@@ -39,6 +39,19 @@ async function createCookies(connection) {
     return !!q;
 }
 
+async function createMajorsTable(connection) {
+    if (await tableExists(connection, "majors")) return true;
+    const sql = `CREATE TABLE majors (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  degree_type VARCHAR(64) NOT NULL,
+  program_name VARCHAR(255) NOT NULL,
+  program_short_name VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE = InnoDB`;
+    const [q] = await connection.execute(sql);
+    return !!q;
+}
+
 
 async function createSMSSentTable(connection) {
     if (await tableExists(connection, "sms_sents")) return true;
@@ -66,5 +79,6 @@ async function createSMSSentTable(connection) {
 export default async (connection) => {
     return await createUser(connection)
         && await createCookies(connection)
+        && await createMajorsTable(connection)
         && await createSMSSentTable(connection);
 };
