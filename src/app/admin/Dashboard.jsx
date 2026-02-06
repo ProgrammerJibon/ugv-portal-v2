@@ -3,42 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 import AdminNavbar from './AdminNavbar';
+import {adminActions} from './AdminSideBar';
 import AdminProfile from './AdminProfile';
+
+
 
 const AdminDashboard = ({user}) => {
     // defined based on your requirements list
-    const adminActions = [
-        {
-            title: "Manage Users",
-            description: "Add Main Users (Teachers, Accountants, Admission Guiders)",
-            link: "/admin/users",
-            icon: "👥"
-        },
-        {
-            title: "Manage Majors",
-            description: "Add Majors (B.Sc, BA, BBA) & Auto-assign Semesters",
-            link: "/admin/majors",
-            icon: "🎓"
-        },
-        {
-            title: "Session Management",
-            description: "Add New Sessions & Configure Semesters",
-            link: "/admin/sessions",
-            icon: "📅"
-        },
-        {
-            title: "Manage Subjects",
-            description: "Add new subjects to the curriculum",
-            link: "/admin/subjects",
-            icon: "📚"
-        },
-        {
-            title: "Promote Session",
-            description: "Promote current session and update academic year",
-            link: "/admin/promote-session",
-            icon: "🚀"
-        }
-    ];
+    
 
     return (
         <div className="min-h-screen bg-slate-50 font-sans flex flex-col">

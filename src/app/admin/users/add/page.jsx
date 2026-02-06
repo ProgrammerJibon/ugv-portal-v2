@@ -1,12 +1,12 @@
 import { getUserFromAuthCookie } from "@/app/json/serverFunctions";
-import ManageUsers from "./ManageUsers";
+import AddUserForm from "./RegisterNewStaff";
 
 export default async () => {
     const res = await getUserFromAuthCookie();
     if (res && "user" in res) {
         if (res?.user?.user_type?.toLowerCase() === "admin") {
             return <>
-                <ManageUsers />
+                <AddUserForm />
             </>
         }
     }
