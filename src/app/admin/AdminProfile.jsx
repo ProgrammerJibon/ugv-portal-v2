@@ -6,7 +6,6 @@ import React from 'react';
 const AdminProfile = ({ user }) => {
 
 
-    console.log(user);
 
     return (
         <div className="bg-slate-50 font-sans">
