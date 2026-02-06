@@ -9,8 +9,8 @@ import createTablesIfNotExists from "./json/createTablesIfNotExists";
 import { databaseError } from "@/static";
 
 export const metadata = {
-    title: "Code Assessment Arena",
-    description: "Test",
+    title: "UGV Portal",
+    description: "UGV Portal for students and faculty members",
 };
 
 let rootRenderred = false;
