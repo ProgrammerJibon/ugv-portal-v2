@@ -12,45 +12,45 @@ const LoginPage = () => {
                     alt="University Campus"
                     className="w-full h-full object-cover opacity-80"
                 />
-                { }
+                
                 <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent"></div>
             </div>
 
-            { }
+
             <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-50">
                 <div className="bg-green-700 text-white font-bold py-4 px-1 rounded-l-md writing-mode-vertical rotate-180 flex items-center justify-center h-32 cursor-pointer hover:bg-green-800 shadow-lg" style={{ writingMode: 'vertical-rl' }}>
                     UGV Portal
                 </div>
             </div>
 
-            { }
+            
             <div className="flex-grow flex flex-col items-center justify-start -mt-28 z-30 pb-10">
 
-                { }
+                
                 <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-2 overflow-hidden border border-gray-100">
 
-                    { }
-                    <div className="bg-slate-900 rounded-t-lg py-8 flex justify-center items-center relative overflow-hidden">
-                        { }
+                    
+                    <div className="bg-slate-300 rounded-t-lg py-8 flex justify-center items-center relative overflow-hidden">
+                        
                         <div className="absolute w-24 h-24 bg-blue-500 rounded-full blur-3xl opacity-20"></div>
 
-                        { }
+                        
                         <div className="relative z-10 flex flex-col items-center">
                             <img
                                 src="https://ugv.edu.bd/assets/images/logos/UGV-Logo-02.png"
-                                alt="National University Logo"
+                                alt="UGV Logo"
                                 className="h-30 w-auto drop-shadow-lg"
                             />
                         </div>
                     </div>
 
-                    { }
+                    
                     <div className="px-8 py-8 text-center">
                         <h2 className="text-2xl font-bold text-slate-800 mb-1">University Of Global Village</h2>
                         <p className="text-purple-700 font-medium mb-8 text-sm"></p>
 
                         <form className="space-y-4">
-                            { }
+                            
                             <div>
                                 <input
                                     type="text"
@@ -59,7 +59,7 @@ const LoginPage = () => {
                                 />
                             </div>
 
-                            { }
+                            
                             <div>
                                 <input
                                     type="password"
@@ -68,7 +68,7 @@ const LoginPage = () => {
                                 />
                             </div>
 
-                            { }
+                            
                             <button
                                 type="button"
                                 className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-md shadow-md transition-transform transform active:scale-95 mt-4"
@@ -88,7 +88,7 @@ const LoginPage = () => {
 
             </div>
 
-            { }
+            
             <footer className="w-full py-8 mt-auto bg-white">
                 <div className="container mx-auto flex flex-col items-center">
 
@@ -97,7 +97,6 @@ const LoginPage = () => {
                     </p>
                 </div>
             </footer>
-
         </div>
     );
 };
