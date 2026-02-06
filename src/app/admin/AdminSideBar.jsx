@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'; 
 import { TiUserAdd } from "react-icons/ti";
+import { MdCreateNewFolder } from "react-icons/md";
+import { RiFolderSettingsFill } from "react-icons/ri";
 
 
 import {
@@ -14,7 +16,8 @@ import {
     FaRocket,
     FaBars,
     FaSignOutAlt,
-    FaUser
+    FaUser,
+    FaFolder
 } from 'react-icons/fa';
 
 export const adminActions = [
@@ -43,22 +46,22 @@ export const adminActions = [
         icon: <FaGraduationCap />
     },
     {
-        title: "Session Management",
+        title: "Add Sessions",
         description: "Add New Sessions & Configure Semesters",
+        link: "/admin/sessions/add",
+        icon: <MdCreateNewFolder />
+    },
+    {
+        title: "Manage Sessions",
+        description: "View and manage existing sessions",
         link: "/admin/sessions",
-        icon: <FaCalendarAlt />
+        icon: <RiFolderSettingsFill />
     },
     {
         title: "Manage Subjects",
         description: "Add new subjects to the curriculum",
         link: "/admin/subjects",
         icon: <FaBook />
-    },
-    {
-        title: "Promote Session",
-        description: "Promote current session and update academic year",
-        link: "/admin/promote-session",
-        icon: <FaRocket />
     }
 ];
 

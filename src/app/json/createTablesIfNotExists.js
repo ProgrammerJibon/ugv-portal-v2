@@ -52,6 +52,34 @@ async function createMajorsTable(connection) {
     return !!q;
 }
 
+async function createSessionsTable(connection) {
+    if (await tableExists(connection, "sessions")) return true;
+    const sql = `CREATE TABLE IF NOT EXISTS sessions (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        session_year VARCHAR(4) NOT NULL,
+        session_season VARCHAR(32) NOT NULL,
+        short_code VARCHAR(16) NOT NULL,
+        status VARCHAR(16) DEFAULT 'ACTIVE',
+        PRIMARY KEY (id)
+        ) ENGINE=InnoDB`;
+    const [q] = await connection.execute(sql);
+    return !!q;
+}
+
+async function createSubjectsTable(connection) {
+    if (await tableExists(connection, "subjects")) return true;
+    const sql = `CREATE TABLE IF NOT EXISTS subjects (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        program_id VARCHAR(11) NOT NULL,
+        semester VARCHAR(16) NOT NULL,
+        subject_name VARCHAR(255) NOT NULL,
+        subject_code VARCHAR(32) NOT NULL,
+        PRIMARY KEY (id)
+        ) ENGINE=InnoDB`;
+    const [q] = await connection.execute(sql);
+    return !!q;
+}
+
 
 async function createSMSSentTable(connection) {
     if (await tableExists(connection, "sms_sents")) return true;
@@ -80,5 +108,7 @@ export default async (connection) => {
     return await createUser(connection)
         && await createCookies(connection)
         && await createMajorsTable(connection)
+        && await createSubjectsTable(connection)
+        && await createSessionsTable(connection)
         && await createSMSSentTable(connection);
 };
