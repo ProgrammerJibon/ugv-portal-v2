@@ -3,10 +3,8 @@ import "./globals.css";
 import React from "react";
 import KeepCookieUpdated from "../context/KeepCookieUpdated";
 import { getUserFromAuthCookie } from "./json/serverFunctions";
-import Navbar from "@/Components/Navbar";
 import { connectDatabase } from "./json/connectDatabase";
 import createTablesIfNotExists from "./json/createTablesIfNotExists";
-import { databaseError } from "@/static";
 
 export const metadata = {
     title: "UGV Portal",
@@ -30,7 +28,7 @@ export default async function RootLayout({ children }) {
 
     if (!rootRenderred){
         metadata.title += " - 500 internal error";
-        return <html lang="en"><body><h1 className="font-bold text-3xl">500 internal error {databaseError}...</h1></body></html>;
+        return <html lang="en"><body><h1 className="font-bold text-3xl">500 internal error {0x74}...</h1></body></html>;
     }
     const gUser = await getUserFromAuthCookie();
     
@@ -39,7 +37,6 @@ export default async function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={``}>
-                <Navbar gUser={gUser} />
                 <main>{children}</main>
                 <KeepCookieUpdated gUser={gUser} />
                 <ToastContainer />
