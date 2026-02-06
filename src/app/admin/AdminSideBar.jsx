@@ -31,7 +31,13 @@ export const adminActions = [
         icon: <FaUserCog />
     },
     {
-        title: "Manage Majors",
+        title: "Add Majors/Dept.",
+        description: "Add/View Majors (B.Sc, BA, BBA) & Auto-assign Semesters",
+        link: "/admin/majors/add",
+        icon: <FaGraduationCap />
+    },
+    {
+        title: "Manage Majors/Dept.",
         description: "Add/View Majors (B.Sc, BA, BBA) & Auto-assign Semesters",
         link: "/admin/majors",
         icon: <FaGraduationCap />
