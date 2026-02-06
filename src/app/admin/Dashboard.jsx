@@ -3,8 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 import AdminNavbar from './AdminNavbar';
+import AdminProfile from './AdminProfile';
 
-const AdminDashboard = () => {
+const AdminDashboard = ({user}) => {
     // defined based on your requirements list
     const adminActions = [
         {
@@ -43,8 +44,12 @@ const AdminDashboard = () => {
         <div className="min-h-screen bg-slate-50 font-sans flex flex-col">
 
             <AdminNavbar />
-            
+
             <main className="flex-grow container mx-auto px-6 py-10">
+
+                <div>
+                    <AdminProfile user={user}/>
+                </div>
 
                 <div className="mb-8">
                     <h2 className="text-2xl font-bold text-slate-800">Dashboard Overview</h2>
