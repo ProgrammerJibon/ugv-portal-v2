@@ -1,6 +1,3 @@
-import insertCountries from "./insertCountries";
-import insertUniversities from "./insertUniversities";
-
 async function tableExists(connection, table) {
     const [rows] = await connection.execute("SELECT 1 FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = ?", [table]);
     return rows.length > 0;
@@ -8,7 +5,7 @@ async function tableExists(connection, table) {
 
 async function createUser(connection) {
     if (await tableExists(connection, "users")) return true;
-    const sql = `CREATE TABLE IF NOT EXISTS user (
+    const sql = `CREATE TABLE IF NOT EXISTS users (
         id int(11) NOT NULL AUTO_INCREMENT,
         name varchar(64) NOT NULL,
         user_type varchar(32) NOT NULL,

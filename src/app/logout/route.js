@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { time } from "../functions";
 import { connectDatabase } from "../json/connectDatabase";
 
-export async function POST() {
+export async function GET() {
     const cookieStore = await cookies();
     const authCookie = cookieStore.get("auth")?.value;
 
@@ -26,5 +26,5 @@ export async function POST() {
         expires: new Date(0),
     });
 
-    redirect("/login");
+    redirect("/");
 }

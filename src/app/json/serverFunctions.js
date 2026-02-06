@@ -52,10 +52,13 @@ export async function getUserFromAuthCookie(authCookie = null) {
         "SELECT * FROM cookies WHERE cookie=? AND status='ACTIVE' LIMIT 1",
         [authCookie]
     );
+    
     if (cookieRows.length === 0) {
         // connect.end();
         return null;
     }
+    
+    
 
     const cookieData = cookieRows[0];
     const now = Math.floor(Date.now() / 1000);
@@ -67,6 +70,7 @@ export async function getUserFromAuthCookie(authCookie = null) {
         // connect.end();
         return null;
     }
+    
 
     const [userRows] = await connect.execute(
         "SELECT * FROM users WHERE id=? LIMIT 1",
@@ -84,12 +88,15 @@ export async function getUserFromAuthCookie(authCookie = null) {
     const t = time();
     const expiryDays = 30;
     const expiry = t + 86400 * expiryDays;
+    
     await connect.execute(
         "UPDATE cookies SET expiry=? WHERE id=?",
         [expiry, cookieData.id]
     );
 
     // await // connect.end();
+
+    
     
     return { user, authCookie, expiryDays };
 }
