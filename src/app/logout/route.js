@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { time } from "../functions";
 import { connectDatabase } from "../json/connectDatabase";
 
-export async function GET() {
+export async function POST() {
     const cookieStore = await cookies();
     const authCookie = cookieStore.get("auth")?.value;
 
