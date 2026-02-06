@@ -1,0 +1,1964 @@
+[
+    {
+        "team_id": "1110805",
+        "team_name": "UGV_QUANTUM_SQUAD",
+        "university_name": "University of Global Village",
+        "votes": "1329"
+    },
+    {
+        "team_id": "1107830",
+        "team_name": "FU_Equilibrium",
+        "university_name": "Feni University",
+        "votes": "792"
+    },
+    {
+        "team_id": "1108950",
+        "team_name": "PUC_MinhazSir_Remembered",
+        "university_name": "Premier University Chittagong",
+        "votes": "685"
+    },
+    {
+        "team_id": "1103036",
+        "team_name": "EU_parina_kichu",
+        "university_name": "Eastern University of Bangladesh",
+        "votes": "567"
+    },
+    {
+        "team_id": "1112111",
+        "team_name": "BUBT_BitBusters",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "539"
+    },
+    {
+        "team_id": "1109023",
+        "team_name": "PUC_MinhazSir_Forever",
+        "university_name": "Premier University Chittagong",
+        "votes": "456"
+    },
+    {
+        "team_id": "1111676",
+        "team_name": "DUWP",
+        "university_name": "International Islamic University Chittagong",
+        "votes": "392"
+    },
+    {
+        "team_id": "1111535",
+        "team_name": "sorry_IIUC",
+        "university_name": "International Islamic University Chittagong",
+        "votes": "357"
+    },
+    {
+        "team_id": "1108453",
+        "team_name": "CSTU-3-Billions",
+        "university_name": "Chandpur Science and Technology University",
+        "votes": "317"
+    },
+    {
+        "team_id": "1111447",
+        "team_name": "UITS_ACES",
+        "university_name": "University of Information Technology & Sciences",
+        "votes": "271"
+    },
+    {
+        "team_id": "1106738",
+        "team_name": "MIST_rHotasha",
+        "university_name": "Military Institute of Science and Technology",
+        "votes": "266"
+    },
+    {
+        "team_id": "1111421",
+        "team_name": "IIUC_StrawHats",
+        "university_name": "International Islamic University Chittagong",
+        "votes": "259"
+    },
+    {
+        "team_id": "1112103",
+        "team_name": "IIUC_MangoCoders",
+        "university_name": "International Islamic University Chittagong",
+        "votes": "245"
+    },
+    {
+        "team_id": "1109363",
+        "team_name": "BUBT_TorMuzZ",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "229"
+    },
+    {
+        "team_id": "1111431",
+        "team_name": "IIUC_MARK_US",
+        "university_name": "International Islamic University Chittagong",
+        "votes": "229"
+    },
+    {
+        "team_id": "1111433",
+        "team_name": "IIUC_return_0",
+        "university_name": "International Islamic University Chittagong",
+        "votes": "218"
+    },
+    {
+        "team_id": "1111815",
+        "team_name": "SUB_Innovators",
+        "university_name": "Southern University Bangladesh",
+        "votes": "206"
+    },
+    {
+        "team_id": "1112099",
+        "team_name": "IIUC_BigO",
+        "university_name": "International Islamic University Chittagong",
+        "votes": "203"
+    },
+    {
+        "team_id": "1109938",
+        "team_name": "uiu_lwlvl",
+        "university_name": "United International University",
+        "votes": "146"
+    },
+    {
+        "team_id": "1111825",
+        "team_name": "RPSU_Ternary_Troopers",
+        "university_name": "R. P. Shaha University",
+        "votes": "140"
+    },
+    {
+        "team_id": "1110084",
+        "team_name": "FEC_We_Coded_Without_Prompts",
+        "university_name": "Faridpur Engineering College",
+        "votes": "132"
+    },
+    {
+        "team_id": "1105435",
+        "team_name": "EDU_ZeroIndexed",
+        "university_name": "East Delta University, Chittagong",
+        "votes": "108"
+    },
+    {
+        "team_id": "1111275",
+        "team_name": "MEC_ALGO_SCHOLARS",
+        "university_name": "Mymensingh Engineering College",
+        "votes": "99"
+    },
+    {
+        "team_id": "1103594",
+        "team_name": "NSTU_DOT",
+        "university_name": "Noakhali Science and Technology University",
+        "votes": "93"
+    },
+    {
+        "team_id": "1110662",
+        "team_name": "TU_BLOODBORNE",
+        "university_name": "Teesta University",
+        "votes": "84"
+    },
+    {
+        "team_id": "1112544",
+        "team_name": "BAIUST_Semi_Army",
+        "university_name": "Bangladesh Army International University of Science and Technology",
+        "votes": "80"
+    },
+    {
+        "team_id": "1114125",
+        "team_name": "return 0",
+        "university_name": "University of Frontier Technology, Bangladesh",
+        "votes": "79"
+    },
+    {
+        "team_id": "1105661",
+        "team_name": "TEC_MRK",
+        "university_name": "TMSS Engineering College",
+        "votes": "78"
+    },
+    {
+        "team_id": "1111542",
+        "team_name": "BAIUST_Tree-O(n)",
+        "university_name": "Bangladesh Army International University of Science and Technology",
+        "votes": "75"
+    },
+    {
+        "team_id": "1110095",
+        "team_name": "PCIU_CodeLingPong",
+        "university_name": "Port City International University",
+        "votes": "73"
+    },
+    {
+        "team_id": "1110750",
+        "team_name": "Segmentation Fault",
+        "university_name": "Comilla Polytechnic Institute",
+        "votes": "73"
+    },
+    {
+        "team_id": "1111844",
+        "team_name": "HUB_Newbies",
+        "university_name": "Hamdard University Bangladesh",
+        "votes": "71"
+    },
+    {
+        "team_id": "1105409",
+        "team_name": "EDU_CoPRIME",
+        "university_name": "East Delta University, Chittagong",
+        "votes": "69"
+    },
+    {
+        "team_id": "1111886",
+        "team_name": "BUBT_Curly_Braces",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "68"
+    },
+    {
+        "team_id": "1104616",
+        "team_name": "NUBTK $(^w^)$",
+        "university_name": "Northern University of Business and Technology Khulna",
+        "votes": "68"
+    },
+    {
+        "team_id": "1113484",
+        "team_name": "JU_Brainrot",
+        "university_name": "Jahangirnagar University",
+        "votes": "66"
+    },
+    {
+        "team_id": "1104112",
+        "team_name": "UITS_Bangi_Valobashi",
+        "university_name": "University of Information Technology & Sciences",
+        "votes": "62"
+    },
+    {
+        "team_id": "1112444",
+        "team_name": "KU_ByteRunners",
+        "university_name": "Khulna University",
+        "votes": "60"
+    },
+    {
+        "team_id": "1112602",
+        "team_name": "GodFathers Inc.",
+        "university_name": "Shahjalal University of Science and Technology",
+        "votes": "59"
+    },
+    {
+        "team_id": "1111614",
+        "team_name": "Green_Xettabyte",
+        "university_name": "Green University Of Bangladesh",
+        "votes": "59"
+    },
+    {
+        "team_id": "1108931",
+        "team_name": "AIUB_!END",
+        "university_name": "American International University - Bangladesh",
+        "votes": "57"
+    },
+    {
+        "team_id": "1112442",
+        "team_name": "KU_Second_Team",
+        "university_name": "Khulna University",
+        "votes": "57"
+    },
+    {
+        "team_id": "1113169",
+        "team_name": "LU_LastFrame",
+        "university_name": "Leading University, Sylhet",
+        "votes": "57"
+    },
+    {
+        "team_id": "1111620",
+        "team_name": "KiU_NewHorizon",
+        "university_name": "Kishoreganj University",
+        "votes": "56"
+    },
+    {
+        "team_id": "1112441",
+        "team_name": "KU_First_Team",
+        "university_name": "Khulna University",
+        "votes": "56"
+    },
+    {
+        "team_id": "1109279",
+        "team_name": "UIU_AlgoWarriors",
+        "university_name": "United International University",
+        "votes": "55"
+    },
+    {
+        "team_id": "1108850",
+        "team_name": "DIU_Sixth_Sense",
+        "university_name": "Daffodil International University",
+        "votes": "53"
+    },
+    {
+        "team_id": "1109792",
+        "team_name": "error_404",
+        "university_name": "University of Frontier Technology, Bangladesh",
+        "votes": "52"
+    },
+    {
+        "team_id": "1110451",
+        "team_name": "AUST_Simplexity",
+        "university_name": "Ahsanullah University of Science and Technology",
+        "votes": "51"
+    },
+    {
+        "team_id": "1110459",
+        "team_name": "AUST_Bumblebee",
+        "university_name": "Ahsanullah University of Science and Technology",
+        "votes": "49"
+    },
+    {
+        "team_id": "1112082",
+        "team_name": "BUBT_Mudbloods",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "48"
+    },
+    {
+        "team_id": "1111866",
+        "team_name": "BUBT_Palestinians",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "47"
+    },
+    {
+        "team_id": "1108639",
+        "team_name": "BUBT_Sunday_Monday_Close",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "47"
+    },
+    {
+        "team_id": "1111414",
+        "team_name": "UCTC_bitsArmy",
+        "university_name": "University of Creative Technology, Chittagong",
+        "votes": "44"
+    },
+    {
+        "team_id": "1112473",
+        "team_name": "BUBT_Aces",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "43"
+    },
+    {
+        "team_id": "1111576",
+        "team_name": "BUBT_AlphaQForces",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "41"
+    },
+    {
+        "team_id": "1113053",
+        "team_name": "PSTU_Amortized",
+        "university_name": "Patuakhali Science and Technology University",
+        "votes": "41"
+    },
+    {
+        "team_id": "1111609",
+        "team_name": "TPI_Avengers",
+        "university_name": "Thakurgaon Polytechnic Institute",
+        "votes": "41"
+    },
+    {
+        "team_id": "1113990",
+        "team_name": "NDUB_missing_semicolon",
+        "university_name": "Notre Dame University Bangladesh",
+        "votes": "40"
+    },
+    {
+        "team_id": "1113756",
+        "team_name": "SSTU_SAM_Coder",
+        "university_name": "Sunamgonj Science and Technology University",
+        "votes": "40"
+    },
+    {
+        "team_id": "1110535",
+        "team_name": "UIU_Entropy",
+        "university_name": "United International University",
+        "votes": "40"
+    },
+    {
+        "team_id": "1113193",
+        "team_name": "LU_Believers",
+        "university_name": "Leading University, Sylhet",
+        "votes": "39"
+    },
+    {
+        "team_id": "1109649",
+        "team_name": "BUBT_QuantumLoop",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "38"
+    },
+    {
+        "team_id": "1110586",
+        "team_name": "neXT!me",
+        "university_name": "Bangladesh University",
+        "votes": "37"
+    },
+    {
+        "team_id": "1112429",
+        "team_name": "DCC_Axions",
+        "university_name": "Dhaka City College",
+        "votes": "36"
+    },
+    {
+        "team_id": "1110749",
+        "team_name": "DIU_Anonymous",
+        "university_name": "Daffodil International University",
+        "votes": "36"
+    },
+    {
+        "team_id": "1112482",
+        "team_name": "Infinite Tsukuyomi",
+        "university_name": "Chittagong University of Engineering & Technology",
+        "votes": "36"
+    },
+    {
+        "team_id": "1109733",
+        "team_name": "IUBAT Eksho Eksho",
+        "university_name": "International University of Business Agriculture and Technology",
+        "votes": "36"
+    },
+    {
+        "team_id": "1112189",
+        "team_name": "BAUET_Rong_Answer",
+        "university_name": "Bangladesh Army University of Engineering & Technology",
+        "votes": "35"
+    },
+    {
+        "team_id": "1112638",
+        "team_name": "BUBT_NameNai",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "35"
+    },
+    {
+        "team_id": "1113907",
+        "team_name": "CBST_Humanoid AI",
+        "university_name": "College of Business Science and Technology, Mymensingh",
+        "votes": "35"
+    },
+    {
+        "team_id": "1110724",
+        "team_name": "DIU_ADHN",
+        "university_name": "Daffodil International University",
+        "votes": "35"
+    },
+    {
+        "team_id": "1108121",
+        "team_name": "GreenForces",
+        "university_name": "Green University Of Bangladesh",
+        "votes": "34"
+    },
+    {
+        "team_id": "1111895",
+        "team_name": "BUBT_Aslam_r_Gelam",
+        "university_name": "Bangladesh University of Business and Technology",
+        "votes": "32"
+    },
+    {
+        "team_id": "1110580",
+        "team_name": "DIU_MilesPerHour",
+        "university_name": "Daffodil International University",
+        "votes": "32"
+    },
+    {
+        "team_id": "1107673",
+        "team_name": "GSTU_ONE_LAST_RUN_SKBN",
+        "university_name": "Gopalganj Science and Technology University",
+        "votes": "32"
+    },
+    {
+        "team_id": "1113558",
+        "team_name": "CUET_Falcons",
+        "university_name": "Chittagong University of Engineering & Technology",
+        "votes": "30"
+    },
+    {
+        "team_id": "1110713",
+        "team_name": "DIU_CoprimeCrew",
+        "university_name": "Daffodil International University",
+        "votes": "30"
+    },
+    {
+        "team_id": "1110650",
+        "team_name": "UCASM_Default_Geeks",
+        "university_name": "United College of Aviation, Science and Management",
+        "votes": "30"
+    },
+    {
+        "team_id": "1110722",
+        "team_name": "DIU_Pawgrammers",
+        "university_name": "Daffodil International University",
+        "votes": "29"
+    },
+    {
+        "team_id": "1109479",
+        "team_name": "NEUB_Anomalies",
+        "university_name": "North East University Bangladesh",
+        "votes": "29"
+    },
+    {
+        "team_id": "1110712",
+        "team_name": "DIU_ADHN",
+        "university_name": "Daffodil International University",
+        "votes": "28"
+    },
+    {
+        "team_id": "1110718",
+        "team_name": "DIU_DividedByZero",
+        "university_name": "Daffodil International University",
+        "votes": "28"
+    },
+    {
+        "team_id": "1113153",
+        "team_name": "JU_Odd_Bits",
+        "university_name": "Jahangirnagar University",
+        "votes": "28"
+    },
+    {
+        "team_id": "1111198",
+        "team_name": "Team-Believers",
+        "university_name": "Noakhali Science and Technology University",
+        "votes": "28"
+    },
+    {
+        "team_id": "1113819",
+        "team_name": "CUET_Phoenixes",
+        "university_name": "Chittagong University of Engineering & Technology",
+        "votes": "26"
+    },
+    {
+        "team_id": "1113845",
+        "team_name": "It's_leviOsa",
+        "university_name": "Chittagong University of Engineering & Technology",
+        "votes": "26"
+    },
+    {
+        "team_id": "1111399",
+        "team_name": "TC_Griffins",
+        "university_name": "Tejgaon College",
+        "votes": "26"
+    },
+    {
+        "team_id": "1112195",
+        "team_name": "VU_Triple_I_Coders",
+        "university_name": "Varendra University",
+        "votes": "26"
+    },
+    {
+        "team_id": "1113820",
+        "team_name": "CUET_LastCommit",
+        "university_name": "Chittagong University of Engineering & Technology",
+        "votes": "25"
+    },
+    {
+        "team_id": "1114833",
+        "team_name": "runtime_rebels ",
+        "university_name": "University of Scholars",
+        "votes": "25"
+    },
+    {
+        "team_id": "1112113",
+        "team_name": "TC_Binary_Brains",
+        "university_name": "Tejgaon College",
+        "votes": "25"
+    },
+    {
+        "team_id": "1112207",
+        "team_name": "VU_KRNfinity",
+        "university_name": "Varendra University",
+        "votes": "25"
+    },
+    {
+        "team_id": "1113309",
+        "team_name": "CoU_Reignite",
+        "university_name": "Comilla University",
+        "votes": "24"
+    },
+    {
+        "team_id": "1111321",
+        "team_name": "IUBAT PONCHASH PONCHASH",
+        "university_name": "International University of Business Agriculture and Technology",
+        "votes": "24"
+    },
+    {
+        "team_id": "1111912",
+        "team_name": "UFTB_BitsBlitz",
+        "university_name": "University of Frontier Technology, Bangladesh",
+        "votes": "24"
+    },
+    {
+        "team_id": "1111245",
+        "team_name": "UCTC_PrimeCoders",
+        "university_name": "University of Creative Technology, Chittagong",
+        "votes": "23"
+    },
+    {
+        "team_id": "1110455",
+        "team_name": "AUST_Tubelight",
+        "university_name": "Ahsanullah University of Science and Technology",
+        "votes": "22"
+    },
+    {
+        "team_id": "1113738",
+        "team_name": "Winter_Is_Coming",
+        "university_name": "Chittagong University of Engineering & Technology",
+        "votes": "22"
+    },
+    {
+        "team_id": "1113822",
+        "team_name": "CUET_DeathlyHallows",
+        "university_name": "Chittagong University of Engineering & Technology",
+        "votes": "21"
+    },
+    {
+        "team_id": "1112384",
+        "team_name": "Green_Fun",
+        "university_name": "Green University Of Bangladesh",
+        "votes": "21"
+    },
+    {
+        "team_id": "1110642",
+        "team_name": "Green_MK",
+        "university_name": "Green University Of Bangladesh",
+        "votes": "21"
+    },
+    {
+        "team_id": "1111530",
+        "team_name": "JnU_FiretriX",
+        "university_name": "Jagannath University, Bangladesh",
+        "votes": "21"
+    },
+    {
+        "team_id": "1112623",
+        "team_name": "BRACU_Badda Shorbohara Party",
+        "university_name": "BRAC University",
+        "votes": "20"
+    },
+    {
+        "team_id": "1111904",
+        "team_name": "DIU_INFINITY",
+        "university_name": "Dhaka International University",
+        "votes": "20"
+    },
+    {
+        "team_id": "1106769",
+        "team_name": "IU_DeepCheck",
+        "university_name": "Islamic University, Bangladesh",
+        "votes": "20"
+    },
+    {
+        "team_id": "1109870",
+        "team_name": "Snacks_Kidhar_Hain?",
+        "university_name": "Noakhali Science and Technology University",
+        "votes": "20"
+    },
+    {
+        "team_id": "1107679",
+        "team_name": "GSTU_299792458ms",
+        "university_name": "Gopalganj Science and Technology University",
+        "votes": "16"
+    },
+    {
+        "team_id": "1110081",
+        "team_name": "IU_Null_VoiD",
+        "university_name": "Islamic University, Bangladesh",
+        "votes": "16"
+    },
+    {
+        "team_id": "1106768",
+        "team_name": "IU_Semicolon",
+        "university_name": "Islamic University, Bangladesh",
+        "votes": "16"
+    },
+    {
+        "team_id": "1110205",
+        "team_name": "JSTU_Undefined_Behavior",
+        "university_name": "Jamalpur Science and Technology University",
+        "votes": "16"
+    },
+    {
+        "team_id": "1113334",
+        "team_name": "STAMFORD_SPARTANS",
+        "university_name": "Stamford University Bangladesh",
+        "votes": "16"
+    },
+    {
+        "team_id": "1111650",
+        "team_name": "BUET_TheEmptySet",
+        "university_name": "Bangladesh University of Engineering and Technology",
+        "votes": "15"
+    },
+    {
+        "team_id": "1112709",
+        "team_name": "CoU_PretestPassed",
+        "university_name": "Comilla University",
+        "votes": "15"
+    },
+    {
+        "team_id": "1107676",
+        "team_name": "GSTU_One_Last_Dance",
+        "university_name": "Gopalganj Science and Technology University",
+        "votes": "15"
+    },
+    {
+        "team_id": "1107381",
+        "team_name": "IIUSTB_ZeroBug",
+        "university_name": "International Islami University of Science and Technology Bangladesh",
+        "votes": "15"
+    },
+    {
+        "team_id": "1112929",
+        "team_name": "NSTU_NO_NAME",
+        "university_name": "Noakhali Science and Technology University",
+        "votes": "15"
+    },
+    {
+        "team_id": "1113390",
+        "team_name": "RPI_Dreamers",
+        "university_name": "Rangpur Polytechnic Institute",
+        "votes": "15"
+    },
+    {
+        "team_id": "1110916",
+        "team_name": "UAP_Akatsuki",
+        "university_name": "University of Asia Pacific",
+        "votes": "15"
+    },
+    {
+        "team_id": "1109041",
+        "team_name": "IU_PRIME_CODERS",
+        "university_name": "Islamic University, Bangladesh",
+        "votes": "14"
+    },
+    {
+        "team_id": "1113667",
+        "team_name": "JU_NullVoid",
+        "university_name": "Jahangirnagar University",
+        "votes": "14"
+    },
+    {
+        "team_id": "1108913",
+        "team_name": "AIUB_Modularity",
+        "university_name": "American International University - Bangladesh",
+        "votes": "13"
+    },
+    {
+        "team_id": "1112739",
+        "team_name": "CoU_PiRaTes",
+        "university_name": "Comilla University",
+        "votes": "13"
+    },
+    {
+        "team_id": "1107909",
+        "team_name": "BUET_Silver_hawks",
+        "university_name": "Bangladesh University of Engineering and Technology",
+        "votes": "12"
+    },
+    {
+        "team_id": "1107908",
+        "team_name": "BUET_Supernova",
+        "university_name": "Bangladesh University of Engineering and Technology",
+        "votes": "12"
+    },
+    {
+        "team_id": "1111051",
+        "team_name": "JnU_End_Game",
+        "university_name": "Jagannath University, Bangladesh",
+        "votes": "12"
+    },
+    {
+        "team_id": "1113070",
+        "team_name": "PSTU_WormHole",
+        "university_name": "Patuakhali Science and Technology University",
+        "votes": "12"
+    },
+    {
+        "team_id": "1112593",
+        "team_name": "SUST IKHWAN",
+        "university_name": "Shahjalal University of Science and Technology",
+        "votes": "12"
+    },
+    {
+        "team_id": "1110787",
+        "team_name": "AIUB_FinalVerse",
+        "university_name": "American International University - Bangladesh",
+        "votes": "11"
+    },
+    {
+        "team_id": "1112600",
+        "team_name": "CoU Zero Range",
+        "university_name": "Comilla University",
+        "votes": "11"
+    },
+    {
+        "team_id": "1112711",
+        "team_name": "CoU_Antariksha",
+        "university_name": "Comilla University",
+        "votes": "11"
+    },
+    {
+        "team_id": "1112747",
+        "team_name": "DIIT_Wrong_Answer ",
+        "university_name": "Daffodil Institute of Information Technology",
+        "votes": "11"
+    },
+    {
+        "team_id": "1113550",
+        "team_name": "JUST_ORIONS",
+        "university_name": "Jashore University of Science and Technology",
+        "votes": "11"
+    },
+    {
+        "team_id": "1114073",
+        "team_name": "JU_Not_Coders",
+        "university_name": "Jahangirnagar University",
+        "votes": "11"
+    },
+    {
+        "team_id": "1106068",
+        "team_name": "MIST_EagleForces",
+        "university_name": "Military Institute of Science and Technology",
+        "votes": "11"
+    },
+    {
+        "team_id": "1111670",
+        "team_name": "UU_Brute_Force",
+        "university_name": "Uttara University",
+        "votes": "11"
+    },
+    {
+        "team_id": "1109698",
+        "team_name": "Aiub_Eclipse",
+        "university_name": "American International University - Bangladesh",
+        "votes": "10"
+    },
+    {
+        "team_id": "1110027",
+        "team_name": "Binary Bloom",
+        "university_name": "Rangamati Science and Technology University",
+        "votes": "10"
+    },
+    {
+        "team_id": "1110636",
+        "team_name": "BUET_SyntaxError",
+        "university_name": "Bangladesh University of Engineering and Technology",
+        "votes": "10"
+    },
+    {
+        "team_id": "1108844",
+        "team_name": "BU_TrieHards",
+        "university_name": "University of Barishal",
+        "votes": "10"
+    },
+    {
+        "team_id": "1113329",
+        "team_name": "DU_Brute4ce",
+        "university_name": "University of Dhaka",
+        "votes": "10"
+    },
+    {
+        "team_id": "1110569",
+        "team_name": "HSTU_al_shi'ra",
+        "university_name": "Hajee Mohammad Danesh Science and Technology University",
+        "votes": "10"
+    },
+    {
+        "team_id": "1110751",
+        "team_name": "KUET_Potol",
+        "university_name": "Khulna University of Engineering and Technology",
+        "votes": "10"
+    },
+    {
+        "team_id": "1104593",
+        "team_name": "PU_Dark_Walkers",
+        "university_name": "Presidency University - Bangladesh",
+        "votes": "10"
+    },
+    {
+        "team_id": "1110336",
+        "team_name": "AlgoFlare \u00bb SEU",
+        "university_name": "Southeast University, Bangladesh",
+        "votes": "9"
+    },
+    {
+        "team_id": "1110454",
+        "team_name": "AUST_DEADCODER",
+        "university_name": "Ahsanullah University of Science and Technology",
+        "votes": "9"
+    },
+    {
+        "team_id": "1109328",
+        "team_name": "BU_Trinity",
+        "university_name": "University of Barishal",
+        "votes": "9"
+    },
+    {
+        "team_id": "1110793",
+        "team_name": "CoU_Thirteen",
+        "university_name": "Comilla University",
+        "votes": "9"
+    },
+    {
+        "team_id": "1112494",
+        "team_name": "EWU_Greedy_Gang",
+        "university_name": "East West University",
+        "votes": "9"
+    },
+    {
+        "team_id": "1112594",
+        "team_name": "IUT_Kamikaze",
+        "university_name": "Islamic University of Technology",
+        "votes": "9"
+    },
+    {
+        "team_id": "1106737",
+        "team_name": "MIST_Untitled",
+        "university_name": "Military Institute of Science and Technology",
+        "votes": "9"
+    },
+    {
+        "team_id": "1110967",
+        "team_name": "PCIU_Random",
+        "university_name": "Port City International University",
+        "votes": "9"
+    },
+    {
+        "team_id": "1112673",
+        "team_name": "SUST_Beginning_of_the_End",
+        "university_name": "Shahjalal University of Science and Technology",
+        "votes": "9"
+    },
+    {
+        "team_id": "1112622",
+        "team_name": "SUST_Innovara",
+        "university_name": "Shahjalal University of Science and Technology",
+        "votes": "9"
+    },
+    {
+        "team_id": "1110362",
+        "team_name": "AlgoFlare \u00bb SEU",
+        "university_name": "Southeast University, Bangladesh",
+        "votes": "8"
+    },
+    {
+        "team_id": "1110453",
+        "team_name": "AUST_Vanquishers",
+        "university_name": "Ahsanullah University of Science and Technology",
+        "votes": "8"
+    },
+    {
+        "team_id": "1110452",
+        "team_name": "AUST_Zer0ne22",
+        "university_name": "Ahsanullah University of Science and Technology",
+        "votes": "8"
+    },
+    {
+        "team_id": "1107577",
+        "team_name": "BU_Dynamic_Trio",
+        "university_name": "University of Barishal",
+        "votes": "8"
+    },
+    {
+        "team_id": "1108832",
+        "team_name": "BU_Optimizers",
+        "university_name": "University of Barishal",
+        "votes": "8"
+    },
+    {
+        "team_id": "1110975",
+        "team_name": "Dream O(n)",
+        "university_name": "Rajshahi University of Engineering & Technology",
+        "votes": "8"
+    },
+    {
+        "team_id": "1112499",
+        "team_name": "EWU_Expelliarmus",
+        "university_name": "East West University",
+        "votes": "8"
+    },
+    {
+        "team_id": "1113816",
+        "team_name": "JU_Jabian_6.1",
+        "university_name": "Jahangirnagar University",
+        "votes": "8"
+    },
+    {
+        "team_id": "1113777",
+        "team_name": "JU_LazyCoders",
+        "university_name": "Jahangirnagar University",
+        "votes": "8"
+    },
+    {
+        "team_id": "1113160",
+        "team_name": "JU_P=NP?",
+        "university_name": "Jahangirnagar University",
+        "votes": "8"
+    },
+    {
+        "team_id": "1113787",
+        "team_name": "JU_P=NP?",
+        "university_name": "Jahangirnagar University",
+        "votes": "8"
+    },
+    {
+        "team_id": "1114305",
+        "team_name": "JU_Twilight_Tray",
+        "university_name": "Jahangirnagar University",
+        "votes": "8"
+    },
+    {
+        "team_id": "1112472",
+        "team_name": "Mama_DP_Mar",
+        "university_name": "Jatiya Kabi Kazi Nazrul Islam University",
+        "votes": "8"
+    },
+    {
+        "team_id": "1114655",
+        "team_name": "OpOperators_ustc",
+        "university_name": "University of Science and Technology Chittagong",
+        "votes": "8"
+    },
+    {
+        "team_id": "1111950",
+        "team_name": "SEC_Dungeon_Master",
+        "university_name": "Sylhet Engineering College",
+        "votes": "8"
+    },
+    {
+        "team_id": "1109317",
+        "team_name": "SUST_BOTbrikkho",
+        "university_name": "Shahjalal University of Science and Technology",
+        "votes": "8"
+    },
+    {
+        "team_id": "1113325",
+        "team_name": "SUST_notActive",
+        "university_name": "Shahjalal University of Science and Technology",
+        "votes": "8"
+    },
+    {
+        "team_id": "1113322",
+        "team_name": "SUST_Oblivion",
+        "university_name": "Shahjalal University of Science and Technology",
+        "votes": "8"
+    },
+    {
+        "team_id": "1110025",
+        "team_name": "Zero or One",
+        "university_name": "Rangamati Science and Technology University",
+        "votes": "8"
+    },
+    {
+        "team_id": "1110610",
+        "team_name": "3BlueNoBrown",
+        "university_name": "Rajshahi University of Engineering & Technology",
+        "votes": "7"
+    },
+    {
+        "team_id": "1110785",
+        "team_name": "AIUB_ColdBlood",
+        "university_name": "American International University - Bangladesh",
+        "votes": "7"
+    },
+    {
+        "team_id": "1108995",
+        "team_name": "BIT_&_BYTE",
+        "university_name": "Khwaja Yunus Ali University",
+        "votes": "7"
+    },
+    {
+        "team_id": "1110998",
+        "team_name": "CityU_Segmentation_Fault",
+        "university_name": "City University",
+        "votes": "7"
+    },
+    {
+        "team_id": "1110395",
+        "team_name": "DUET_DalBhat",
+        "university_name": "Dhaka University of Engineering & Technology - Gazipur",
+        "votes": "7"
+    },
+    {
+        "team_id": "1114031",
+        "team_name": "IUT_notPurple",
+        "university_name": "Islamic University of Technology",
+        "votes": "7"
+    },
+    {
+        "team_id": "1113115",
+        "team_name": "IUT_Stalwart",
+        "university_name": "Islamic University of Technology",
+        "votes": "7"
+    },
+    {
+        "team_id": "1113767",
+        "team_name": "JUST_Lazy_Coders",
+        "university_name": "Jashore University of Science and Technology",
+        "votes": "7"
+    },
+    {
+        "team_id": "1113752",
+        "team_name": "JUST_TLE",
+        "university_name": "Jashore University of Science and Technology",
+        "votes": "7"
+    },
+    {
+        "team_id": "1110753",
+        "team_name": "KUET_Akatsuki",
+        "university_name": "Khulna University of Engineering and Technology",
+        "votes": "7"
+    },
+    {
+        "team_id": "1113106",
+        "team_name": "PSTU_Tenetune_3_jon",
+        "university_name": "Patuakhali Science and Technology University",
+        "votes": "7"
+    },
+    {
+        "team_id": "1110609",
+        "team_name": "Ruet_Airlines",
+        "university_name": "Rajshahi University of Engineering & Technology",
+        "votes": "7"
+    },
+    {
+        "team_id": "1111019",
+        "team_name": "RUET_Celestials",
+        "university_name": "Rajshahi University of Engineering & Technology",
+        "votes": "7"
+    },
+    {
+        "team_id": "1111290",
+        "team_name": "RUET_SaNnin<3",
+        "university_name": "Rajshahi University of Engineering & Technology",
+        "votes": "7"
+    },
+    {
+        "team_id": "1106881",
+        "team_name": "RU_SignBit",
+        "university_name": "University of Rajshahi",
+        "votes": "7"
+    },
+    {
+        "team_id": "1111976",
+        "team_name": "SEC_Frontier",
+        "university_name": "Sylhet Engineering College",
+        "votes": "7"
+    },
+    {
+        "team_id": "1109343",
+        "team_name": "0Stack Overflow",
+        "university_name": "Bangladesh Open University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1110120",
+        "team_name": "ADUST_AlgoKnights",
+        "university_name": "Atish Dipankar University of Science & Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1111517",
+        "team_name": "AlphaCoders",
+        "university_name": "Northern University Bangladesh",
+        "votes": "6"
+    },
+    {
+        "team_id": "1110752",
+        "team_name": "AstralisPrime",
+        "university_name": "Khulna University of Engineering and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112887",
+        "team_name": "AUB_Return_0",
+        "university_name": "Asian University of Bangladesh",
+        "votes": "6"
+    },
+    {
+        "team_id": "1113337",
+        "team_name": "BAUSTian_Inventors",
+        "university_name": "Bangladesh Army University of Science & Technology ",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112310",
+        "team_name": "BRACU_DeluluDreamers",
+        "university_name": "BRAC University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1113393",
+        "team_name": "BRIU_Redox_3",
+        "university_name": "Brahmaputra International University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1110696",
+        "team_name": "BUET_de_Novo",
+        "university_name": "Bangladesh University of Engineering and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1110686",
+        "team_name": "BUET_GreyMatter",
+        "university_name": "Bangladesh University of Engineering and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1107683",
+        "team_name": "BUET_MST",
+        "university_name": "Bangladesh University of Engineering and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1110699",
+        "team_name": "BUET_NullPointer",
+        "university_name": "Bangladesh University of Engineering and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1109127",
+        "team_name": "BUET_TrieHard",
+        "university_name": "Bangladesh University of Engineering and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1111631",
+        "team_name": "CIU_NullPointers",
+        "university_name": "Chittagong Independent University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112376",
+        "team_name": "DCC_Strivers",
+        "university_name": "Dhaka City College",
+        "votes": "6"
+    },
+    {
+        "team_id": "1110415",
+        "team_name": "DUET_ImmortalLoop",
+        "university_name": "Dhaka University of Engineering & Technology - Gazipur",
+        "votes": "6"
+    },
+    {
+        "team_id": "1105340",
+        "team_name": "DU_MaxSunkCostFlow",
+        "university_name": "University of Dhaka",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112500",
+        "team_name": "EWU_2nd_Chance",
+        "university_name": "East West University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112489",
+        "team_name": "EWU_Dreadnought",
+        "university_name": "East West University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112503",
+        "team_name": "EWU_Fall2022",
+        "university_name": "East West University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1113121",
+        "team_name": "EWU_RQ_Angles",
+        "university_name": "East West University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1114379",
+        "team_name": "HSTU_Arrival",
+        "university_name": "Hajee Mohammad Danesh Science and Technology University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112846",
+        "team_name": "HSTU__Newbies",
+        "university_name": "Hajee Mohammad Danesh Science and Technology University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1113551",
+        "team_name": "IST_GhostCoders",
+        "university_name": "Institute of Science and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1110887",
+        "team_name": "IUBAT_RETURN_ZERO",
+        "university_name": "International University of Business Agriculture and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1114239",
+        "team_name": "IUT_Lycoris",
+        "university_name": "Islamic University of Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112630",
+        "team_name": "IUT_Sakib(vai)Parbe",
+        "university_name": "Islamic University of Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1116214",
+        "team_name": "IUT_sudorm-rf",
+        "university_name": "Islamic University of Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112666",
+        "team_name": "IUT_vacationLovers",
+        "university_name": "Islamic University of Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112902",
+        "team_name": "JKKNIU Picnic Team",
+        "university_name": "Jatiya Kabi Kazi Nazrul Islam University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112392",
+        "team_name": "Low_CG_Coders",
+        "university_name": "National Institute of Textile Engineering and Research",
+        "votes": "6"
+    },
+    {
+        "team_id": "1105925",
+        "team_name": "MIST_CodeCrafters_2.0",
+        "university_name": "Military Institute of Science and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1105929",
+        "team_name": "MIST_CrabCoders",
+        "university_name": "Military Institute of Science and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1112333",
+        "team_name": "MU_Trinomial",
+        "university_name": "Metropolitan University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1113102",
+        "team_name": "PSTU_bitForge",
+        "university_name": "Patuakhali Science and Technology University",
+        "votes": "6"
+    },
+    {
+        "team_id": "1114536",
+        "team_name": "PUST_GG",
+        "university_name": "Pabna University of Science and Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1103582",
+        "team_name": "RISING_CODERS",
+        "university_name": "Bangladesh University of Professionals",
+        "votes": "6"
+    },
+    {
+        "team_id": "1110604",
+        "team_name": "RUET_BACKUP_TEAM",
+        "university_name": "Rajshahi University of Engineering & Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1110607",
+        "team_name": "Ruet_Potato_Coders",
+        "university_name": "Rajshahi University of Engineering & Technology",
+        "votes": "6"
+    },
+    {
+        "team_id": "1110971",
+        "team_name": "RU_ConscriptedThree",
+        "university_name": "University of Rajshahi",
+        "votes": "6"
+    },
+    {
+        "team_id": "1103584",
+        "team_name": "Sagittarius A*",
+        "university_name": "Rangpur Engineering College,Rangpur",
+        "votes": "6"
+    },
+    {
+        "team_id": "1114236",
+        "team_name": "Timeout Error GB",
+        "university_name": "Gono Bishwabidyalay (Gono University)",
+        "votes": "6"
+    },
+    {
+        "team_id": "1114128",
+        "team_name": "BRUR_ONIRUDDHO",
+        "university_name": "Begum Rokeya University, Rangpur",
+        "votes": "5"
+    },
+    {
+        "team_id": "1111652",
+        "team_name": "BUET_ASM",
+        "university_name": "Bangladesh University of Engineering and Technology",
+        "votes": "5"
+    },
+    {
+        "team_id": "1111236",
+        "team_name": "CU_DWIMIK",
+        "university_name": "University of Chittagong",
+        "votes": "5"
+    },
+    {
+        "team_id": "1107794",
+        "team_name": "Fiery_end",
+        "university_name": "Shahjalal University of Science and Technology",
+        "votes": "5"
+    },
+    {
+        "team_id": "1113541",
+        "team_name": "IST_tawakkul",
+        "university_name": "Institute of Science and Technology",
+        "votes": "5"
+    },
+    {
+        "team_id": "1111646",
+        "team_name": "IST_team_10",
+        "university_name": "Institute of Science and Technology",
+        "votes": "5"
+    },
+    {
+        "team_id": "1113424",
+        "team_name": "ISU_QUEENS",
+        "university_name": "International Standard University",
+        "votes": "5"
+    },
+    {
+        "team_id": "1103587",
+        "team_name": "Rebooters_NeU",
+        "university_name": "Netrokona University",
+        "votes": "5"
+    },
+    {
+        "team_id": "1110061",
+        "team_name": "ShEC_404_Brain_Not_Found",
+        "university_name": "Shyamoli Engineering College",
+        "votes": "5"
+    },
+    {
+        "team_id": "1110582",
+        "team_name": "Team_Tim",
+        "university_name": "Shahjalal University of Science and Technology",
+        "votes": "5"
+    },
+    {
+        "team_id": "1113343",
+        "team_name": "Uttorbongo_SUST",
+        "university_name": "Shahjalal University of Science and Technology",
+        "votes": "5"
+    },
+    {
+        "team_id": "1105418",
+        "team_name": "BAU_BiE_OutL&ers",
+        "university_name": "Bangladesh Agricultural University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112987",
+        "team_name": "BCS_Coders",
+        "university_name": "Mawlana Bhashani Science and Technology University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1103580",
+        "team_name": "BGC_Team_Dim",
+        "university_name": "BGC Trust University Bangladesh",
+        "votes": "4"
+    },
+    {
+        "team_id": "1113970",
+        "team_name": "BGC_Team_Dim",
+        "university_name": "BGC Trust University Bangladesh",
+        "votes": "4"
+    },
+    {
+        "team_id": "1114209",
+        "team_name": "BIST",
+        "university_name": "National University, Bangladesh",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112652",
+        "team_name": "BRACU_Lemons",
+        "university_name": "BRAC University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1114584",
+        "team_name": "BRACU_NewBitsBug",
+        "university_name": "BRAC University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112296",
+        "team_name": "BRACU_ScareCrows",
+        "university_name": "BRAC University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110693",
+        "team_name": "BUP_Epilogue",
+        "university_name": "Bangladesh University of Professionals",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110399",
+        "team_name": "Byte Bandits",
+        "university_name": "Southeast University, Bangladesh",
+        "votes": "4"
+    },
+    {
+        "team_id": "1113848",
+        "team_name": "CCN Overclocked",
+        "university_name": "CCN University of Science & Technology",
+        "votes": "4"
+    },
+    {
+        "team_id": "1111002",
+        "team_name": "CityU_ThreeBytes",
+        "university_name": "City University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110442",
+        "team_name": "CIU_Undefined_Errors",
+        "university_name": "Chittagong Independent University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1108549",
+        "team_name": "Code Commandos",
+        "university_name": "Bangladesh University of Professionals",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110559",
+        "team_name": "CU_Falcon",
+        "university_name": "University of Chittagong",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110104",
+        "team_name": "CU_LastMove",
+        "university_name": "University of Chittagong",
+        "votes": "4"
+    },
+    {
+        "team_id": "1113181",
+        "team_name": "DCC_F3_Syntax",
+        "university_name": "Dhaka City College",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110616",
+        "team_name": "DCSC_CodeGeass",
+        "university_name": "Delta Computer Science College",
+        "votes": "4"
+    },
+    {
+        "team_id": "1114173",
+        "team_name": "DU_Ironclaw",
+        "university_name": "University of Dhaka",
+        "votes": "4"
+    },
+    {
+        "team_id": "1111864",
+        "team_name": "DU_Kairo",
+        "university_name": "University of Dhaka",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112618",
+        "team_name": "DU_KOPALE_JA_ACHE",
+        "university_name": "University of Dhaka",
+        "votes": "4"
+    },
+    {
+        "team_id": "1111928",
+        "team_name": "DU_Odyssey",
+        "university_name": "University of Dhaka",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112192",
+        "team_name": "DU_Rumbling",
+        "university_name": "University of Dhaka",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112213",
+        "team_name": "DU_STSTORM",
+        "university_name": "University of Dhaka",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110988",
+        "team_name": "IUS_Algo_Blancos",
+        "university_name": "University of Scholars",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112625",
+        "team_name": "IUT_Jet2Holiday",
+        "university_name": "Islamic University of Technology",
+        "votes": "4"
+    },
+    {
+        "team_id": "1113780",
+        "team_name": "JUST_Presenting_Mr_Noodles",
+        "university_name": "Jashore University of Science and Technology",
+        "votes": "4"
+    },
+    {
+        "team_id": "1114495",
+        "team_name": "KKBAU_Code_Squad",
+        "university_name": "Khulna Khan Bahadur Ahsanullah University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110758",
+        "team_name": "KUET_Anarosh",
+        "university_name": "Khulna University of Engineering and Technology",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110761",
+        "team_name": "KUET_Beyonders",
+        "university_name": "Khulna University of Engineering and Technology",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110771",
+        "team_name": "KUET_BitGladiators",
+        "university_name": "Khulna University of Engineering and Technology",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110767",
+        "team_name": "KUET_EVANGELION",
+        "university_name": "Khulna University of Engineering and Technology",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110760",
+        "team_name": "KUET_KichuPareNa",
+        "university_name": "Khulna University of Engineering and Technology",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112985",
+        "team_name": "MBSTU_Dynamic_Trio",
+        "university_name": "Mawlana Bhashani Science and Technology University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112860",
+        "team_name": "MBSTU_UdoMada",
+        "university_name": "Mawlana Bhashani Science and Technology University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112194",
+        "team_name": "MU_HalaMadrid",
+        "university_name": "Metropolitan University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1114250",
+        "team_name": "PrSTU_OutputError",
+        "university_name": "Pirojpur Science and Technology University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1113044",
+        "team_name": "PSTU_Array_Of_Hope",
+        "university_name": "Patuakhali Science and Technology University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1111413",
+        "team_name": "Root@Linux",
+        "university_name": "Manarat International University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1109546",
+        "team_name": "RU_CurlyBraces",
+        "university_name": "University of Rajshahi",
+        "votes": "4"
+    },
+    {
+        "team_id": "1109534",
+        "team_name": "RU_New_Coders",
+        "university_name": "University of Rajshahi",
+        "votes": "4"
+    },
+    {
+        "team_id": "1111973",
+        "team_name": "SEC_Gamma_Radiation",
+        "university_name": "Sylhet Engineering College",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112063",
+        "team_name": "Sec_Porcupine_Tree",
+        "university_name": "Sylhet Engineering College",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110397",
+        "team_name": "SEU_Trident",
+        "university_name": "Southeast University, Bangladesh",
+        "votes": "4"
+    },
+    {
+        "team_id": "1108474",
+        "team_name": "SIU_Algorithm_Avengers",
+        "university_name": "Sylhet International University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1103591",
+        "team_name": "Team_Chronicle",
+        "university_name": "Netrokona University",
+        "votes": "4"
+    },
+    {
+        "team_id": "1111334",
+        "team_name": "The long Longs",
+        "university_name": "Rajshahi University of Engineering & Technology",
+        "votes": "4"
+    },
+    {
+        "team_id": "1114288",
+        "team_name": "The_Logic_Builders",
+        "university_name": "College Of Technology (Narayanganj)",
+        "votes": "4"
+    },
+    {
+        "team_id": "1111552",
+        "team_name": "UAP_Nightjars",
+        "university_name": "University of Asia Pacific",
+        "votes": "4"
+    },
+    {
+        "team_id": "1110917",
+        "team_name": "UAP_Sample_Passed",
+        "university_name": "University of Asia Pacific",
+        "votes": "4"
+    },
+    {
+        "team_id": "10002",
+        "team_name": "UCSI_QuantumGlitch",
+        "university_name": "UCSI",
+        "votes": "4"
+    },
+    {
+        "team_id": "1111839",
+        "team_name": "wub_garbage_value",
+        "university_name": "World University of Bangladesh",
+        "votes": "4"
+    },
+    {
+        "team_id": "1111961",
+        "team_name": "ZHSUST_Orions",
+        "university_name": "Z. H. Sikder University of Science and Technology",
+        "votes": "4"
+    },
+    {
+        "team_id": "1112309",
+        "team_name": "BRACU_Ravens",
+        "university_name": "BRAC University",
+        "votes": "3"
+    },
+    {
+        "team_id": "1109191",
+        "team_name": "Code Bees of EUB",
+        "university_name": "European University of Bangladesh",
+        "votes": "3"
+    },
+    {
+        "team_id": "1112981",
+        "team_name": "Code Dragon",
+        "university_name": "Shanto-Mariam University of Creative Technology",
+        "votes": "3"
+    },
+    {
+        "team_id": "1112610",
+        "team_name": "DU_KKHITO",
+        "university_name": "University of Dhaka",
+        "votes": "3"
+    },
+    {
+        "team_id": "1112582",
+        "team_name": "DU_MB",
+        "university_name": "University of Dhaka",
+        "votes": "3"
+    },
+    {
+        "team_id": "1112486",
+        "team_name": "Fukka_Kulle_Nezamin",
+        "university_name": "Mawlana Bhashani Science and Technology University",
+        "votes": "3"
+    },
+    {
+        "team_id": "1112417",
+        "team_name": "ICE_new_Epoch",
+        "university_name": "Imperial College of Engineering, Khulna",
+        "votes": "3"
+    },
+    {
+        "team_id": "1111273",
+        "team_name": "Insoluble_Heralds",
+        "university_name": "Rajshahi University of Engineering & Technology",
+        "votes": "3"
+    },
+    {
+        "team_id": "1112954",
+        "team_name": "ISTT_CoduKathi",
+        "university_name": "Institute of Science Trade and Technology",
+        "votes": "3"
+    },
+    {
+        "team_id": "1111742",
+        "team_name": "IUB_Botshos",
+        "university_name": "Independent University - Bangladesh",
+        "votes": "3"
+    },
+    {
+        "team_id": "1111056",
+        "team_name": "IUB_Branch&Bound",
+        "university_name": "Independent University - Bangladesh",
+        "votes": "3"
+    },
+    {
+        "team_id": "1113011",
+        "team_name": "jeta_mone_hoy",
+        "university_name": "Mawlana Bhashani Science and Technology University",
+        "votes": "3"
+    },
+    {
+        "team_id": "1113004",
+        "team_name": "MBSTU_TRIES",
+        "university_name": "Mawlana Bhashani Science and Technology University",
+        "votes": "3"
+    },
+    {
+        "team_id": "1114329",
+        "team_name": "NSU_ArPariNa",
+        "university_name": "North South University",
+        "votes": "3"
+    },
+    {
+        "team_id": "1114327",
+        "team_name": "NSU_EktaNaamDaoFast",
+        "university_name": "North South University",
+        "votes": "3"
+    },
+    {
+        "team_id": "1114646",
+        "team_name": "NSU_JobApplication",
+        "university_name": "North South University",
+        "votes": "3"
+    },
+    {
+        "team_id": "1114274",
+        "team_name": "NSU_TLE",
+        "university_name": "North South University",
+        "votes": "3"
+    },
+    {
+        "team_id": "1114328",
+        "team_name": "NSU_XudlingPong",
+        "university_name": "North South University",
+        "votes": "3"
+    },
+    {
+        "team_id": "1113201",
+        "team_name": "nullset",
+        "university_name": "University of Liberal Arts Bangladesh",
+        "votes": "3"
+    },
+    {
+        "team_id": "1114009",
+        "team_name": "NWU_SPARK",
+        "university_name": "North Western University, Khulna",
+        "votes": "3"
+    },
+    {
+        "team_id": "1113878",
+        "team_name": "PEC_Supermacy",
+        "university_name": "Pabna Engineering College",
+        "votes": "3"
+    },
+    {
+        "team_id": "1116871",
+        "team_name": "PiratesCoder",
+        "university_name": "Nawab Faizunnesa Govt College",
+        "votes": "3"
+    },
+    {
+        "team_id": "1109558",
+        "team_name": "RU_CoPrime",
+        "university_name": "University of Rajshahi",
+        "votes": "3"
+    },
+    {
+        "team_id": "1109015",
+        "team_name": "RU_Dhaka_Jabo",
+        "university_name": "University of Rajshahi",
+        "votes": "3"
+    },
+    {
+        "team_id": "1111008",
+        "team_name": "RU_Prime_Suspects",
+        "university_name": "University of Rajshahi",
+        "votes": "3"
+    },
+    {
+        "team_id": "1111577",
+        "team_name": "RU_TLE_Shikari",
+        "university_name": "University of Rajshahi",
+        "votes": "3"
+    },
+    {
+        "team_id": "1109543",
+        "team_name": "RU_Zero_Day_Hackers",
+        "university_name": "University of Rajshahi",
+        "votes": "3"
+    },
+    {
+        "team_id": "1111823",
+        "team_name": "Scholars_Byte_Brigade",
+        "university_name": "University of Scholars",
+        "votes": "3"
+    },
+    {
+        "team_id": "1111474",
+        "team_name": "segment_fault",
+        "university_name": "Northern University Bangladesh",
+        "votes": "3"
+    },
+    {
+        "team_id": "1114906",
+        "team_name": "Snowbell",
+        "university_name": "State University of Bangladesh",
+        "votes": "3"
+    },
+    {
+        "team_id": "1113175",
+        "team_name": "Superm4n_FanClub",
+        "university_name": "Prime University",
+        "votes": "3"
+    },
+    {
+        "team_id": "1112876",
+        "team_name": "SU_wrong_asnwer__bar_bar",
+        "university_name": "Sonargaon University",
+        "votes": "3"
+    }
+]

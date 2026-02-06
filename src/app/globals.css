@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+
+*{
+    @apply  transition-all duration-100 outline-0;
+}
+/* select-none */
+
+.loader {
+    @apply fixed top-0 left-0 right-0 h-[3px] bg-cyan-500 z-[9999];
+}
