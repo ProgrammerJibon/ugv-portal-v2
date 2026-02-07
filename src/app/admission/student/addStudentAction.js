@@ -84,14 +84,14 @@ export async function addStudentAction(formData) {
                 program, session, program_type, section,
                 email_address, phone_number, address, student_nid,
                 father_name, mother_name, guardian_phone, guardian_nid,
-                faculty_id, designation, joining_date
+                faculty_id, designation, joining_date, status
             ) VALUES (
                 'Student', ?, ?, ?, 
                 ?, ?, ?, ?, 
                 ?, ?, ?, ?,
                 ?, ?, ?, ?,
                 ?, ?, ?, ?,
-                '', '', ''
+                '', '', '', 'ACTIVE'
             )
         `;
 

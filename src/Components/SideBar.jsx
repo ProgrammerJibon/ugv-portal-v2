@@ -93,6 +93,11 @@ export const actions = {
             description: "Admit new students to the university",
             link: "/admission/student",
             icon: <TiUserAdd />
+        }, {
+            title: "Readmit Student",
+            description: "Readmit students who have been dropped out",
+            link: "/admission/readmission",
+            icon: <TiUserAdd />
         },
     ]
 };
