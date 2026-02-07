@@ -50,7 +50,7 @@ export async function getClassMarksData(subjectId, teacherId) {
                 u.user_id = sm.student_user_id 
                 AND sm.subject_id = ?
             WHERE 
-                u.user_type = 'Student'
+                u.user_type = 'STUDENT'
                 AND u.program = ? 
                 -- AND u.session = ? -- Uncomment if strict session matching is needed
             ORDER BY u.user_id ASC

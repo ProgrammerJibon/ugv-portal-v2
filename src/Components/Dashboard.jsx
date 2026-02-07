@@ -10,6 +10,7 @@ import Profile from './Profile';
 
 const Dashboard = ({user}) => {
     // defined based on your requirements list
+    console.log(user);
     
 
     return (

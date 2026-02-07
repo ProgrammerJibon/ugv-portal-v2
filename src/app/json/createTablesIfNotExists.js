@@ -188,6 +188,58 @@ async function createAssignedSubjectsTeacherTable(connection) {
     return !!q;
 }
 
+async function createTeacherReviewsTable(connection) {
+    if (await tableExists(connection, "teacher_reviews")) return true;
+    const sql = `CREATE TABLE IF NOT EXISTS teacher_reviews (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        student_user_id VARCHAR(64) NOT NULL,
+        teacher_id VARCHAR(11) NOT NULL,
+        session_id VARCHAR(11) NOT NULL,
+        program_id VARCHAR(11) NOT NULL,
+        semester VARCHAR(16) NOT NULL,
+        subject_id VARCHAR(11) NOT NULL,
+        rating VARCHAR(4) NOT NULL,
+        comment VARCHAR(1024) DEFAULT NULL,
+        created_at VARCHAR(32) NOT NULL,
+        PRIMARY KEY (id)
+    ) ENGINE=InnoDB`;
+    const [q] = await connection.execute(sql);
+    return !!q;
+}
+
+async function createPaymentsTable(connection) {
+    if (await tableExists(connection, "payments")) return true;
+    const sql = `CREATE TABLE IF NOT EXISTS payments (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        student_user_id VARCHAR(64) NOT NULL,
+        session VARCHAR(32) NOT NULL,
+        fee_type VARCHAR(64) NOT NULL,
+        amount VARCHAR(10) NOT NULL,
+        payment_method VARCHAR(16) NOT NULL,
+        trx_id VARCHAR(64) DEFAULT NULL,
+        remarks VARCHAR(512) DEFAULT NULL,
+        payment_date VARCHAR(32) NOT NULL,
+        created_by VARCHAR(11) NOT NULL, -- Accountant ID
+        PRIMARY KEY (id)
+        ) ENGINE=InnoDB;`;
+    const [q] = await connection.execute(sql);
+    return !!q;
+}
+
+async function createFinancialTable(connection) {
+    if (await tableExists(connection, "financials")) return true;
+    const sql = `CREATE TABLE IF NOT EXISTS student_financials (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        student_user_id VARCHAR(64) NOT NULL,
+        total_due VARCHAR(10) DEFAULT '0.00',
+        last_payment_date VARCHAR(32) DEFAULT NULL,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+        ) ENGINE=InnoDB`;
+    const [q] = await connection.execute(sql);
+    return !!q;
+}
+
 
 
 export default async (connection) => {
@@ -198,6 +250,9 @@ export default async (connection) => {
         && await createSessionsTable(connection)
         && await createStudentsMarksTable(connection)
         && await createCourseMaterialTable(connection)
+        && await createTeacherReviewsTable(connection)
+        && await createPaymentsTable(connection)
+        && await createFinancialTable(connection)
         && await createAssignedSubjectsTeacherTable(connection)
         && await createSMSSentTable(connection);
 };

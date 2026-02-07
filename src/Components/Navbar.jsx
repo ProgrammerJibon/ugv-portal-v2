@@ -12,7 +12,13 @@ export default ({user}) => {
     } else if (user?.user_type?.toLowerCase() === "teacher") {
         title = "Teacher Portal";
         home = "/teacher";
-    }
+    } else if (user?.user_type?.toLowerCase() === "student") {
+        title = "Student Portal";
+        home = "/student";
+    } else if (user?.user_type?.toLowerCase() === "admission") {
+        title = "Admission Portal";
+        home = "/admission";
+    } 
     return <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
             <Link href={home} className="flex items-center gap-3">

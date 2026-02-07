@@ -30,8 +30,20 @@ export default async function Home() {
                 <script>window.location.href = "/admission";</script>
             </div>;
         }
+        if (res?.user?.user_type?.toLowerCase() === "student"){
+            return <div>
+                <h1>Redirecting to student page...</h1>
+                <script>window.location.href = "/student";</script>
+            </div>;
+        }
+        if (res?.user?.user_type?.toLowerCase() === "accountant"){
+            return <div>
+                <h1>Redirecting to accountant page...</h1>
+                <script>window.location.href = "/accountant";</script>
+            </div>;
+        }
     }else{
         return <LoginPage />;
-    }
+    } 
     
 }

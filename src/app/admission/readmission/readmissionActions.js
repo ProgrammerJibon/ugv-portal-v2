@@ -11,7 +11,7 @@ export async function findStudentAction(studentId) {
                 id, user_id, name, program, batch, session, status, 
                 current_semester, program_type 
              FROM users 
-             WHERE user_id = ? AND user_type = 'Student'`,
+             WHERE user_id = ? AND user_type = 'STUDENT'`,
             [studentId]
         );
 

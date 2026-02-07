@@ -86,7 +86,7 @@ export async function addStudentAction(formData) {
                 father_name, mother_name, guardian_phone, guardian_nid,
                 faculty_id, designation, joining_date, status
             ) VALUES (
-                'Student', ?, ?, ?, 
+                'STUDENT', ?, ?, ?,
                 ?, ?, ?, ?, 
                 ?, ?, ?, ?,
                 ?, ?, ?, ?,
