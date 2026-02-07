@@ -25,6 +25,7 @@ export async function getTeacherDashboardData(teacherId) {
                 m.program_short_name AS dept,
                 at.semester,
                 s.subject_code AS code,
+                s.id AS subject_id,
                 s.subject_name AS title
             FROM assigned_teachers at
             JOIN subjects s ON at.subject_id = s.id

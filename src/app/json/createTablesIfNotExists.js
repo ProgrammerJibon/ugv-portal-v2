@@ -86,6 +86,30 @@ async function createSessionsTable(connection) {
     return !!q;
 }
 
+async function createStudentsMarksTable(connection) {
+    if (await tableExists(connection, "student_marks")) return true;
+    const sql = `CREATE TABLE IF NOT EXISTS student_marks (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        student_user_id VARCHAR(64) NOT NULL, 
+        session_id VARCHAR(11) NOT NULL,
+        program_id VARCHAR(11) NOT NULL,
+        subject_id VARCHAR(11) NOT NULL,
+        teacher_id VARCHAR(11) NOT NULL,
+        semester VARCHAR(16) NOT NULL,
+        
+        mark_attendance VARCHAR(5) DEFAULT 0,
+        mark_quiz VARCHAR(5) DEFAULT 0,
+        mark_assignment VARCHAR(5) DEFAULT 0,
+        mark_mid VARCHAR(5) DEFAULT 0,
+        mark_final VARCHAR(5) DEFAULT 0,
+        
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+        ) ENGINE=InnoDB`;
+    const [q] = await connection.execute(sql);
+    return !!q;
+}
+
 async function createSubjectsTable(connection) {
     if (await tableExists(connection, "subjects")) return true;
     const sql = `CREATE TABLE IF NOT EXISTS subjects (
@@ -152,6 +176,7 @@ export default async (connection) => {
         && await createMajorsTable(connection)
         && await createSubjectsTable(connection)
         && await createSessionsTable(connection)
+        && await createStudentsMarksTable(connection)
         && await createAssignedSubjectsTeacherTable(connection)
         && await createSMSSentTable(connection);
 };

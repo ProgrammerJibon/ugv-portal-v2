@@ -125,7 +125,7 @@ const TeacherDashboard = ({ user }) => {
                                                 </button>
                                                 <button
                                                     className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 px-3 rounded shadow transition-colors"
-                                                    onClick={() => window.location.href = `/teacher/subjects/${course.id}/marks`} // Future link
+                                                    onClick={() => window.location.href = `/teacher/subjects/${course.subject_id}/marks`} // Future link
                                                 >
                                                     Enter Marks <FaArrowRight />
                                                 </button>
