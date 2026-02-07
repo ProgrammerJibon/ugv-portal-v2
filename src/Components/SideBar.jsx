@@ -78,6 +78,14 @@ export const actions = {
             link: "/exam/result-update",
             icon: <TiUserAdd />
         }
+    ],
+    teacher: [
+        {
+            title: "My Subjects",
+            description: "View and manage subjects assigned to you",
+            link: "/teacher/subjects",
+            icon: <TiUserAdd />
+        },
     ]
 };
 

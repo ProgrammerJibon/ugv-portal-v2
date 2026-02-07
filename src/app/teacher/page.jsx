@@ -4,7 +4,7 @@ import AdminDashboard from "../../Components/Dashboard";
 export default async () => {
     const res = await getUserFromAuthCookie();
     if (res && "user" in res) {
-        if (res?.user?.user_type?.toLowerCase() === "exam") {
+        if (res?.user?.user_type?.toLowerCase() === "teacher") {
             return <>
                 <AdminDashboard user={res?.user}/>
             </>

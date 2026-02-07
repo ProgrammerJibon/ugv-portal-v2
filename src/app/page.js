@@ -18,6 +18,12 @@ export default async function Home() {
                 <script>window.location.href = "/exam";</script>
             </div>;
         }
+        if (res?.user?.user_type?.toLowerCase() === "teacher"){
+            return <div>
+                <h1>Redirecting to teacher page...</h1>
+                <script>window.location.href = "/teacher";</script>
+            </div>;
+        }
     }else{
         return <LoginPage />;
     }
