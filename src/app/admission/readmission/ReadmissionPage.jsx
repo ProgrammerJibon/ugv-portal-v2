@@ -63,8 +63,8 @@ const ReadmissionPage = ({ user }) => {
 
             if (res.status === 'success') {
                 alert(res.message);
-                // Update local state to reflect Active status immediately
-                setStudent(prev => ({ ...prev, status: 'Active', session: targetSession, current_semester: rejoinSemester }));
+                // Update local state to reflect ACTIVE status immediately
+                setStudent(prev => ({ ...prev, status: 'ACTIVE', session: targetSession, current_semester: rejoinSemester }));
             } else {
                 alert(res.message);
             }
@@ -119,7 +119,7 @@ const ReadmissionPage = ({ user }) => {
                                 <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden relative">
 
                                     {/* Status Ribbon */}
-                                    <div className={`absolute top-4 right-0 px-3 py-1 text-xs font-bold text-white rounded-l shadow-sm ${student.status === 'Active' ? 'bg-emerald-500' : 'bg-red-500'}`}>
+                                    <div className={`absolute top-4 right-0 px-3 py-1 text-xs font-bold text-white rounded-l shadow-sm ${student.status === 'ACTIVE' ? 'bg-emerald-500' : 'bg-red-500'}`}>
                                         {student.status}
                                     </div>
 
@@ -162,12 +162,12 @@ const ReadmissionPage = ({ user }) => {
 
                                     <div className="p-8 space-y-6 flex-grow">
 
-                                        {student.status === 'Active' ? (
+                                        {student.status === 'ACTIVE' ? (
                                             <div className="h-full flex flex-col items-center justify-center text-center p-6">
                                                 <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4">
                                                     <FaCheckCircle size={32} />
                                                 </div>
-                                                <h3 className="text-xl font-bold text-emerald-700">Student is Active</h3>
+                                                <h3 className="text-xl font-bold text-emerald-700">Student is ACTIVE</h3>
                                                 <p className="text-slate-500 mt-2">This student account is currently active.</p>
                                             </div>
                                         ) : (

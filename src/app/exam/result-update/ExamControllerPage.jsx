@@ -19,8 +19,8 @@ const ExamControllerPage = ({ user }) => {
             if (res.status === 'success' && res.data.length > 0) {
                 setSessions(res.data);
 
-                // Try to find the 'Active' session to select by default, otherwise pick the first one
-                const activeSession = res.data.find(s => s.status === 'Active');
+                // Try to find the 'ACTIVE' session to select by default, otherwise pick the first one
+                const activeSession = res.data.find(s => s.status === 'ACTIVE');
                 setSelectedSessionId(activeSession ? activeSession.id : res.data[0].id);
             }
             setLoading(false);
@@ -92,7 +92,7 @@ const ExamControllerPage = ({ user }) => {
                                 >
                                     {sessions.map(s => (
                                         <option key={s.id} value={s.id}>
-                                            {s.session_season} {s.session_year} {s.status === 'Active' ? '(Current)' : ''}
+                                            {s.session_season} {s.session_year} {s.status === 'ACTIVE' ? '(Current)' : ''}
                                         </option>
                                     ))}
                                 </select>

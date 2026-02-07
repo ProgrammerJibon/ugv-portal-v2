@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaSpinner, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import addSessionAction from './addSessionAction';
-import AdminSection from '../../AdminSection';
 
 const AddSessionForm = () => {
     const [loading, setLoading] = useState(false);
@@ -56,7 +55,7 @@ const AddSessionForm = () => {
     };
 
     return (
-        <AdminSection>
+        <Section>
             <div className="bg-slate-50 font-sans flex flex-col justify-center items-center py-10">
 
                 <div className="w-full container px-4">
@@ -154,7 +153,7 @@ const AddSessionForm = () => {
                     </div>
                 </div>
             </div>
-        </AdminSection>
+        </Section>
     );
 };
 

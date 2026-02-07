@@ -7,7 +7,6 @@ import {
     deleteSubjectAction
 } from './addSubjectAction';
 import { FaBook, FaSpinner, FaCheckCircle, FaExclamationCircle, FaListAlt, FaTrash, FaCalculator } from 'react-icons/fa';
-import AdminSection from '../AdminSection';
 
 const AddSubjectForm = () => {
     const [loading, setLoading] = useState(false);
@@ -161,7 +160,7 @@ const AddSubjectForm = () => {
     };
 
     return (
-        <AdminSection>
+        <Section>
             <div className="min-h-screen bg-slate-50 font-sans flex flex-col justify-center items-center py-10">
                 <div className="w-full container px-4">
                     <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
@@ -367,7 +366,7 @@ const AddSubjectForm = () => {
                     </div>
                 </div>
             </div>
-        </AdminSection>
+        </Section>
     );
 };
 

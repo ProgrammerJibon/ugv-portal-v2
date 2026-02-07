@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { FaSpinner, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import addMajorAction from './addMajorAction';
-import AdminSection from '../../AdminSection';
 
 const AddMajorForm = () => {
     const [loading, setLoading] = useState(false);
@@ -47,7 +46,7 @@ const AddMajorForm = () => {
     };
 
     return (
-        <AdminSection>
+        <Section>
             <div className="min-h-screen bg-slate-50 font-sans flex flex-col items-center py-10">
 
                 <div className="w-full container px-4">
@@ -139,7 +138,7 @@ const AddMajorForm = () => {
                     </div>
                 </div>
             </div>
-        </AdminSection>
+        </Section>
     );
 };
 

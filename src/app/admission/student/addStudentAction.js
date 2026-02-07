@@ -8,7 +8,7 @@ export async function getAdmissionDropdowns() {
     const db = await connectDatabase();
     try {
         const [programs] = await db.execute("SELECT id, program_name, program_short_name FROM majors ORDER BY program_name ASC");
-        const [sessions] = await db.execute("SELECT id, session_year, session_season FROM sessions WHERE status IN ('Active', 'Upcoming') ORDER BY id DESC");
+        const [sessions] = await db.execute("SELECT id, session_year, session_season FROM sessions WHERE status IN ('ACTIVE', 'Upcoming') ORDER BY id DESC");
         return { status: "success", programs, sessions };
     } catch (error) {
         return { status: "error", message: "Failed to load dropdown data" };

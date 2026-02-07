@@ -16,10 +16,10 @@ const Profile = ({ user }) => {
     const isStudent = user?.user_type === 'STUDENT';
 
     return (
-        <div className="bg-slate-50 font-sans min-h-screen">
+        <div className="bg-slate-50 font-sans py-4 w-full">
 
             {/* Main Content */}
-            <main className="mx-auto py-10 px-4 max-w-6xl">
+            <main className="mx-auto py-10 px-4">
 
                 {/* Page Title */}
                 <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">

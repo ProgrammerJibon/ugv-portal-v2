@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import AdminSection from '../../AdminSection';
 import addUserAction, { getProbableId } from './addUserAction';
 
 const AddUserForm = ({ getMajorsData }) => {
@@ -110,7 +109,7 @@ const AddUserForm = ({ getMajorsData }) => {
     };
 
     return (
-        <AdminSection>
+        <Section>
             <div className="min-h-screen bg-slate-50 font-sans flex flex-col">
                 <div className="flex-grow container mx-auto py-10 px-4">
                     <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
@@ -263,7 +262,7 @@ const AddUserForm = ({ getMajorsData }) => {
                     </div>
                 </div>
             </div>
-        </AdminSection>
+        </Section>
     );
 };
 

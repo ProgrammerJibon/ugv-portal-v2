@@ -7,11 +7,11 @@ async function createUser(connection) {
     if (await tableExists(connection, "users")) return true;
     const sql = `CREATE TABLE IF NOT EXISTS users (
         id int(11) NOT NULL AUTO_INCREMENT,
-        
+
         user_id varchar(64) NOT NULL,
         password varchar(255) NOT NULL,
         user_type varchar(32) NOT NULL,
-        
+
         name varchar(255) NOT NULL,
         email_address varchar(255) NOT NULL,
         phone_number varchar(32) NOT NULL,
@@ -27,7 +27,11 @@ async function createUser(connection) {
         joining_date varchar(32) DEFAULT NULL,
         program_type varchar(16) DEFAULT NULL,
         current_semester varchar(2) DEFAULT "1",
+        registerred varchar(2) NOT NULL DEFAULT '0',
+        waiver varchar(4) NOT NULL DEFAULT '0',
+        admission_fee varchar(8) NOT NULL DEFAULT '50000',
         section varchar(2) DEFAULT NULL,
+        last_promoted_session varchar(64) DEFAULT NULL,
 
         program varchar(64) DEFAULT NULL,
         session varchar(32) DEFAULT NULL,
@@ -37,10 +41,11 @@ async function createUser(connection) {
         guardian_nid varchar(64) DEFAULT NULL,
 
         PRIMARY KEY (id)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`;
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`;
     const [q] = await connection.execute(sql);
     return !!q;
 }
+
 
 async function createCookies(connection) {
     if (await tableExists(connection, "cookies")) return true;
@@ -214,6 +219,7 @@ async function createPaymentsTable(connection) {
         student_user_id VARCHAR(64) NOT NULL,
         session VARCHAR(32) NOT NULL,
         fee_type VARCHAR(64) NOT NULL,
+        semester VARCHAR(64) NOT NULL,
         amount VARCHAR(10) NOT NULL,
         payment_method VARCHAR(16) NOT NULL,
         trx_id VARCHAR(64) DEFAULT NULL,

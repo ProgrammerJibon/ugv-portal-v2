@@ -28,12 +28,12 @@ export async function setActiveSessionAction(sessionId) {
     try {
         // Step 1: Mark currently active session as 'Completed'
         await db.execute(
-            "UPDATE sessions SET status = 'Completed' WHERE status = 'Active'"
+            "UPDATE sessions SET status = 'Completed' WHERE status = 'ACTIVE'"
         );
 
-        // Step 2: Set the selected session to 'Active'
+        // Step 2: Set the selected session to 'ACTIVE'
         await db.execute(
-            "UPDATE sessions SET status = 'Active' WHERE id = ?",
+            "UPDATE sessions SET status = 'ACTIVE' WHERE id = ?",
             [sessionId]
         );
 

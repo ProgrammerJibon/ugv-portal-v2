@@ -44,7 +44,7 @@ export async function findStudentAction(studentId) {
 export async function getActiveSessionsAction() {
     const db = await connectDatabase();
     try {
-        const [rows] = await db.execute("SELECT session_year, session_season FROM sessions WHERE status IN ('Active', 'Upcoming') ORDER BY id DESC");
+        const [rows] = await db.execute("SELECT session_year, session_season FROM sessions WHERE status IN ('ACTIVE', 'Upcoming') ORDER BY id DESC");
         return { status: "success", data: rows };
     } catch (error) {
         return { status: "error", message: "Failed to load sessions" };
@@ -56,7 +56,7 @@ export async function processReadmissionAction(studentDbId, targetSession, rejoi
     const db = await connectDatabase();
     try {
         await db.execute(
-            "UPDATE users SET status = 'Active', session = ?, current_semester = ? WHERE id = ?",
+            "UPDATE users SET status = 'ACTIVE', session = ?, current_semester = ? WHERE id = ?",
             [targetSession, rejoinSemester, studentDbId]
         );
         return { status: "success", message: "Student re-admitted successfully." };

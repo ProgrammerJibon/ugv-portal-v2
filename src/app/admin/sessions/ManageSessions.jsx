@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { getSessionsAction, setActiveSessionAction, deleteSessionAction } from './manageSessionActions';
 import { FaCalendarAlt, FaCheckCircle, FaHistory, FaPowerOff, FaSpinner, FaTrash, FaClock } from 'react-icons/fa';
-import AdminSection from '../AdminSection';
 
 const ManageSessions = () => {
     const [sessions, setSessions] = useState([]);
@@ -35,8 +34,8 @@ const ManageSessions = () => {
         if (res.status === 'success') {
             // Optimistically update UI
             const updatedSessions = sessions.map(s => {
-                if (s.id === id) return { ...s, status: 'Active' };
-                if (s.status === 'Active') return { ...s, status: 'Completed' };
+                if (s.id === id) return { ...s, status: 'ACTIVE' };
+                if (s.status === 'ACTIVE') return { ...s, status: 'Completed' };
                 return s;
             });
             setSessions(updatedSessions);
@@ -60,7 +59,7 @@ const ManageSessions = () => {
     };
 
     return (
-        <AdminSection>
+        <Section>
             <div className="min-h-screen bg-slate-50 font-sans p-6">
 
                 {/* Header */}
@@ -91,21 +90,21 @@ const ManageSessions = () => {
                         sessions.map((session) => (
                             <div
                                 key={session.id}
-                                className={`relative flex flex-col md:flex-row items-center justify-between p-6 rounded-xl border transition-all ${session.status === 'Active'
+                                className={`relative flex flex-col md:flex-row items-center justify-between p-6 rounded-xl border transition-all ${session.status === 'ACTIVE'
                                         ? 'bg-white border-green-500 shadow-lg ring-1 ring-green-500 z-10'
                                         : 'bg-white border-gray-200 hover:border-blue-300'
                                     }`}
                             >
                                 {/* Left: Info */}
                                 <div className="flex items-center gap-6 w-full md:w-auto">
-                                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-inner ${session.status === 'Active' ? 'bg-green-100 text-green-600' : 'bg-slate-100 text-slate-400'
+                                    <div className={`w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-inner ${session.status === 'ACTIVE' ? 'bg-green-100 text-green-600' : 'bg-slate-100 text-slate-400'
                                         }`}>
                                         <FaCalendarAlt />
                                     </div>
                                     <div>
                                         <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
                                             {session.session_season} {session.session_year}
-                                            {session.status === 'Active' && (
+                                            {session.status === 'ACTIVE' && (
                                                 <span className="bg-green-100 text-green-700 text-[10px] uppercase px-2 py-0.5 rounded-full border border-green-200 font-extrabold tracking-wider">
                                                     Current
                                                 </span>
@@ -121,17 +120,17 @@ const ManageSessions = () => {
                                 <div className="flex items-center gap-4 mt-4 md:mt-0 w-full md:w-auto justify-end">
 
                                     {/* Status Indicator Text */}
-                                    <div className={`px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 ${session.status === 'Active' ? 'text-green-600 bg-green-50' :
+                                    <div className={`px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 ${session.status === 'ACTIVE' ? 'text-green-600 bg-green-50' :
                                             session.status === 'Completed' ? 'text-slate-500 bg-slate-100' :
                                                 'text-blue-500 bg-blue-50'
                                         }`}>
-                                        {session.status === 'Active' ? <FaCheckCircle /> :
+                                        {session.status === 'ACTIVE' ? <FaCheckCircle /> :
                                             session.status === 'Completed' ? <FaHistory /> : <FaClock />}
                                         {session.status}
                                     </div>
 
                                     {/* Activate Button */}
-                                    {session.status !== 'Active' && (
+                                    {session.status !== 'ACTIVE' && (
                                         <button
                                             onClick={() => handleActivate(session.id, session.session_year, session.session_season)}
                                             disabled={actionLoading === session.id}
@@ -144,7 +143,7 @@ const ManageSessions = () => {
                                     )}
 
                                     {/* Delete Button (Only if not active) */}
-                                    {session.status !== 'Active' && (
+                                    {session.status !== 'ACTIVE' && (
                                         <button
                                             onClick={() => handleDelete(session.id)}
                                             className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
@@ -160,7 +159,7 @@ const ManageSessions = () => {
                 </div>
 
             </div>
-        </AdminSection>
+        </Section>
     );
 };
 

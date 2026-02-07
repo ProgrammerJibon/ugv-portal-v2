@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import AdminSection from '../AdminSection';
 import {
     getUsersAction,
     toggleUserStatusAction,
@@ -66,7 +65,7 @@ const ManageUsers = () => {
     };
 
     return (
-        <AdminSection>
+        <Section>
             <div className="min-h-screen bg-slate-50 font-sans p-6">
 
                 {/* Header Section */}
@@ -206,7 +205,7 @@ const ManageUsers = () => {
                     </div>
                 </div>
             </div>
-        </AdminSection>
+        </Section>
     );
 };
 

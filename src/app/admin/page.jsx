@@ -1,12 +1,12 @@
+import Dashboard from "@/Components/Dashboard";
 import { getUserFromAuthCookie } from "../json/serverFunctions";
-import AdminDashboard from "./Dashboard";
 
 export default async () => {
     const res = await getUserFromAuthCookie();
     if (res && "user" in res) {
         if (res?.user?.user_type?.toLowerCase() === "admin") {
             return <>
-                <AdminDashboard user={res?.user}/>
+                <Dashboard user={res?.user}/>
             </>
         }
     }

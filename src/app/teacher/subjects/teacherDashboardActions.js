@@ -6,9 +6,9 @@ export async function getTeacherDashboardData(teacherId) {
     const db = await connectDatabase();
 
     try {
-        // 1. Get the Current Active Session
+        // 1. Get the Current ACTIVE Session
         const [sessions] = await db.execute(
-            "SELECT id, session_year, session_season FROM sessions WHERE status = 'Active' LIMIT 1"
+            "SELECT id, session_year, session_season FROM sessions WHERE status = 'ACTIVE' LIMIT 1"
         );
 
         if (sessions.length === 0) {

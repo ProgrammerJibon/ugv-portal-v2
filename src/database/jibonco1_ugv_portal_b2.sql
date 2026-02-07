@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 
 INSERT IGNORE INTO `sessions` (`id`, `session_year`, `session_season`, `short_code`, `status`) VALUES
 (1, '2026', 'Summer', 'SUM26', 'Completed'),
-(2, '2026', 'Winter', 'WIN26', 'Active');
+(2, '2026', 'Winter', 'WIN26', 'ACTIVE');
 
 -- --------------------------------------------------------
 
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT IGNORE INTO `users` (`id`, `name`, `user_type`, `email_address`, `phone_number`, `faculty_id`, `designation`, `user_id`, `password`, `joining_date`, `status`) VALUES
 (1, 'Jibon', 'ADMIN', 'programmerjibon@gmail.com', '01600301810', '', 'System Administrator', '1', '700c8b805a3e2a265b01c77614cd8b21', '19-11-2019', 'ACTIVE'),
 (5, 'Zahid Akon', 'Teacher', 'zahid@ugv.edu.bd', '01600112233', '1', 'Lecturer', 'T-1', '716e44ee064be58fc7a02f05a48f4ee9', '2020-01-01', 'ACTIVE'),
-(6, 'asf', 'Admission', 'wer@sf.tt', '01222447741', 'N/A', 'Admission', 'AG-1', '716e44ee064be58fc7a02f05a48f4ee9', '2025-11-04', 'Active');
+(6, 'asf', 'Admission', 'wer@sf.tt', '01222447741', 'N/A', 'Admission', 'AG-1', '716e44ee064be58fc7a02f05a48f4ee9', '2025-11-04', 'ACTIVE');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

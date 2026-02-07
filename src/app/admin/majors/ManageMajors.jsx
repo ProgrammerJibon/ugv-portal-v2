@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import AdminSection from '../AdminSection';
 import { FaEdit, FaSpinner, FaGraduationCap, FaTimes, FaSave } from 'react-icons/fa';
 import { getMajorsAction, updateMajorAction } from './manageMajorsActions';
 
@@ -57,7 +56,7 @@ const ManageMajors = () => {
     };
 
     return (
-        <AdminSection>
+        <Section>
             <div className="min-h-screen bg-slate-50 font-sans p-6">
 
                 {/* Page Header */}
@@ -210,7 +209,7 @@ const ManageMajors = () => {
                 )}
 
             </div>
-        </AdminSection>
+        </Section>
     );
 };
 

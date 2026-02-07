@@ -20,7 +20,7 @@ const TeacherDashboard = ({ user }) => {
                 setCurrentSession(res.sessionLabel);
                 setAssignedCourses(res.courses);
             } else {
-                setCurrentSession("No Active Session");
+                setCurrentSession("No ACTIVE Session");
             }
             setLoading(false);
         };
@@ -58,7 +58,7 @@ const TeacherDashboard = ({ user }) => {
 
                         {/* Session Badge */}
                         <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-200">
-                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Active Session</span>
+                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">ACTIVE Session</span>
                             <span className="text-sm font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">
                                 {currentSession}
                             </span>
