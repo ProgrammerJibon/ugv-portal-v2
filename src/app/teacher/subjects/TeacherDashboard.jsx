@@ -120,7 +120,9 @@ const TeacherDashboard = ({ user }) => {
 
                                             {/* Action Buttons */}
                                             <div className="mt-6 pt-4 grid grid-cols-2 gap-3">
-                                                <button className="flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs font-bold py-2 px-3 rounded border border-slate-200 transition-colors">
+                                                <button 
+                                                    onClick={() => window.location.href = `/teacher/subjects/${course.subject_id}/materials`} 
+                                                className="flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs font-bold py-2 px-3 rounded border border-slate-200 transition-colors">
                                                     <FaClipboardList /> Materials
                                                 </button>
                                                 <button
