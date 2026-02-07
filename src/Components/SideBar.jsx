@@ -154,7 +154,7 @@ export const actions = {
             icon: <FaArrowUp />
         },
         {
-            title: "Add Payment",
+            title: "Making Payment",
             description: "Add payment for a student",
             link: "/accountant/add-payment",
             icon: <FaMoneyBillWave />

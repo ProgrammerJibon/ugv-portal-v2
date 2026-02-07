@@ -87,10 +87,10 @@ const AddPaymentPage = ({ user }) => {
 
     return (
         <Section user={user}>
-            <div className="min-h-screen bg-slate-50 font-sans flex flex-col items-center py-10">
+            <div className="bg-slate-50 font-sans flex flex-col items-center py-10">
                 <div className="w-full container max-w-6xl px-4">
 
-                    {}
+                    
                     <div className="mb-8 border-b border-gray-200 pb-4">
                         <h1 className="text-2xl font-bold text-slate-800">Process New Payment</h1>
                         <p className="text-slate-500 text-sm">Collect fees, generate receipts, and view history.</p>
@@ -98,10 +98,10 @@ const AddPaymentPage = ({ user }) => {
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                        {}
+                        
                         <div className="lg:col-span-1 space-y-6">
 
-                            {}
+                            
                             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                                 <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Find Student</label>
                                 <form onSubmit={handleSearch} className="flex gap-2">
@@ -119,11 +119,11 @@ const AddPaymentPage = ({ user }) => {
                                 </form>
                             </div>
 
-                            {}
+                            
                             {student ? (
-                                <div className="bg-white rounded-xl shadow-lg border border-indigo-50 overflow-hidden relative animate-fade-in-up">
-                                    <div className="bg-indigo-600 h-20"></div>
-                                    <div className="px-6 pb-6 text-center -mt-10">
+                                <div className="bg-white rounded-xl shadow-lg border border-gray-300 overflow-hidden relative animate-fade-in-up p-8">
+                                    <div className="bg-indigo-600 w-20 h-20"></div>
+                                    <div className="px-6 pb-6 text-center">
                                         <div className="w-20 h-20 mx-auto bg-white rounded-full p-1 shadow-md flex items-center justify-center text-slate-300">
                                             <div className="w-full h-full bg-slate-100 rounded-full flex items-center justify-center text-3xl"><FaUserGraduate /></div>
                                         </div>
@@ -131,7 +131,7 @@ const AddPaymentPage = ({ user }) => {
                                         <p className="text-sm text-slate-500 font-mono font-bold">{student.user_id}</p>
                                         <p className="text-xs text-slate-400 mt-1">{student.dept} • Batch {student.batch}</p>
 
-                                        {}
+                                        
                                         <div className="mt-6 bg-slate-50 border border-slate-200 rounded-lg p-4 text-left space-y-2">
                                             <div className="flex justify-between text-sm">
                                                 <span className="text-slate-500">Current Due:</span>
@@ -157,10 +157,10 @@ const AddPaymentPage = ({ user }) => {
                             )}
                         </div>
 
-                        {}
+                        
                         <div className="lg:col-span-2 space-y-8">
 
-                            {}
+                            
                             <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 ${student ? 'opacity-100' : 'opacity-50 pointer-events-none grayscale'}`}>
                                 <div className="bg-slate-50 px-8 py-4 border-b border-gray-200 flex justify-between items-center">
                                     <h3 className="font-bold text-slate-700 flex items-center gap-2"><FaMoneyBillWave className="text-emerald-500" /> New Payment</h3>
@@ -213,7 +213,7 @@ const AddPaymentPage = ({ user }) => {
                                 </form>
                             </div>
 
-                            {}
+                            
                             {student && (
                                 <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden animate-fade-in-up">
                                     <div className="bg-slate-50 px-8 py-4 border-b border-gray-200 flex justify-between items-center">
