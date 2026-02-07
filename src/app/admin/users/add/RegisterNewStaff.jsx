@@ -1,30 +1,59 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AdminSection from '../../AdminSection';
-import addUserAction from './addUserAction';
+import addUserAction, { getProbableId } from './addUserAction';
 
-const AddUserForm = () => {
+const AddUserForm = ({ getMajorsData }) => {
     const [role, setRole] = useState('Teacher');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '' });
 
     // Form State
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        joiningDate: '',
-        facultyId: '', // For teachers
-        department: 'Computer Science & Engineering', // For teachers
-        designation: 'Lecturer', // Default
+        name: 'Test',
+        email: 'test@ugv.edu.bd',
+        phone: '01888888888',
+        prefix: '',
+        joiningDate: '2024-01-01',
+        facultyId: '', 
+        department: 'Computer Science & Engineering',
+        designation: 'Lecturer',
         userIdSuffix: '',
-        password: 'Welcome@2026'
+        password: '12345678' // Default temporary password
     });
 
     // Handle Input Change
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
+    let changing = false;
+    useEffect(() => {
+        (async () => {
+            if(changing) return;
+            changing = true;
+            let prefix = '---';
+            if(role === 'Admin') {
+                prefix = 'A-';
+            } else if(role == 'Exam Controller') {
+                prefix = 'E-';
+            } else if(role == 'Admission') {
+                prefix = 'AD-'; // admission desk
+            } else if(role == 'Teacher') {
+                prefix = 'T-';
+            } else if(role == 'Accountant') {
+                prefix = 'AC-';
+            }
+            setFormData((prev) => ({ ...prev, prefix }));
+            const res = await getProbableId(prefix);
+            if (res.status === 'success') {
+                setFormData((prev) => ({ ...prev, userIdSuffix: res.nextNumber.toString().padStart(4, '0') }));
+            } else {
+                setFormData((prev) => ({ ...prev, userIdSuffix: '0001' }));
+            }
+            setTimeout(() => {changing = false;}, 1000);
+        })();
+    }, [formData.prefix, role]);
 
     // Handle Submit
     const handleSubmit = async (e) => {
@@ -42,14 +71,13 @@ const AddUserForm = () => {
         // 2. Prepare Data for Server Action
         const payload = new FormData();
         payload.append("name", formData.name);
-        payload.append("user_type", role); // "Teacher", "Accountant", etc.
+        payload.append("user_type", role?.toUpperCase() || ''); // "Teacher", "Accountant", etc.
         payload.append("email_address", formData.email);
         payload.append("phone_number", formData.phone);
         payload.append("joining_date", formData.joiningDate);
 
-        // Construct User ID (Prefix + Suffix)
-        const prefix = role === 'Teacher' ? 'T-' : role === 'Accountant' ? 'A-' : 'AG-';
-        payload.append("user_id", prefix + formData.userIdSuffix);
+    
+        payload.append("prefix", formData.prefix);
 
         payload.append("password", formData.password);
 
@@ -106,7 +134,7 @@ const AddUserForm = () => {
                             <div className="mb-8">
                                 <h3 className="text-lg font-bold text-slate-800 border-b border-gray-200 pb-2 mb-4">1. Account Role</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                                    {['Teacher', 'Accountant', 'Admission'].map((r) => (
+                                    {['Admin', 'Exam Controller','Teacher', 'Accountant', 'Admission'].map((r) => (
                                         <label key={r} className={`cursor-pointer border p-4 rounded-lg flex items-center justify-between transition-all ${role === r ? 'border-blue-500 bg-blue-50 ring-1 ring-blue-500' : 'border-gray-200 hover:border-blue-300'}`}>
                                             <div className="flex items-center gap-3">
                                                 <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${role === r ? 'border-blue-600' : 'border-gray-400'}`}>
@@ -151,10 +179,9 @@ const AddUserForm = () => {
                                         <div>
                                             <label className="block text-sm font-semibold text-gray-600 mb-1">Department</label>
                                             <select name="department" value={formData.department} onChange={handleChange} className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500 bg-white">
-                                                <option>Computer Science & Engineering</option>
-                                                <option>Electrical & Electronic Engineering</option>
-                                                <option>Business Administration</option>
-                                                <option>English</option>
+                                                {getMajorsData?.data?.map((major) => (
+                                                    <option key={major.id} value={major.program_short_name}>{major.program_name}</option>
+                                                ))}
                                             </select>
                                         </div>
                                         <div>
@@ -182,16 +209,17 @@ const AddUserForm = () => {
                                     <div>
                                         <label className="block text-sm font-semibold text-gray-600 mb-1">Assign User ID</label>
                                         <div className="relative">
-                                            <span className="absolute left-3 top-2 text-gray-400 font-bold select-none">
-                                                {role === 'Teacher' ? 'T-' : role === 'Accountant' ? 'A-' : 'AG-'}
+                                            <span className="absolute left-4 top-2 text-gray-600 font-bold select-none">
+                                                {formData.prefix}
                                             </span>
                                             <input
                                                 required
                                                 name="userIdSuffix"
+                                                disabled
                                                 value={formData.userIdSuffix}
                                                 onChange={handleChange}
                                                 type="text"
-                                                placeholder="XXXX"
+                                                placeholder="Auto-generated"
                                                 className="w-full border border-gray-300 rounded-md pl-12 pr-4 py-2 focus:outline-none focus:border-blue-500 bg-gray-50 font-mono"
                                             />
                                         </div>
@@ -201,9 +229,9 @@ const AddUserForm = () => {
                                         <input
                                             name="password"
                                             value={formData.password}
-                                            onChange={handleChange}
+                                            disabled
                                             type="text"
-                                            className="w-full border border-gray-300 rounded-md px-4 py-2 bg-gray-100 text-gray-700 focus:outline-none focus:bg-white transition-colors"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 bg-gray-100 text-gray-500 font-bold focus:outline-none focus:bg-white transition-colors"
                                         />
                                         <p className="text-xs text-gray-400 mt-1">* User will be asked to change this on first login.</p>
                                     </div>
