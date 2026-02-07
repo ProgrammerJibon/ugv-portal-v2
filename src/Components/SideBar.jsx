@@ -86,6 +86,14 @@ export const actions = {
             link: "/teacher/subjects",
             icon: <TiUserAdd />
         },
+    ],
+    admission: [
+        {
+            title: "Admit Student",
+            description: "Admit new students to the university",
+            link: "/admission/student",
+            icon: <TiUserAdd />
+        },
     ]
 };
 

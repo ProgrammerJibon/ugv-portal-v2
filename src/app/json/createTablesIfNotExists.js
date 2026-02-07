@@ -7,17 +7,36 @@ async function createUser(connection) {
     if (await tableExists(connection, "users")) return true;
     const sql = `CREATE TABLE IF NOT EXISTS users (
         id int(11) NOT NULL AUTO_INCREMENT,
-        name varchar(64) NOT NULL,
+        
+        user_id varchar(64) NOT NULL,
+        password varchar(255) NOT NULL,
         user_type varchar(32) NOT NULL,
-        email_address varchar(1024) NOT NULL,
-        phone_number varchar(16) NOT NULL,
-        faculty_id varchar(11) NOT NULL,
-        designation varchar(32) NOT NULL,
-        user_id varchar(16) NOT NULL,
-        password varchar(32) NOT NULL,
-        joining_date varchar(32) NOT NULL,
+        
+        name varchar(255) NOT NULL,
+        email_address varchar(255) NOT NULL,
+        phone_number varchar(32) NOT NULL,
+        address varchar(1024) DEFAULT NULL,
+        date_of_birth varchar(32) DEFAULT NULL,
+        gender varchar(16) DEFAULT NULL,
+        blood_group varchar(16) DEFAULT NULL,
+        religion varchar(32) DEFAULT NULL,
+        student_nid varchar(64) DEFAULT NULL,
+
+        faculty_id varchar(32) DEFAULT NULL,
+        designation varchar(64) DEFAULT NULL,
+        joining_date varchar(32) DEFAULT NULL,
+        program_type varchar(16) DEFAULT NULL,
+        section varchar(2) DEFAULT NULL,
+
+        program varchar(64) DEFAULT NULL,
+        session varchar(32) DEFAULT NULL,
+        father_name varchar(255) DEFAULT NULL,
+        mother_name varchar(255) DEFAULT NULL,
+        guardian_phone varchar(32) DEFAULT NULL,
+        guardian_nid varchar(64) DEFAULT NULL,
+
         PRIMARY KEY (id)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci`;
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`;
     const [q] = await connection.execute(sql);
     return !!q;
 }
