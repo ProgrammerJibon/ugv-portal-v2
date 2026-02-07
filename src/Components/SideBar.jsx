@@ -71,6 +71,12 @@ export const actions = {
             description: "See Assigned Teachers in Subjects",
             link: "/exam/subjects",
             icon: <TiUserAdd />
+        },
+        {
+            title: "Mark Update Options",
+            description: "Manage mark update options for subjects",
+            link: "/exam/result-update",
+            icon: <TiUserAdd />
         }
     ]
 };

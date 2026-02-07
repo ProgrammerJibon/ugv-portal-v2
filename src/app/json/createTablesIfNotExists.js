@@ -111,6 +111,7 @@ async function createAssignedSubjectsTeacherTable(connection) {
         semester VARCHAR(16) NOT NULL,
         subject_id INT(11) NOT NULL,
         teacher_id INT(11) NOT NULL,
+        mark_open VARCHAR(2) NOT NULL,
         PRIMARY KEY (id)
         ) ENGINE=InnoDB`;
     const [q] = await connection.execute(sql);
