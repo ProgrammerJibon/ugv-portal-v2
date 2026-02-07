@@ -35,7 +35,7 @@ const AddUserForm = ({ getMajorsData }) => {
             let prefix = '---';
             if(role === 'Admin') {
                 prefix = 'A-';
-            } else if(role == 'Exam Controller') {
+            } else if(role == 'Exam') {
                 prefix = 'E-';
             } else if(role == 'Admission') {
                 prefix = 'AD-'; // admission desk
@@ -134,7 +134,7 @@ const AddUserForm = ({ getMajorsData }) => {
                             <div className="mb-8">
                                 <h3 className="text-lg font-bold text-slate-800 border-b border-gray-200 pb-2 mb-4">1. Account Role</h3>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                                    {['Admin', 'Exam Controller','Teacher', 'Accountant', 'Admission'].map((r) => (
+                                    {['Admin', 'Exam','Teacher', 'Accountant', 'Admission'].map((r) => (
                                         <label key={r} className={`cursor-pointer border p-4 rounded-lg flex items-center justify-between transition-all ${role === r ? 'border-blue-500 bg-blue-50 ring-1 ring-blue-500' : 'border-gray-200 hover:border-blue-300'}`}>
                                             <div className="flex items-center gap-3">
                                                 <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${role === r ? 'border-blue-600' : 'border-gray-400'}`}>

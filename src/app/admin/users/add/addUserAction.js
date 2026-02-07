@@ -90,8 +90,8 @@ export default async function addUserAction(formData) {
         await db.execute(
             `INSERT INTO users 
             (name, user_type, email_address, phone_number, faculty_id, designation, user_id, password, joining_date, status) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Active')`,
-            [name, user_type, email_address, phone_number, faculty_id, designation, user_id, hashedPassword, joining_date]
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'ACTIVE')`,
+            [name, user_type?.toUpperCase() || '', email_address, phone_number, faculty_id, designation, user_id, hashedPassword, joining_date]
         );
 
         return { status: "success", message: `User registered successfully with User ID: ${user_id} and Password: ${password}` };
