@@ -102,6 +102,21 @@ async function createSMSSentTable(connection) {
     return !!q;
 }
 
+async function createAssignedSubjectsTeacherTable(connection) {
+    if (await tableExists(connection, "assigned_teachers")) return true;
+    const sql = `CREATE TABLE IF NOT EXISTS assigned_teachers (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        session_id INT(11) NOT NULL,
+        program_id INT(11) NOT NULL,
+        semester VARCHAR(16) NOT NULL,
+        subject_id INT(11) NOT NULL,
+        teacher_id INT(11) NOT NULL,
+        PRIMARY KEY (id)
+        ) ENGINE=InnoDB`;
+    const [q] = await connection.execute(sql);
+    return !!q;
+}
+
 
 
 export default async (connection) => {
@@ -110,5 +125,6 @@ export default async (connection) => {
         && await createMajorsTable(connection)
         && await createSubjectsTable(connection)
         && await createSessionsTable(connection)
+        && await createAssignedSubjectsTeacherTable(connection)
         && await createSMSSentTable(connection);
 };
