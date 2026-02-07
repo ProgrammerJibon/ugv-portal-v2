@@ -24,6 +24,12 @@ export default async function Home() {
                 <script>window.location.href = "/teacher";</script>
             </div>;
         }
+        if (res?.user?.user_type?.toLowerCase() === "admission"){
+            return <div>
+                <h1>Redirecting to admission page...</h1>
+                <script>window.location.href = "/admission";</script>
+            </div>;
+        }
     }else{
         return <LoginPage />;
     }

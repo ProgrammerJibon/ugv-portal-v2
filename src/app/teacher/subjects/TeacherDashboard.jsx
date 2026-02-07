@@ -121,11 +121,11 @@ const TeacherDashboard = ({ user }) => {
                                             {/* Action Buttons */}
                                             <div className="mt-6 pt-4 grid grid-cols-2 gap-3">
                                                 <button className="flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs font-bold py-2 px-3 rounded border border-slate-200 transition-colors">
-                                                    <FaClipboardList /> Class List
+                                                    <FaClipboardList /> Materials
                                                 </button>
                                                 <button
                                                     className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 px-3 rounded shadow transition-colors"
-                                                    onClick={() => window.location.href = `/teacher/marks/${course.id}`} // Future link
+                                                    onClick={() => window.location.href = `/teacher/subjects/${course.id}/marks`} // Future link
                                                 >
                                                     Enter Marks <FaArrowRight />
                                                 </button>

@@ -2,7 +2,7 @@
 
 import { connectDatabase } from "@/app/json/connectDatabase";
 
-// 1. Fetch all Programs (for the dropdown)
+// 1. Fetch Programs (No change)
 export async function getProgramsAction() {
     const db = await connectDatabase();
     try {
@@ -13,11 +13,10 @@ export async function getProgramsAction() {
     }
 }
 
-// 2. Fetch Subjects by Program ID (Updated to include ID)
+// 2. Fetch Subjects (No change)
 export async function getSubjectsByProgramAction(programId, semester) {
     const db = await connectDatabase();
     try {
-        // [UPDATED] Added 'id' to the SELECT statement
         const [rows] = await db.execute(
             "SELECT id, subject_name, subject_code FROM subjects WHERE program_id = ? AND semester = ? ORDER BY subject_code ASC",
             [programId, semester]
@@ -28,7 +27,7 @@ export async function getSubjectsByProgramAction(programId, semester) {
     }
 }
 
-// 3. Add New Subject
+// 3. Add New Subject (UPDATED)
 export async function addSubjectAction(formData) {
     const db = await connectDatabase();
 
@@ -37,8 +36,16 @@ export async function addSubjectAction(formData) {
     const subjectName = formData.get("subjectName");
     const subjectCode = formData.get("subjectCode");
 
+    // New Fields
+    const credit = formData.get("credit");
+    const markAttendance = formData.get("markAttendance");
+    const markQuize = formData.get("markQuize");
+    const markAssignment = formData.get("markAssignment");
+    const markMid = formData.get("markMid");
+    const markFinal = formData.get("markFinal");
+
     if (!programId || !semester || !subjectName || !subjectCode) {
-        return { status: "error", message: "All fields are required." };
+        return { status: "error", message: "Basic fields are required." };
     }
 
     try {
@@ -52,11 +59,18 @@ export async function addSubjectAction(formData) {
             return { status: "error", message: "Subject code already exists for this program." };
         }
 
-        // Insert
-        await db.execute(
-            "INSERT INTO subjects (program_id, semester, subject_name, subject_code) VALUES (?, ?, ?, ?)",
-            [programId, semester, subjectName, subjectCode]
-        );
+        // Insert with new columns
+        // Note: mark_quize matches your specific DB spelling
+        const query = `
+            INSERT INTO subjects 
+            (program_id, semester, subject_name, subject_code, credit, mark_attendance, mark_quize, mark_assignment, mark_mid, mark_final) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        await db.execute(query, [
+            programId, semester, subjectName, subjectCode,
+            credit, markAttendance, markQuize, markAssignment, markMid, markFinal
+        ]);
 
         return { status: "success", message: "Subject added successfully!" };
     } catch (error) {
@@ -65,7 +79,7 @@ export async function addSubjectAction(formData) {
     }
 }
 
-// 4. [NEW] Delete Subject
+// 4. Delete Subject (No change)
 export async function deleteSubjectAction(subjectId) {
     const db = await connectDatabase();
     try {

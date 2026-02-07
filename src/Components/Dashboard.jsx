@@ -8,7 +8,7 @@ import Profile from './Profile';
 
 
 
-const AdminDashboard = ({user}) => {
+const Dashboard = ({user}) => {
     // defined based on your requirements list
     
 
@@ -70,4 +70,4 @@ const AdminDashboard = ({user}) => {
     );
 };
 
-export default AdminDashboard;
+export default Dashboard;

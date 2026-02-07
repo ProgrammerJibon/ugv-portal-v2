@@ -1,12 +1,11 @@
 import { getUserFromAuthCookie } from "@/app/json/serverFunctions";
-import Dashboard from "../../Components/Dashboard";
 
 export default async () => {
     const res = await getUserFromAuthCookie();
     if (res && "user" in res) {
         if (res?.user?.user_type?.toLowerCase() === "teacher") {
             return <>
-                <Dashboard user={res?.user}/>
+                {/* <TeacherDashboard user={res?.user}/> */}
             </>
         }
     }

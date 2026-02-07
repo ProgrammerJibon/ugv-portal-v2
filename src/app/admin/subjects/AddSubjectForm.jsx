@@ -4,29 +4,36 @@ import {
     getProgramsAction,
     getSubjectsByProgramAction,
     addSubjectAction,
-    deleteSubjectAction // [NEW] Import this
+    deleteSubjectAction
 } from './addSubjectAction';
-import { FaBook, FaSpinner, FaCheckCircle, FaExclamationCircle, FaListAlt, FaTrash } from 'react-icons/fa';
+import { FaBook, FaSpinner, FaCheckCircle, FaExclamationCircle, FaListAlt, FaTrash, FaCalculator } from 'react-icons/fa';
 import AdminSection from '../AdminSection';
 
 const AddSubjectForm = () => {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '' });
 
-    // Data Loading State
     const [programs, setPrograms] = useState([]);
     const [existingSubjects, setExistingSubjects] = useState([]);
     const [loadingSubjects, setLoadingSubjects] = useState(false);
 
-    // Form State
-    const [formData, setFormData] = useState({
+    // Initial State with Defaults
+    const initialState = {
         programId: '',
         semester: '',
         subjectName: '',
-        subjectCode: ''
-    });
+        subjectCode: '',
+        credit: '3', // Default 3 credits
+        markAttendance: '15',
+        markQuize: '15',
+        markAssignment: '15',
+        markMid: '45',
+        markFinal: '60' // Default totals to 150 for 3 credits
+    };
 
-    // 1. Load Programs on Mount
+    const [formData, setFormData] = useState(initialState);
+
+    // Load Programs
     useEffect(() => {
         const fetchPrograms = async () => {
             const res = await getProgramsAction();
@@ -35,7 +42,7 @@ const AddSubjectForm = () => {
         fetchPrograms();
     }, []);
 
-    // 2. Load Subjects Helper
+    // Load Subjects
     const loadSubjects = async () => {
         if (!formData.programId) return;
         setLoadingSubjects(true);
@@ -44,7 +51,6 @@ const AddSubjectForm = () => {
         setLoadingSubjects(false);
     };
 
-    // Trigger load on change
     useEffect(() => {
         if (!formData.programId) {
             setExistingSubjects([]);
@@ -53,25 +59,80 @@ const AddSubjectForm = () => {
         loadSubjects();
     }, [formData.programId, formData.semester]);
 
+    // Handle Input Change with Validation for Credit
+    const handleChange = (e) => {
+        let { name, value } = e.target;
 
-    // 3. Handle Submit
+        // Enforce Min/Max for Credit
+        if (name === 'credit') {
+            if (value > 3) value = '3';
+            if (value < 1 && value !== '') value = '1';
+        }
+
+        setFormData({ ...formData, [name]: value });
+    };
+
+    // --- Dynamic Calculations ---
+    const creditValue = parseInt(formData.credit || 0);
+    const maxAllowedMarks = creditValue * 50; // 1 credit = 50 marks
+
+    const currentTotalMarks =
+        parseInt(formData.markAttendance || 0) +
+        parseInt(formData.markQuize || 0) +
+        parseInt(formData.markAssignment || 0) +
+        parseInt(formData.markMid || 0) +
+        parseInt(formData.markFinal || 0);
+
+    const isTotalValid = currentTotalMarks === maxAllowedMarks;
+    const isOverLimit = currentTotalMarks > maxAllowedMarks;
+
     const handleSubmit = async () => {
         setLoading(true);
         setMessage({ type: '', text: '' });
 
+        // 1. Validation: Credit Range
+        if (creditValue < 1 || creditValue > 3) {
+            setMessage({ type: 'error', text: 'Credit must be between 1 and 3.' });
+            setLoading(false);
+            return;
+        }
+
+        // 2. Validation: Total Marks
+        if (currentTotalMarks !== maxAllowedMarks) {
+            setMessage({
+                type: 'error',
+                text: `Total marks must be exactly ${maxAllowedMarks} for a ${creditValue} credit course. Current: ${currentTotalMarks}`
+            });
+            setLoading(false);
+            return;
+        }
+
         const payload = new FormData();
+        // Basic Info
         payload.append("programId", formData.programId);
         payload.append("semester", formData.semester);
         payload.append("subjectName", formData.subjectName);
         payload.append("subjectCode", formData.subjectCode);
+        // Marks & Credit
+        payload.append("credit", formData.credit);
+        payload.append("markAttendance", formData.markAttendance);
+        payload.append("markQuize", formData.markQuize);
+        payload.append("markAssignment", formData.markAssignment);
+        payload.append("markMid", formData.markMid);
+        payload.append("markFinal", formData.markFinal);
 
         try {
             const result = await addSubjectAction(payload);
 
             if (result.status === 'success') {
                 setMessage({ type: 'success', text: result.message });
-                setFormData(prev => ({ ...prev, subjectName: '', subjectCode: '' }));
-                loadSubjects(); // Refresh list
+                // Reset form but keep program/semester selections
+                setFormData(prev => ({
+                    ...initialState,
+                    programId: prev.programId,
+                    semester: prev.semester
+                }));
+                loadSubjects();
             } else {
                 setMessage({ type: 'error', text: result.message });
             }
@@ -82,16 +143,13 @@ const AddSubjectForm = () => {
         }
     };
 
-    // 4. [NEW] Handle Delete
     const handleDelete = async (subjectId) => {
         if (!window.confirm("Are you sure you want to delete this subject?")) return;
-
-        // Optimistically remove from UI or show loading
         setLoadingSubjects(true);
         try {
             const res = await deleteSubjectAction(subjectId);
             if (res.status === 'success') {
-                loadSubjects(); // Refresh the list from DB
+                loadSubjects();
             } else {
                 alert("Failed to delete");
                 setLoadingSubjects(false);
@@ -105,16 +163,15 @@ const AddSubjectForm = () => {
     return (
         <AdminSection>
             <div className="min-h-screen bg-slate-50 font-sans flex flex-col justify-center items-center py-10">
-
                 <div className="w-full container px-4">
-                    <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
+                    <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
 
                         {/* Header */}
                         <div className="bg-gradient-to-r from-purple-600 to-indigo-700 px-8 py-6 text-white">
                             <h2 className="text-2xl font-bold flex items-center gap-2">
                                 <FaBook /> Add New Subject
                             </h2>
-                            <p className="text-purple-100 text-sm mt-1">Register a new course/subject under an academic program.</p>
+                            <p className="text-purple-100 text-sm mt-1">Register course details and marks distribution.</p>
                         </div>
 
                         {/* Status Message */}
@@ -129,145 +186,183 @@ const AddSubjectForm = () => {
                         )}
 
                         <form className="px-8 py-8">
+                            <div className="space-y-8">
 
-                            <div className="space-y-6">
-
-                                
-
-
-                                {/* Divider */}
-                                <div className="relative flex py-1 items-center">
-                                    <div className="flex-grow border-t border-gray-200"></div>
-                                    <span className="flex-shrink-0 mx-4 text-gray-400 text-xs font-bold uppercase tracking-widest">New Entry Details</span>
-                                    <div className="flex-grow border-t border-gray-200"></div>
-                                </div>
-
-
-                                {/* 1. Program Name (Select) */}
-                                <div>
-                                    <label className="block text-sm font-semibold text-gray-600 mb-1">Program Name</label>
-                                    <select
-                                        value={formData.programId}
-                                        onChange={(e) => setFormData({ ...formData, programId: e.target.value })}
-                                        className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:border-purple-500 bg-white"
-                                    >
-                                        <option value="" disabled>Select a Program</option>
-                                        {programs.map(prog => (
-                                            <option key={prog.id} value={prog.id}>
-                                                {prog.program_name} ({prog.program_short_name})
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                {/* 2. Semester (Select) */}
-                                <div>
-                                    <label className="block text-sm font-semibold text-gray-600 mb-1">Semester</label>
-                                    <select
-                                        value={formData.semester}
-                                        onChange={(e) => setFormData({ ...formData, semester: e.target.value })}
-                                        className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:border-purple-500 bg-white"
-                                    >
-                                        <option value="" disabled>Select Semester</option>
-                                        {[...Array(8)].map((_, i) => (
-                                            <option key={i} value={`${i + 1}`}>{i + 1}th Semester</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-
-                                {/* --- Dynamic List Viewer --- */}
-                                <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg mb-6">
-                                    <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
-                                        <FaListAlt className="text-purple-500" /> Check Existing Subjects
-                                    </label>
-
-                                    <p className="text-xs text-slate-500 mb-2">Select a Program & Semester below to see subjects.</p>
-
-                                    {formData.programId && formData.semester && (
-                                        <div className="mt-3 bg-white border border-gray-200 rounded-md shadow-inner max-h-60 overflow-y-auto">
-                                            {loadingSubjects ? (
-                                                <div className="p-4 text-center text-xs text-slate-400">Loading...</div>
-                                            ) : (
-                                                <ul className="divide-y divide-gray-100">
-                                                    {existingSubjects.length > 0 ? (
-                                                        existingSubjects.map((sub) => (
-                                                            <li key={sub.id} className="px-3 py-2 text-sm flex justify-between items-center hover:bg-gray-50 group">
-                                                                <div className="flex items-center gap-3">
-                                                                    <span className="text-xs font-mono font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded border border-purple-100">
-                                                                        {sub.subject_code}
-                                                                    </span>
-                                                                    <span className="text-gray-700 font-medium">{sub.subject_name}</span>
-                                                                </div>
-
-                                                                {/* [NEW] Delete Button */}
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => handleDelete(sub.id)}
-                                                                    className="text-gray-300 hover:text-red-500 transition-colors p-2"
-                                                                    title="Delete Subject"
-                                                                >
-                                                                    <FaTrash size={14} />
-                                                                </button>
-                                                            </li>
-                                                        ))
-                                                    ) : (
-                                                        <li className="p-3 text-sm text-gray-400 italic">No subjects found for this semester.</li>
-                                                    )}
-                                                </ul>
-                                            )}
+                                {/* --- Basic Selection --- */}
+                                <div className="space-y-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-sm font-semibold text-gray-600 mb-1">Program Name</label>
+                                            <select
+                                                name="programId"
+                                                value={formData.programId}
+                                                onChange={handleChange}
+                                                className="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:outline-none focus:border-purple-500 bg-white"
+                                            >
+                                                <option value="" disabled>Select Program</option>
+                                                {programs.map(prog => (
+                                                    <option key={prog.id} value={prog.id}>{prog.program_name} ({prog.program_short_name})</option>
+                                                ))}
+                                            </select>
                                         </div>
-                                    )}
-                                </div>
+                                        <div>
+                                            <label className="block text-sm font-semibold text-gray-600 mb-1">Semester</label>
+                                            <select
+                                                name="semester"
+                                                value={formData.semester}
+                                                onChange={handleChange}
+                                                className="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:outline-none focus:border-purple-500 bg-white"
+                                            >
+                                                <option value="" disabled>Select Semester</option>
+                                                {[...Array(8)].map((_, i) => (
+                                                    <option key={i} value={`${i + 1}`}>{i + 1}th Semester</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
 
-                                {/* 3. Subject Name */}
-                                <div>
-                                    <label className="block text-sm font-semibold text-gray-600 mb-1">Subject Name</label>
-                                    <input
-                                        type="text"
-                                        placeholder="e.g. Data Structures & Algorithms"
-                                        value={formData.subjectName}
-                                        onChange={(e) => setFormData({ ...formData, subjectName: e.target.value })}
-                                        className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
-                                    />
-                                </div>
-
-                                {/* 4. Subject Code */}
-                                <div>
-                                    <label className="block text-sm font-semibold text-gray-600 mb-1">Subject Code</label>
-                                    <div className="flex">
-                                        <input
-                                            type="text"
-                                            placeholder="e.g. CSE-2101"
-                                            value={formData.subjectCode}
-                                            onChange={(e) => setFormData({ ...formData, subjectCode: e.target.value.toUpperCase() })}
-                                            className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:border-purple-500 font-mono text-slate-700 font-bold uppercase tracking-wide"
-                                        />
+                                    {/* Existing Subjects List */}
+                                    <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg">
+                                        <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
+                                            <FaListAlt className="text-purple-500" /> Existing Subjects
+                                        </label>
+                                        {formData.programId && formData.semester ? (
+                                            <div className="mt-2 bg-white border border-gray-200 rounded-md shadow-inner max-h-40 overflow-y-auto">
+                                                {loadingSubjects ? <div className="p-3 text-xs text-center">Loading...</div> : (
+                                                    <ul className="divide-y divide-gray-100">
+                                                        {existingSubjects.length > 0 ? (
+                                                            existingSubjects.map((sub) => (
+                                                                <li key={sub.id} className="px-3 py-2 text-sm flex justify-between items-center hover:bg-gray-50">
+                                                                    <div className="flex items-center gap-2">
+                                                                        <span className="text-xs font-mono font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded border border-purple-100">{sub.subject_code}</span>
+                                                                        <span className="text-gray-700">{sub.subject_name}</span>
+                                                                    </div>
+                                                                    <button type="button" onClick={() => handleDelete(sub.id)} className="text-gray-300 hover:text-red-500 p-1"><FaTrash size={12} /></button>
+                                                                </li>
+                                                            ))
+                                                        ) : <li className="p-3 text-sm text-gray-400 italic">No subjects found.</li>}
+                                                    </ul>
+                                                )}
+                                            </div>
+                                        ) : <p className="text-xs text-slate-400">Select Program & Semester to view list.</p>}
                                     </div>
                                 </div>
 
-                            </div>
+                                {/* --- Subject Details --- */}
+                                <div>
+                                    <div className="relative flex py-1 items-center mb-4">
+                                        <div className="flex-grow border-t border-gray-200"></div>
+                                        <span className="flex-shrink-0 mx-4 text-gray-400 text-xs font-bold uppercase tracking-widest">Course Details</span>
+                                        <div className="flex-grow border-t border-gray-200"></div>
+                                    </div>
 
-                            {/* Actions */}
-                            <div className="flex justify-end gap-4 pt-8 mt-4 border-t border-gray-100">
-                                <button
-                                    type="button"
-                                    onClick={() => window.history.back()}
-                                    className="px-6 py-2 rounded-md text-slate-600 hover:bg-slate-100 font-semibold transition-colors"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={handleSubmit}
-                                    disabled={loading}
-                                    className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-8 rounded-md shadow-lg transition-transform active:scale-95 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    {loading ? <FaSpinner className="animate-spin" /> : null}
-                                    {loading ? 'Adding...' : 'Add Subject'}
-                                </button>
-                            </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-sm font-semibold text-gray-600 mb-1">Subject Name</label>
+                                            <input
+                                                type="text"
+                                                name="subjectName"
+                                                placeholder="e.g. Data Structures"
+                                                value={formData.subjectName}
+                                                onChange={handleChange}
+                                                className="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:outline-none focus:border-purple-500"
+                                            />
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-sm font-semibold text-gray-600 mb-1">Code</label>
+                                                <input
+                                                    type="text"
+                                                    name="subjectCode"
+                                                    placeholder="CSE-101"
+                                                    value={formData.subjectCode}
+                                                    onChange={(e) => setFormData({ ...formData, subjectCode: e.target.value.toUpperCase() })}
+                                                    className="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:outline-none focus:border-purple-500 font-mono font-bold uppercase"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-semibold text-gray-600 mb-1">Credit (1-3)</label>
+                                                <input
+                                                    type="number"
+                                                    name="credit"
+                                                    min="1"
+                                                    max="3"
+                                                    value={formData.credit}
+                                                    onChange={handleChange}
+                                                    className="w-full border border-gray-300 rounded-md px-4 py-2.5 focus:outline-none focus:border-purple-500 text-center"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                {/* --- Marks Distribution --- */}
+                                <div className={`p-6 rounded-xl border transition-colors ${isOverLimit ? 'bg-red-50 border-red-200' : 'bg-slate-50 border-slate-200'
+                                    }`}>
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h3 className="text-sm font-bold text-slate-700 flex items-center gap-2">
+                                            <FaCalculator className="text-purple-500" /> Marks Distribution
+                                        </h3>
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-xs text-slate-500">Target: {maxAllowedMarks}</span>
+                                            <span className={`text-xs font-bold px-2 py-1 rounded border ${isTotalValid
+                                                    ? 'bg-green-100 text-green-700 border-green-200'
+                                                    : 'bg-red-100 text-red-700 border-red-200'
+                                                }`}>
+                                                Total: {currentTotalMarks}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                                        {[
+                                            { label: 'Attendance', name: 'markAttendance' },
+                                            { label: 'Quiz', name: 'markQuize' },
+                                            { label: 'Assignment', name: 'markAssignment' },
+                                            { label: 'Mid Term', name: 'markMid' },
+                                            { label: 'Final', name: 'markFinal' },
+                                        ].map((field) => (
+                                            <div key={field.name}>
+                                                <label className="block text-xs font-semibold text-gray-500 mb-1">{field.label}</label>
+                                                <input
+                                                    type="number"
+                                                    name={field.name}
+                                                    value={formData[field.name]}
+                                                    onChange={handleChange}
+                                                    onFocus={(e) => e.target.select()}
+                                                    className={`w-full border rounded-md px-2 py-2 focus:outline-none text-center font-bold ${isOverLimit ? 'border-red-300 focus:border-red-500 text-red-700' : 'border-gray-300 focus:border-purple-500 text-slate-700'
+                                                        }`}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {isOverLimit && (
+                                        <p className="text-xs text-red-600 mt-2 font-semibold text-center">
+                                            ⚠️ Total marks exceed the allowed limit of {maxAllowedMarks} for {creditValue} credit(s).
+                                        </p>
+                                    )}
+                                </div>
+
+                                <div className="flex justify-end gap-4 pt-4 border-t border-gray-100">
+                                    <button
+                                        type="button"
+                                        onClick={() => window.history.back()}
+                                        className="px-6 py-2 rounded-md text-slate-600 hover:bg-slate-100 font-semibold transition-colors"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={handleSubmit}
+                                        disabled={loading || !isTotalValid}
+                                        className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-8 rounded-md shadow-lg transition-transform active:scale-95 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {loading ? <FaSpinner className="animate-spin" /> : 'Save Subject'}
+                                    </button>
+                                </div>
+
+                            </div>
                         </form>
                     </div>
                 </div>

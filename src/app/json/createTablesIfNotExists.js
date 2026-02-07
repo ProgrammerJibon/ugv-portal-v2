@@ -74,8 +74,14 @@ async function createSubjectsTable(connection) {
         semester VARCHAR(16) NOT NULL,
         subject_name VARCHAR(255) NOT NULL,
         subject_code VARCHAR(32) NOT NULL,
+        mark_attendance VARCHAR(4) NOT NULL DEFAULT '15',
+        mark_quize VARCHAR(4) NOT NULL DEFAULT '15',
+        mark_assignment VARCHAR(4) NOT NULL DEFAULT '15',
+        mark_mid VARCHAR(4) NOT NULL DEFAULT '45',
+        mark_final VARCHAR(4) NOT NULL DEFAULT '60',
+        credit VARCHAR(2) NOT NULL DEFAULT '3',
         PRIMARY KEY (id)
-        ) ENGINE=InnoDB`;
+    ) ENGINE=InnoDB`;
     const [q] = await connection.execute(sql);
     return !!q;
 }
