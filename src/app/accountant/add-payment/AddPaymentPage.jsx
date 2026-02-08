@@ -9,16 +9,16 @@ import {
 } from 'react-icons/fa';
 
 const AddPaymentPage = ({ user }) => {
-    // --- State ---
+    
     const [searchId, setSearchId] = useState('');
     const [student, setStudent] = useState(null);
     const [history, setHistory] = useState([]);
-    const [sessionsList, setSessionsList] = useState([]); // [NEW] Store sessions
+    const [sessionsList, setSessionsList] = useState([]); 
     const [loadingSearch, setLoadingSearch] = useState(false);
     const [processing, setProcessing] = useState(false);
     const [transactionMode, setTransactionMode] = useState('PAYMENT');
 
-    // --- Form State ---
+    
     const initialFormState = {
         session: '',
         semester: '',
@@ -30,13 +30,13 @@ const AddPaymentPage = ({ user }) => {
     };
     const [formData, setFormData] = useState(initialFormState);
 
-    // --- [NEW] Load Sessions on Mount ---
+    
     useEffect(() => {
         const loadSessions = async () => {
             const res = await getSessionListAction();
             if (res.status === 'success') {
                 setSessionsList(res.data);
-                // Set default if list exists and no student selected yet
+                
                 if (res.data.length > 0) {
                     setFormData(prev => ({ ...prev, session: res.data[0].session_name }));
                 }
@@ -45,13 +45,13 @@ const AddPaymentPage = ({ user }) => {
         loadSessions();
     }, []);
 
-    // --- Helpers ---
+    
     const fetchHistory = async (id) => {
         const res = await getPaymentHistoryAction(id);
         if (res.status === 'success') setHistory(res.data);
     };
 
-    // --- Handlers ---
+    
     const handleSearch = async (e) => {
         e.preventDefault();
         if (!searchId) return;
@@ -67,8 +67,8 @@ const AddPaymentPage = ({ user }) => {
             setStudent(std);
             await fetchHistory(std.user_id);
 
-            // Auto-fill: Use system current session + student semester
-            // If globalSession isn't available, fall back to the first item in the loaded list
+            
+            
             const defaultSession = std.globalSession || (sessionsList.length > 0 ? sessionsList[0].session_name : '');
 
             setFormData(prev => ({
@@ -106,7 +106,7 @@ const AddPaymentPage = ({ user }) => {
 
         if (res.status === 'success') {
             alert(res.message);
-            // Live Balance Update
+            
             const impact = transactionMode === 'PAYMENT' ? -parseFloat(amount) : parseFloat(amount);
 
             setStudent(prev => ({
@@ -124,7 +124,7 @@ const AddPaymentPage = ({ user }) => {
         setProcessing(false);
     };
 
-    // Render Logic
+    
     const currentDue = student ? parseFloat(student.currentDue) : 0;
     const inputAmount = parseFloat(formData.amount) || 0;
     let balancePreview = currentDue;
@@ -142,9 +142,9 @@ const AddPaymentPage = ({ user }) => {
 
                     <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
 
-                        {/* --- LEFT: PROFILE --- */}
+                        {}
                         <div className="xl:col-span-1 space-y-6">
-                            {/* Search Box */}
+                            {}
                             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                                 <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Find Student</label>
                                 <form onSubmit={handleSearch} className="flex gap-2">
@@ -162,7 +162,7 @@ const AddPaymentPage = ({ user }) => {
                                 </form>
                             </div>
 
-                            {/* Student Card */}
+                            {}
                             {student && (
                                 <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden animate-fade-in-up">
                                     <div className="bg-gradient-to-r from-slate-800 to-slate-900 p-6 text-white relative">
@@ -174,7 +174,7 @@ const AddPaymentPage = ({ user }) => {
                                         </div>
                                     </div>
 
-                                    {/* Stats Grid */}
+                                    {}
                                     <div className="grid grid-cols-2 divide-x divide-slate-100 border-b border-slate-100">
                                         <div className="p-4 text-center">
                                             <p className="text-[10px] uppercase text-slate-400 font-bold">Lifetime Billed</p>
@@ -196,11 +196,11 @@ const AddPaymentPage = ({ user }) => {
                             )}
                         </div>
 
-                        {/* --- RIGHT: FORM --- */}
+                        {}
                         <div className="xl:col-span-2 space-y-8">
                             <div className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 ${student ? 'opacity-100' : 'opacity-50 pointer-events-none grayscale'}`}>
 
-                                {/* Tabs */}
+                                {}
                                 <div className="flex border-b border-gray-200">
                                     <button onClick={() => setTransactionMode('PAYMENT')} className={`flex-1 py-4 text-sm font-bold flex items-center justify-center gap-2 ${transactionMode === 'PAYMENT' ? 'bg-emerald-50 text-emerald-600 border-b-2 border-emerald-600' : 'text-slate-500'}`}><FaWallet /> Receive Payment</button>
                                     <button onClick={() => setTransactionMode('FEE')} className={`flex-1 py-4 text-sm font-bold flex items-center justify-center gap-2 ${transactionMode === 'FEE' ? 'bg-orange-50 text-orange-600 border-b-2 border-orange-600' : 'text-slate-500'}`}><FaPlusCircle /> Add Fee</button>
@@ -208,7 +208,7 @@ const AddPaymentPage = ({ user }) => {
 
                                 <form onSubmit={handleSubmit} className="p-8 space-y-6">
 
-                                    {/* Auto-Filled Context */}
+                                    {}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
                                         <div>
                                             <label className="block text-xs font-bold text-slate-500 mb-1 uppercase">For Session</label>
@@ -217,7 +217,7 @@ const AddPaymentPage = ({ user }) => {
                                                 onChange={(e) => setFormData({ ...formData, session: e.target.value })}
                                                 className="w-full bg-white border border-gray-300 rounded px-3 py-2 text-sm font-bold text-slate-700 focus:outline-none focus:border-indigo-500"
                                             >
-                                                {/* [UPDATED] Dynamic Session List */}
+                                                {}
                                                 {sessionsList.length > 0 ? (
                                                     sessionsList.map((ses, idx) => (
                                                         <option key={idx} value={ses.session_name}>{ses.session_name}</option>
@@ -277,7 +277,7 @@ const AddPaymentPage = ({ user }) => {
                                 </form>
                             </div>
 
-                            {/* History Table */}
+                            {}
                             {student && (
                                 <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
                                     <div className="bg-slate-50 px-6 py-3 border-b flex justify-between items-center">

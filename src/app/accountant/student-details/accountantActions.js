@@ -2,7 +2,7 @@
 
 import { connectDatabase } from "@/app/json/connectDatabase";
 
-// 1. Fetch Student Financial List
+
 export async function getStudentFinancialsAction() {
     const db = await connectDatabase();
     try {
@@ -31,7 +31,7 @@ export async function getStudentFinancialsAction() {
     }
 }
 
-// 2. Toggle Student Account Status (ACTIVE/ACTIVE)
+
 export async function toggleStudentStatusAction(studentId, newStatus) {
     const db = await connectDatabase();
     try {
@@ -42,11 +42,11 @@ export async function toggleStudentStatusAction(studentId, newStatus) {
     }
 }
 
-// 3. Register Student (Updated Logic)
+
 export async function registerStudentAction(studentId) {
     const db = await connectDatabase();
     try {
-        // [FIX] Just update the 'registerred' column to '1'
+        
         await db.execute("UPDATE users SET registerred = '1' WHERE user_id = ?", [studentId]);
         return { status: "success", message: "Student semester registration complete." };
     } catch (error) {

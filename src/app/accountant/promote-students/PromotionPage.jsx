@@ -6,24 +6,24 @@ import { getPromotableStudentsAction, promoteStudentsAction, getPromotionOptions
 import { FaSpinner, FaFilter, FaCheckCircle } from 'react-icons/fa';
 
 const PromotionPage = ({ user }) => {
-    // --- State ---
+    
     const [loading, setLoading] = useState(false);
-    const [initializing, setInitializing] = useState(true); // New loading state for page init
+    const [initializing, setInitializing] = useState(true); 
     const [promoting, setPromoting] = useState(false);
     const [students, setStudents] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
 
-    // --- Dynamic Options State ---
+    
     const [majors, setMajors] = useState([]);
 
-    // --- Configuration State ---
+    
     const [filters, setFilters] = useState({
-        department: '', // Will be set after loading majors
+        department: '', 
         currentSemester: '1',
-        targetSession: '' // Will be set after loading session
+        targetSession: '' 
     });
 
-    // --- 1. Load Metadata (Majors & Session) on Mount ---
+    
     useEffect(() => {
         const init = async () => {
             const res = await getPromotionOptionsAction();
@@ -32,7 +32,7 @@ const PromotionPage = ({ user }) => {
                 setFilters(prev => ({
                     ...prev,
                     targetSession: res.currentSession,
-                    // Default to the first major in the list if available
+                    
                     department: res.majors.length > 0 ? res.majors[0].id : ''
                 }));
             }
@@ -41,9 +41,9 @@ const PromotionPage = ({ user }) => {
         init();
     }, []);
 
-    // --- 2. Load Students when Filters Change ---
+    
     const loadStudents = async () => {
-        if (!filters.department) return; // Don't fetch if no dept selected yet
+        if (!filters.department) return; 
 
         setLoading(true);
         const res = await getPromotableStudentsAction(filters);
@@ -62,12 +62,12 @@ const PromotionPage = ({ user }) => {
         }
     }, [filters.department, filters.currentSemester, initializing]);
 
-    // --- Computed Values ---
+    
     const eligibleStudents = students.filter(s => parseFloat(s.due) <= 0);
     const eligibleCount = eligibleStudents.length;
     const pendingCount = students.length - eligibleCount;
 
-    // --- Handlers ---
+    
     const handleSelectAllEligible = () => {
         const eligibleIds = eligibleStudents.map(s => s.id);
         if (selectedIds.length === eligibleIds.length) {
@@ -119,7 +119,7 @@ const PromotionPage = ({ user }) => {
             <div className="min-h-screen bg-slate-50 font-sans flex flex-col items-center py-10">
                 <div className="w-full container max-w-5xl px-4">
 
-                    {/* Header */}
+                    {}
                     <div className="mb-8 border-b border-gray-200 pb-4 flex flex-col md:flex-row justify-between items-end gap-4">
                         <div>
                             <h1 className="text-2xl font-bold text-slate-800">Semester Promotion</h1>
@@ -136,7 +136,7 @@ const PromotionPage = ({ user }) => {
                         </div>
                     </div>
 
-                    {/* Filters */}
+                    {}
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-6">
                         <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
                             <FaFilter /> Select Batch to Process
@@ -176,7 +176,7 @@ const PromotionPage = ({ user }) => {
                         </div>
                     </div>
 
-                    {/* Stats */}
+                    {}
                     <div className="grid grid-cols-3 gap-4 mb-6">
                         <div className="bg-white p-4 rounded-lg border border-slate-100 shadow-sm text-center">
                             <span className="text-2xl font-bold text-slate-700">{students.length}</span>
@@ -192,10 +192,10 @@ const PromotionPage = ({ user }) => {
                         </div>
                     </div>
 
-                    {/* Table */}
+                    {}
                     <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
 
-                        {/* Toolbar */}
+                        {}
                         <div className="px-6 py-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
                             <div className="flex items-center gap-2">
                                 <input
@@ -274,7 +274,7 @@ const PromotionPage = ({ user }) => {
                             </table>
                         </div>
 
-                        {/* Footer Action */}
+                        {}
                         <div className="bg-white border-t border-gray-200 p-4 sticky bottom-0 flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
                             <div>
                                 <p className="text-xs text-slate-500">

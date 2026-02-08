@@ -7,13 +7,13 @@ import { FaSearch, FaSpinner, FaUserCheck, FaUserTimes, FaMoneyBillWave, FaIdCar
 import Link from 'next/link';
 
 const AccountantStudentPage = ({ user }) => {
-    // --- State ---
+    
     const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterStatus, setFilterStatus] = useState('All');
 
-    // --- Load Data ---
+    
     const loadData = async () => {
         setLoading(true);
         const res = await getStudentFinancialsAction();
@@ -27,33 +27,33 @@ const AccountantStudentPage = ({ user }) => {
         loadData();
     }, []);
 
-    // --- Handlers ---
+    
     const toggleStatus = async (id, currentStatus) => {
         const newStatus = currentStatus === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
         if (!confirm(`Change status to ${newStatus}?`)) return;
 
-        // Optimistic Update
+        
         setStudents(prev => prev.map(s => s.id === id ? { ...s, account_status: newStatus } : s));
 
         const res = await toggleStudentStatusAction(id, newStatus);
         if (res.status !== 'success') {
             alert(res.message);
-            loadData(); // Revert
+            loadData(); 
         }
     };
 
     const handleRegister = async (id) => {
         if (!confirm("Confirm semester registration for this student?")) return;
 
-        // Optimistic Update
+        
         setStudents(prev => prev.map(s => s.id === id ? { ...s, registerred: '1' } : s));
 
         const res = await registerStudentAction(id);
         alert(res.message);
-        if (res.status !== 'success') loadData(); // Revert on fail
+        if (res.status !== 'success') loadData(); 
     };
 
-    // --- Filtering Logic ---
+    
     const filteredStudents = students.filter(std => {
         const matchesSearch = std.name.toLowerCase().includes(searchTerm.toLowerCase()) || std.id.toString().includes(searchTerm);
         const matchesStatus = filterStatus === 'All' || std.account_status === filterStatus;
@@ -64,7 +64,7 @@ const AccountantStudentPage = ({ user }) => {
         <Section user={user}>
             <div className="min-h-screen bg-slate-50 font-sans">
 
-                {/* --- Header & Summary --- */}
+                {}
                 <div className="bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm px-6 py-4">
                     <div className="container mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
@@ -72,7 +72,7 @@ const AccountantStudentPage = ({ user }) => {
                             <p className="text-xs text-slate-500">Manage student records, payments, and enrollment status.</p>
                         </div>
 
-                        {/* Search Bar */}
+                        {}
                         <div className="flex gap-2 w-full md:w-auto">
                             <div className="relative flex-grow md:w-64">
                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
@@ -99,7 +99,7 @@ const AccountantStudentPage = ({ user }) => {
                     </div>
                 </div>
 
-                {/* --- Student List Table --- */}
+                {}
                 <div className="container mx-auto p-6">
                     <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
 
@@ -120,7 +120,7 @@ const AccountantStudentPage = ({ user }) => {
                                     ) : filteredStudents.length > 0 ? (
                                         filteredStudents.map((std) => (
                                             <tr key={std.id} className="hover:bg-slate-50 transition-colors group">
-                                                {/* Student Info */}
+                                                {}
                                                 <td className="px-6 py-4">
                                                     <div className="flex items-center gap-3">
                                                         <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm uppercase">
@@ -133,7 +133,7 @@ const AccountantStudentPage = ({ user }) => {
                                                     </div>
                                                 </td>
 
-                                                {/* Program */}
+                                                {}
                                                 <td className="px-6 py-4">
                                                     <div className="text-slate-600 font-medium">{std.dept || 'N/A'}</div>
                                                     <div className="text-xs text-slate-400 font-bold bg-slate-100 inline-block px-2 py-0.5 rounded mt-1">
@@ -141,7 +141,7 @@ const AccountantStudentPage = ({ user }) => {
                                                     </div>
                                                 </td>
 
-                                                {/* Financial Status */}
+                                                {}
                                                 <td className="px-6 py-4">
                                                     {Number(std.balance) > 0 ? (
                                                         <div>
@@ -156,7 +156,7 @@ const AccountantStudentPage = ({ user }) => {
                                                     )}
                                                 </td>
 
-                                                {/* Account Status */}
+                                                {}
                                                 <td className="px-6 py-4 text-center">
                                                     <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${std.account_status === 'ACTIVE'
                                                         ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
@@ -167,20 +167,14 @@ const AccountantStudentPage = ({ user }) => {
                                                     </span>
                                                 </td>
 
-                                                {/* Actions */}
+                                                {}
                                                 <td className="px-6 py-4 text-right">
                                                     <div className="flex items-center justify-end gap-2">
 
-                                                        {/* Add Payment */}
-                                                        {/* <Link
-                                                            href={`/accountant/student-details/${std.id}/add-payment`}
-                                                            className="flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 px-3 rounded shadow transition-all active:scale-95"
-                                                            title="Record New Payment"
-                                                        >
-                                                            <FaMoneyBillWave /> Pay
-                                                        </Link> */}
+                                                        {}
+                                                        {}
 
-                                                        {/* Register Button (Conditional) */}
+                                                        {}
                                                         {std.registerred === '1' ? (
                                                             <button
                                                                 disabled
@@ -199,7 +193,7 @@ const AccountantStudentPage = ({ user }) => {
                                                             </button>
                                                         )}
 
-                                                        {/* Toggle Status */}
+                                                        {}
                                                         <button
                                                             onClick={() => toggleStatus(std.id, std.account_status)}
                                                             className={`p-2 rounded border transition-colors ${std.account_status === 'ACTIVE'
@@ -226,7 +220,7 @@ const AccountantStudentPage = ({ user }) => {
                             </table>
                         </div>
 
-                        {/* Pagination / Footer */}
+                        {}
                         <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex justify-between items-center">
                             <span className="text-xs text-slate-500 font-medium">Showing {filteredStudents.length} Records</span>
                             <div className="flex gap-1">
