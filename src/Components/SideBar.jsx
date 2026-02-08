@@ -24,7 +24,8 @@ import {
     FaIdCard,
     FaBars,
     FaSignOutAlt,
-    FaArrowUp
+    FaArrowUp,
+    FaFileAlt
 } from 'react-icons/fa';
 
 export const actions = {
@@ -138,6 +139,12 @@ export const actions = {
             description: "View and manage your registration details",
             link: "/student/registration",
             icon: <FaIdCard />
+        },
+        {
+            title: "Report",
+            description: "View and manage your academic report",
+            link: "/student/report",
+            icon: <FaFileAlt />
         },
     ],
     accountant:[
