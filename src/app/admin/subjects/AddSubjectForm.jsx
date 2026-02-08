@@ -7,8 +7,9 @@ import {
     deleteSubjectAction
 } from './addSubjectAction';
 import { FaBook, FaSpinner, FaCheckCircle, FaExclamationCircle, FaListAlt, FaTrash, FaCalculator } from 'react-icons/fa';
+import Section from '@/Components/Section';
 
-const AddSubjectForm = () => {
+const AddSubjectForm = ({ user }) => {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '' });
 
@@ -16,23 +17,23 @@ const AddSubjectForm = () => {
     const [existingSubjects, setExistingSubjects] = useState([]);
     const [loadingSubjects, setLoadingSubjects] = useState(false);
 
-    // Initial State with Defaults
+    
     const initialState = {
         programId: '',
         semester: '',
         subjectName: '',
         subjectCode: '',
-        credit: '3', // Default 3 credits
+        credit: '3', 
         markAttendance: '15',
         markQuize: '15',
         markAssignment: '15',
         markMid: '45',
-        markFinal: '60' // Default totals to 150 for 3 credits
+        markFinal: '60' 
     };
 
     const [formData, setFormData] = useState(initialState);
 
-    // Load Programs
+    
     useEffect(() => {
         const fetchPrograms = async () => {
             const res = await getProgramsAction();
@@ -41,7 +42,7 @@ const AddSubjectForm = () => {
         fetchPrograms();
     }, []);
 
-    // Load Subjects
+    
     const loadSubjects = async () => {
         if (!formData.programId) return;
         setLoadingSubjects(true);
@@ -58,11 +59,11 @@ const AddSubjectForm = () => {
         loadSubjects();
     }, [formData.programId, formData.semester]);
 
-    // Handle Input Change with Validation for Credit
+    
     const handleChange = (e) => {
         let { name, value } = e.target;
 
-        // Enforce Min/Max for Credit
+        
         if (name === 'credit') {
             if (value > 3) value = '3';
             if (value < 1 && value !== '') value = '1';
@@ -71,9 +72,9 @@ const AddSubjectForm = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    // --- Dynamic Calculations ---
+    
     const creditValue = parseInt(formData.credit || 0);
-    const maxAllowedMarks = creditValue * 50; // 1 credit = 50 marks
+    const maxAllowedMarks = creditValue * 50; 
 
     const currentTotalMarks =
         parseInt(formData.markAttendance || 0) +
@@ -89,14 +90,14 @@ const AddSubjectForm = () => {
         setLoading(true);
         setMessage({ type: '', text: '' });
 
-        // 1. Validation: Credit Range
+        
         if (creditValue < 1 || creditValue > 3) {
             setMessage({ type: 'error', text: 'Credit must be between 1 and 3.' });
             setLoading(false);
             return;
         }
 
-        // 2. Validation: Total Marks
+        
         if (currentTotalMarks !== maxAllowedMarks) {
             setMessage({
                 type: 'error',
@@ -107,12 +108,12 @@ const AddSubjectForm = () => {
         }
 
         const payload = new FormData();
-        // Basic Info
+        
         payload.append("programId", formData.programId);
         payload.append("semester", formData.semester);
         payload.append("subjectName", formData.subjectName);
         payload.append("subjectCode", formData.subjectCode);
-        // Marks & Credit
+        
         payload.append("credit", formData.credit);
         payload.append("markAttendance", formData.markAttendance);
         payload.append("markQuize", formData.markQuize);
@@ -125,7 +126,7 @@ const AddSubjectForm = () => {
 
             if (result.status === 'success') {
                 setMessage({ type: 'success', text: result.message });
-                // Reset form but keep program/semester selections
+                
                 setFormData(prev => ({
                     ...initialState,
                     programId: prev.programId,
@@ -160,12 +161,12 @@ const AddSubjectForm = () => {
     };
 
     return (
-        <Section>
+        <Section user={user}>
             <div className="min-h-screen bg-slate-50 font-sans flex flex-col justify-center items-center py-10">
                 <div className="w-full container px-4">
                     <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
 
-                        {/* Header */}
+                        {}
                         <div className="bg-gradient-to-r from-purple-600 to-indigo-700 px-8 py-6 text-white">
                             <h2 className="text-2xl font-bold flex items-center gap-2">
                                 <FaBook /> Add New Subject
@@ -173,7 +174,7 @@ const AddSubjectForm = () => {
                             <p className="text-purple-100 text-sm mt-1">Register course details and marks distribution.</p>
                         </div>
 
-                        {/* Status Message */}
+                        {}
                         {message.text && (
                             <div className={`mx-8 mt-6 p-4 rounded-md flex items-center gap-2 ${message.type === 'success'
                                 ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
@@ -187,7 +188,7 @@ const AddSubjectForm = () => {
                         <form className="px-8 py-8">
                             <div className="space-y-8">
 
-                                {/* --- Basic Selection --- */}
+                                {}
                                 <div className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
@@ -220,7 +221,7 @@ const AddSubjectForm = () => {
                                         </div>
                                     </div>
 
-                                    {/* Existing Subjects List */}
+                                    {}
                                     <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg">
                                         <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
                                             <FaListAlt className="text-purple-500" /> Existing Subjects
@@ -247,7 +248,7 @@ const AddSubjectForm = () => {
                                     </div>
                                 </div>
 
-                                {/* --- Subject Details --- */}
+                                {}
                                 <div>
                                     <div className="relative flex py-1 items-center mb-4">
                                         <div className="flex-grow border-t border-gray-200"></div>
@@ -295,7 +296,7 @@ const AddSubjectForm = () => {
                                     </div>
                                 </div>
 
-                                {/* --- Marks Distribution --- */}
+                                {}
                                 <div className={`p-6 rounded-xl border transition-colors ${isOverLimit ? 'bg-red-50 border-red-200' : 'bg-slate-50 border-slate-200'
                                     }`}>
                                     <div className="flex items-center justify-between mb-4">

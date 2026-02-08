@@ -6,7 +6,7 @@ export default async () => {
     if (res && "user" in res) {
         if (res?.user?.user_type?.toLowerCase() === "admin") {
             return <>
-                <AddSubjectForm />
+                <AddSubjectForm user={res.user} />
             </>
         }
     }

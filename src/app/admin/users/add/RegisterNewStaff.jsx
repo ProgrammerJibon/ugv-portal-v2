@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import addUserAction, { getProbableId } from './addUserAction';
+import Section from '@/Components/Section';
 
-const AddUserForm = ({ getMajorsData }) => {
+const AddUserForm = ({ getMajorsData, user }) => {
     const [role, setRole] = useState('Teacher');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '' });
@@ -109,7 +110,7 @@ const AddUserForm = ({ getMajorsData }) => {
     };
 
     return (
-        <Section>
+        <Section user={user}>
             <div className="min-h-screen bg-slate-50 font-sans flex flex-col">
                 <div className="flex-grow container mx-auto py-10 px-4">
                     <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">

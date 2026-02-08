@@ -7,8 +7,9 @@ import {
     resetPasswordAction
 } from './userManagementActions';
 import { FaSearch, FaUserEdit, FaUnlockAlt, FaBan, FaCheckCircle, FaSpinner } from 'react-icons/fa';
+import Section from '@/Components/Section';
 
-const ManageUsers = () => {
+const ManageUsers = ({ user }) => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -65,7 +66,7 @@ const ManageUsers = () => {
     };
 
     return (
-        <Section>
+        <Section user={user}>
             <div className="min-h-screen bg-slate-50 font-sans p-6">
 
                 {/* Header Section */}

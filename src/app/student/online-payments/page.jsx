@@ -1,18 +1,19 @@
 import { getUserFromAuthCookie } from "@/app/json/serverFunctions";
-import AddMajorForm from "./AddMajorForm";
+import Dashboard from "@/Components/Dashboard";
+import OnlinePaymentPage from "./OnlinePaymentPage";
 
 export default async () => {
     const res = await getUserFromAuthCookie();
     if (res && "user" in res) {
-        if (res?.user?.user_type?.toLowerCase() === "admin") {
+        if (res?.user?.user_type?.toLowerCase() === "student") {
             return <>
-                <AddMajorForm user={res.user} />
+                <OnlinePaymentPage user={res.user} />
             </>
         }
     }
     return <div>
         <h1>Redirecting to login page...</h1>
         <script>window.location.href = "/";</script>
-
+        
     </div>;
 }

@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { getSessionsAction, setActiveSessionAction, deleteSessionAction } from './manageSessionActions';
 import { FaCalendarAlt, FaCheckCircle, FaHistory, FaPowerOff, FaSpinner, FaTrash, FaClock } from 'react-icons/fa';
+import Section from '@/Components/Section';
 
-const ManageSessions = () => {
+const ManageSessions = ({ user }) => {
     const [sessions, setSessions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState(null);
@@ -59,7 +60,7 @@ const ManageSessions = () => {
     };
 
     return (
-        <Section>
+        <Section user={user}>
             <div className="min-h-screen bg-slate-50 font-sans p-6">
 
                 {/* Header */}

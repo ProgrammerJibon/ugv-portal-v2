@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { FaEdit, FaSpinner, FaGraduationCap, FaTimes, FaSave } from 'react-icons/fa';
 import { getMajorsAction, updateMajorAction } from './manageMajorsActions';
+import Section from '@/Components/Section';
 
-const ManageMajors = () => {
+const ManageMajors = ({ user }) => {
     const [majors, setMajors] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -56,7 +57,7 @@ const ManageMajors = () => {
     };
 
     return (
-        <Section>
+        <Section user={user}>
             <div className="min-h-screen bg-slate-50 font-sans p-6">
 
                 {/* Page Header */}

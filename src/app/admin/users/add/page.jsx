@@ -8,7 +8,7 @@ export default async () => {
     if (res && "user" in res) {
         if (res?.user?.user_type?.toLowerCase() === "admin") {
             return <>
-                <AddUserForm getMajorsData={getMajorsData} />
+                <AddUserForm getMajorsData={getMajorsData} user={res?.user} />
             </>
         }
     }
