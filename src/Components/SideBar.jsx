@@ -187,7 +187,7 @@ const Sidebar = ({ user }) => {
             {/* Toggle Button */}
             <button
                 onClick={() => setIsCollapsed(!isCollapsed)}
-                className="absolute -right-3 top-6 bg-purple-600 text-white p-1.5 rounded-full shadow-lg hover:bg-purple-700 transition-colors z-50 text-xs border-2 border-white"
+                className="absolute -right-3 z-0 top-6 bg-purple-600 text-white p-1.5 rounded-full shadow-lg hover:bg-purple-700 transition-colors z-50 text-xs border-2 border-white"
             >
                 <FaBars />
             </button>

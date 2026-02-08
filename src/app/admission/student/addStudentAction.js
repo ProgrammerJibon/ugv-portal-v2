@@ -3,7 +3,6 @@
 import { hash } from "@/app/functions";
 import { connectDatabase } from "@/app/json/connectDatabase";
 
-
 export async function getAdmissionDropdowns() {
     const db = await connectDatabase();
     try {
@@ -15,50 +14,42 @@ export async function getAdmissionDropdowns() {
     }
 }
 
-
 export async function addStudentAction(formData) {
     const db = await connectDatabase();
 
     const name = formData.get("fullName");
-    const programId = formData.get("program"); 
-    const sessionString = formData.get("session"); 
-    const programType = formData.get("programType"); 
+    const programId = formData.get("program");
+    const sessionString = formData.get("session");
+    const programType = formData.get("programType");
     const section = formData.get("section");
 
-    
+    // 1. Extract the new fields
+    const waiver = formData.get("waiver");
+    const semesterFee = formData.get("semesterFee");
+
     if (!name || !programId || !sessionString || !programType) {
         return { status: "error", message: "Missing required fields." };
     }
 
     try {
-        
-
-        
+        // --- ID Generation Logic ---
         const deptDigit = programId.toString().charAt(0);
 
-        
-        
         const [seasonName, yearFull] = sessionString.split(' ');
         const yearDigit = yearFull.slice(-2);
 
-        
         let seasonDigit = '1';
         const lowerSeason = seasonName.toLowerCase();
         if (lowerSeason.includes('summer') || lowerSeason.includes('fall')) {
             seasonDigit = '2';
         } else {
-            seasonDigit = '1'; 
+            seasonDigit = '1';
         }
 
-        
         const typeDigit = programType === 'Evening' ? '2' : '1';
 
-        
-        
         const idPrefix = `${deptDigit}${yearDigit}${seasonDigit}${typeDigit}`;
 
-        
-        
         const [lastEntry] = await db.execute(
             "SELECT user_id FROM users WHERE user_id LIKE ? ORDER BY user_id DESC LIMIT 1",
             [`${idPrefix}%`]
@@ -66,7 +57,6 @@ export async function addStudentAction(formData) {
 
         let newSerial = '001';
         if (lastEntry.length > 0) {
-            
             const lastId = lastEntry[0].user_id;
             const currentSerial = parseInt(lastId.slice(-3));
             newSerial = (currentSerial + 1).toString().padStart(3, '0');
@@ -75,11 +65,13 @@ export async function addStudentAction(formData) {
         const generatedUserId = `${idPrefix}${newSerial}`;
         const password = "123456";
 
-        
+        // --- Database Insertion ---
 
+        // 2. Added 'waiver' and 'semester_fee' to the column list
         const query = `
             INSERT INTO users (
                 user_type, user_id, password, name, 
+                waiver, semester_fee,
                 date_of_birth, gender, blood_group, religion, 
                 program, session, program_type, section,
                 email_address, phone_number, address, student_nid,
@@ -87,6 +79,7 @@ export async function addStudentAction(formData) {
                 faculty_id, designation, joining_date, status
             ) VALUES (
                 'STUDENT', ?, ?, ?,
+                ?, ?,
                 ?, ?, ?, ?, 
                 ?, ?, ?, ?,
                 ?, ?, ?, ?,
@@ -95,8 +88,10 @@ export async function addStudentAction(formData) {
             )
         `;
 
+        // 3. Added waiver and semesterFee to the values array
         const values = [
             generatedUserId, hash(password), name,
+            waiver, semesterFee,
             formData.get("dateOfBirth"), formData.get("gender"), formData.get("bloodGroup"), formData.get("religion"),
             programId, sessionString, programType, section,
             formData.get("email"), formData.get("phone"), formData.get("address"), formData.get("studentNid"),

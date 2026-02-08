@@ -13,7 +13,7 @@ export async function getClassMarksData(subjectId, teacherId) {
             SELECT 
                 at.session_id, at.program_id, at.semester,
                 s.subject_code, s.subject_name,
-                m.program_name,
+                m.program_name, s.mark_attendance, s.mark_quize, s.mark_assignment, s.mark_mid, s.mark_final,
                 sess.session_season, sess.session_year
             FROM assigned_teachers at
             JOIN subjects s ON at.subject_id = s.id
@@ -44,6 +44,7 @@ export async function getClassMarksData(subjectId, teacherId) {
                 COALESCE(sm.mark_quiz, 0) as mark_quiz,
                 COALESCE(sm.mark_assignment, 0) as mark_assignment,
                 COALESCE(sm.mark_mid, 0) as mark_mid,
+                COALESCE(u.registerred, 0) as registerred,
                 COALESCE(sm.mark_final, 0) as mark_final
             FROM users u
             LEFT JOIN student_marks sm ON 

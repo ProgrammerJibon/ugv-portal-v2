@@ -42,7 +42,7 @@ export async function getPromotableStudentsAction(filters) {
                 u.id, 
                 u.user_id, 
                 u.name, 
-                u.admission_fee,
+                u.semester_fee,
                 COALESCE(sf.total_due, 0) as due
             FROM users u
             LEFT JOIN student_financials sf ON u.user_id = sf.student_user_id
@@ -81,7 +81,7 @@ export async function promoteStudentsAction(studentIds, targetSession, adminId) 
 
         for (const dbId of studentIds) {
             // A. Get Student Details
-            const [userRows] = await connection.execute("SELECT user_id, admission_fee, current_semester FROM users WHERE id = ?", [dbId]);
+            const [userRows] = await connection.execute("SELECT user_id, semester_fee, current_semester FROM users WHERE id = ?", [dbId]);
             if (userRows.length === 0) continue;
 
             const student = userRows[0];
@@ -93,7 +93,7 @@ export async function promoteStudentsAction(studentIds, targetSession, adminId) 
 
             // B. Define Fee Breakdown
             const feesToApply = [
-                { name: 'Semester Admission Fee', amount: parseFloat(student.admission_fee || 0) },
+                { name: 'Semester Admission Fee', amount: parseFloat(student.semester_fee || 0) },
                 { name: 'Mid Exam Fee', amount: 1000 },
                 { name: 'Final Exam Fee', amount: 2000 }
             ];

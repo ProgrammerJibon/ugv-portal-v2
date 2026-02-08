@@ -13,6 +13,8 @@ const AddStudentPage = ({ user }) => {
     // --- State: Form Data ---
     const initialFormState = {
         fullName: '',
+        waiver: '0',
+        semesterFee: '50000',
         dateOfBirth: '',
         gender: 'Male',
         bloodGroup: '',
@@ -231,6 +233,18 @@ const AddStudentPage = ({ user }) => {
                                     <div className="md:col-span-2">
                                         <label className="block text-sm font-bold text-slate-700 mb-2">Full Name</label>
                                         <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-indigo-500" required />
+                                    </div>
+                                    <div className="md:col-span-2">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div>
+                                                <label className="block text-sm font-bold text-slate-700 mb-2">Waiver</label>
+                                                <input type="text" name="waiver" value={formData.waiver} onChange={handleInputChange} className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-indigo-500" />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-bold text-slate-700 mb-2">Semester Fee</label>
+                                                <input type="text" name="semesterFee" value={formData.semesterFee} onChange={handleInputChange} className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-indigo-500" />
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
                                         <label className="block text-sm font-bold text-slate-700 mb-2">Date of Birth</label>

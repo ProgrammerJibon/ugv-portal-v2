@@ -34,7 +34,8 @@ const MarkEntryPage = ({ user }) => {
                     quiz: parseFloat(s.mark_quiz),
                     assign: parseFloat(s.mark_assignment),
                     mid: parseFloat(s.mark_mid),
-                    final: parseFloat(s.mark_final)
+                    final: parseFloat(s.mark_final),
+                    registerred: s.registerred
                 }));
                 setStudents(mappedStudents);
             } else {
@@ -160,17 +161,17 @@ const MarkEntryPage = ({ user }) => {
                                     <tr>
                                         <th className="px-6 py-4 border-b border-slate-200">Student ID</th>
                                         <th className="px-6 py-4 border-b border-slate-200 w-1/4">Name</th>
-                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-blue-50/50">Att (10)</th>
-                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-teal-50/50">Quiz (15)</th>
-                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-orange-50/50">Assgn (20)</th>
-                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-purple-50/50">Mid (30)</th>
-                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-pink-50/50">Final (40)</th>
-                                        <th className="px-4 py-4 border-b border-slate-200 text-center bg-gray-50 text-slate-800">Total</th>
+                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-blue-50/50">Att ({courseInfo.mark_attendance})</th>
+                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-teal-50/50">Quiz ({courseInfo.mark_quize})</th>
+                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-orange-50/50">Assgn ({courseInfo.mark_assignment})</th>
+                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-purple-50/50">Mid ({courseInfo.mark_mid})</th>
+                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-pink-50/50">Final ({courseInfo.mark_final})</th>
+                                        <th className="px-4 py-4 border-b border-slate-200 text-center bg-gray-50 text-slate-800">Total({Number.parseInt(courseInfo.mark_attendance) + Number.parseInt(courseInfo.mark_quize) + Number.parseInt(courseInfo.mark_assignment) + Number.parseInt(courseInfo.mark_mid) + Number.parseInt(courseInfo.mark_final)})</th>
                                         <th className="px-4 py-4 border-b border-slate-200 text-center bg-gray-50 text-slate-800">Grade</th>
                                     </tr>
                                 </thead>
                                 <tbody className="text-sm divide-y divide-slate-100">
-                                    {students.length > 0 ? students.map((student) => {
+                                    {students.length > 0 ? students.map((student, i) => {
                                         const total = student.att + student.quiz + student.assign + student.mid + student.final;
                                         const { grade, point } = calculateGrade(total);
                                         const isFail = grade === 'F';
@@ -185,10 +186,12 @@ const MarkEntryPage = ({ user }) => {
                                                     <td key={field} className="px-2 py-2 text-center">
                                                         <input
                                                             type="number"
+                                                            title={student.registerred == 0 ? "This student is not registerred yet!" : ""}
+                                                            disabled={student.registerred == 0}
                                                             value={student[field] === 0 ? '' : student[field]} // Show empty if 0 for better UX? Or keep 0.
                                                             placeholder="0"
                                                             onChange={(e) => handleInputChange(student.id, field, e.target.value)}
-                                                            className={`w-16 text-center border rounded py-1.5 font-bold text-slate-700 focus:outline-none focus:ring-2 transition-all
+                                                            className={`w-16 text-center border rounded py-1.5 font-bold ${student.registerred == 0 ? 'text-gray-400' :'text-gray-900'} focus:outline-none focus:ring-2 transition-all
                                                                 ${field === 'att' ? 'focus:border-blue-500 focus:ring-blue-200' : ''}
                                                                 ${field === 'quiz' ? 'focus:border-teal-500 focus:ring-teal-200' : ''}
                                                                 ${field === 'assign' ? 'focus:border-orange-500 focus:ring-orange-200' : ''}
@@ -206,7 +209,7 @@ const MarkEntryPage = ({ user }) => {
                                                 </td>
                                                 <td className="px-4 py-3 text-center bg-gray-50/50">
                                                     <div className={`inline-flex flex-col leading-none ${isFail ? 'text-red-600' : 'text-emerald-600'}`}>
-                                                        <span className="font-bold text-lg">{grade}</span>
+                                                        <span className="font-bold text-lg">{student.registerred != 0 ? grade : "I"}</span>
                                                         <span className="text-[10px] font-bold opacity-60">{point.toFixed(2)}</span>
                                                     </div>
                                                 </td>

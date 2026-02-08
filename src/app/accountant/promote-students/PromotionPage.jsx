@@ -222,7 +222,7 @@ const PromotionPage = ({ user }) => {
                                         <th className="px-6 py-4">Student Details</th>
                                         <th className="px-6 py-4 text-right">Outstanding Due</th>
                                         <th className="px-6 py-4 text-center">Eligibility</th>
-                                        <th className="px-6 py-4 text-right">Adm. Fee</th>
+                                        <th className="px-6 py-4 text-right">Semester Fee</th>
                                     </tr>
                                 </thead>
                                 <tbody className="text-sm divide-y divide-slate-100">
@@ -264,7 +264,7 @@ const PromotionPage = ({ user }) => {
                                                         )}
                                                     </td>
                                                     <td className="px-6 py-4 text-right font-mono text-xs text-slate-500">
-                                                        ৳ {Number(std.admission_fee).toLocaleString()}
+                                                        ৳ {Number(std.semester_fee).toLocaleString()}
                                                     </td>
                                                 </tr>
                                             );

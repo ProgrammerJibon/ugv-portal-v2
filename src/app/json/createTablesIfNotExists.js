@@ -29,7 +29,7 @@ async function createUser(connection) {
         current_semester varchar(2) DEFAULT "1",
         registerred varchar(2) NOT NULL DEFAULT '0',
         waiver varchar(4) NOT NULL DEFAULT '0',
-        admission_fee varchar(8) NOT NULL DEFAULT '50000',
+        semester_fee varchar(8) NOT NULL DEFAULT '50000',
         section varchar(2) DEFAULT NULL,
         last_promoted_session varchar(64) DEFAULT NULL,
 
