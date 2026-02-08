@@ -199,8 +199,8 @@ const Sidebar = ({ user }) => {
                 ) : (
                     <div className="text-center">
                         <img src="https://ugv.edu.bd/assets/images/logos/UGV-Logo-02.png" alt="Logo" className="w-12 h-auto mx-auto mb-2 bg-white rounded-md p-1 shadow-sm" />
-                        <h1 className="text-lg font-bold text-gray-800 tracking-tight">UGV Admin</h1>
-                        <p className="text-[10px] uppercase tracking-widest text-purple-600 font-bold">Portal</p>
+                        <h1 className="text-lg font-bold text-gray-800 tracking-tight">{user.name}</h1>
+                        <p className="text-[10px] uppercase tracking-widest text-purple-600 font-bold">{user.user_type}</p>
                     </div>
                 )}
             </div>
