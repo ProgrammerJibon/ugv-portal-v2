@@ -85,6 +85,12 @@ export const actions = {
             description: "Manage mark update options for subjects",
             link: "/exam/result-update",
             icon: <FaEdit />
+        },
+        {
+            title: "All Marks",
+            description: "View all student marks",
+            link: "/exam/marks",
+            icon: <FaBookReader />
         }
     ],
     teacher: [
