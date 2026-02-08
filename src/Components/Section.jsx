@@ -6,7 +6,7 @@ export default ({ user, children }) => (  // Changed { to (
         <Navbar user={user} />
         <div className="flex">
             <Sidebar user={user} />
-            <main className="flex-grow p-6">
+            <main className="flex-1 w-full p-6">
                 {children}
             </main>
         </div>

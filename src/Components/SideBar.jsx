@@ -25,10 +25,19 @@ import {
     FaBars,
     FaSignOutAlt,
     FaArrowUp,
-    FaFileAlt
+    FaFileAlt,
+    FaCog
 } from 'react-icons/fa';
 
 export const actions = {
+    all: [
+        {
+            title: "Settings",
+            description: "Manage your account settings",
+            link: "/settings",
+            icon: <FaCog />
+        },
+    ],
     admin: [
         {
             title: "Add Users",
@@ -153,7 +162,7 @@ export const actions = {
             icon: <FaFileAlt />
         },
     ],
-    accountant:[
+    accountant: [
         {
             title: "Student Details",
             description: "View and manage student details",
@@ -179,10 +188,12 @@ const Sidebar = ({ user }) => {
     const pathname = usePathname();
     const [isCollapsed, setIsCollapsed] = useState(false);
 
-    return (
+    return (<>
         <aside
             className={`${isCollapsed ? 'w-20' : 'w-72'
-                } bg-slate-100 min-h-screen text-slate-500 flex flex-col transition-all duration-300 relative shadow-xl border-r border-slate-200`}
+                } bg-slate-100  text-slate-500 flex fixed !top-[80px] flex-col h-full transition-all duration-300 shadow-xl border-r border-slate-200`}
+            style={{ maxHeight: 'calc(100vh - 80px)' }}
+
         >
             {/* Toggle Button */}
             <button
@@ -200,14 +211,14 @@ const Sidebar = ({ user }) => {
                     <div className="text-center">
                         <img src="https://ugv.edu.bd/assets/images/logos/UGV-Logo-02.png" alt="Logo" className="w-12 h-auto mx-auto mb-2 bg-white rounded-md p-1 shadow-sm" />
                         <h1 className="text-lg font-bold text-gray-800 tracking-tight">{user.name}</h1>
-                        <p className="text-[10px] uppercase tracking-widest text-purple-600 font-bold">{user.user_type}</p>
+                        <p className="text-[10px] uppercase tracking-widest text-purple-600 font-bold">{user.user_type}{user.designation != "" && " | " + user.designation}</p>
                     </div>
                 )}
             </div>
 
             {/* Navigation Menu */}
             <nav className="flex-1 px-3 space-y-2 overflow-y-auto scrollbar-hide">
-                {user?.user_type?.toLowerCase() in actions && actions[user?.user_type?.toLowerCase()].map((item, index) => {
+                {user?.user_type?.toLowerCase() in actions && [...actions[user?.user_type?.toLowerCase()], ...actions["all"]].map((item, index) => {
                     const isActive = pathname === item.link;
 
                     return (
@@ -239,10 +250,12 @@ const Sidebar = ({ user }) => {
                         </div>
                     );
                 })}
+
+
             </nav>
 
             {/* Footer / Logout */}
-            <div className="p-4 border-t border-slate-200 bg-slate-50">
+            <div className="p-4 border-t border-slate-200 bg-slate-50 ">
                 <button
                     onClick={() => window.location.href = '/login'}
                     className={`flex items-center gap-3 w-full px-3 py-3 rounded-lg text-red-500 hover:bg-red-50 hover:text-red-600 transition-all ${isCollapsed ? 'justify-center' : ''
@@ -253,6 +266,10 @@ const Sidebar = ({ user }) => {
                 </button>
             </div>
         </aside>
+        <div
+            className={`${isCollapsed ? 'w-20' : 'w-72'} shrink-0 transition-all duration-300`}
+        />
+    </>
     );
 };
 
