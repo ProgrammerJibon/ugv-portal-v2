@@ -1,6 +1,6 @@
 import mysql from "mysql2/promise";
 
-export const isServer = false;
+export const isServer = true;
 
 function createPool() {
     return mysql.createPool({
