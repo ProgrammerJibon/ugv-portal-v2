@@ -1,12 +1,12 @@
 import { getUserFromAuthCookie } from "@/app/json/serverFunctions";
-import StudentPaymentPage from "../payments/StudentPaymentPage";
+import StudentRegistrationPage from "./StudentRegistrationPage";
 
 export default async () => {
     const res = await getUserFromAuthCookie();
     if (res && "user" in res) {
         if (res?.user?.user_type?.toLowerCase() === "student") {
             return <>
-                <StudentPaymentPage user={res.user} />
+                <StudentRegistrationPage user={res.user} />
             </>
         }
     }

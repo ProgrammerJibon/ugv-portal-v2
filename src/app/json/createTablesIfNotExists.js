@@ -26,7 +26,7 @@ async function createUser(connection) {
         designation varchar(64) DEFAULT NULL,
         joining_date varchar(32) DEFAULT NULL,
         program_type varchar(16) DEFAULT NULL,
-        current_semester varchar(2) DEFAULT "1",
+        current_semester varchar(2) DEFAULT "0",
         registerred varchar(2) NOT NULL DEFAULT '0',
         waiver varchar(4) NOT NULL DEFAULT '0',
         semester_fee varchar(8) NOT NULL DEFAULT '50000',

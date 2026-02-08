@@ -39,6 +39,7 @@ export async function getPromotableStudentsAction(filters) {
     try {
         const query = `
             SELECT 
+                u.current_semester,
                 u.id, 
                 u.user_id, 
                 u.name, 

@@ -19,7 +19,7 @@ const PromotionPage = ({ user }) => {
     
     const [filters, setFilters] = useState({
         department: '', 
-        currentSemester: '1',
+        currentSemester: '0',
         targetSession: '' 
     });
 
@@ -163,7 +163,7 @@ const PromotionPage = ({ user }) => {
                                     value={filters.currentSemester}
                                     onChange={(e) => setFilters({ ...filters, currentSemester: e.target.value })}
                                 >
-                                    {[1, 2, 3, 4, 5, 6, 7, 8].map(sem => (
+                                    {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(sem => (
                                         <option key={sem} value={sem}>{sem}th Semester</option>
                                     ))}
                                 </select>
@@ -232,7 +232,7 @@ const PromotionPage = ({ user }) => {
                                         <tr><td colSpan="5" className="py-10 text-center text-slate-400">All students in this batch have been promoted to {filters.targetSession}.</td></tr>
                                     ) : (
                                         students.map((std) => {
-                                            const isEligible = parseFloat(std.due) <= 0;
+                                            const isEligible = parseFloat(std.due) <= 0 || std.current_semester == "0";
                                             const isSelected = selectedIds.includes(std.id);
                                             return (
                                                 <tr key={std.id} className={`transition-colors ${isSelected ? 'bg-indigo-50/40' : 'hover:bg-slate-50'}`}>

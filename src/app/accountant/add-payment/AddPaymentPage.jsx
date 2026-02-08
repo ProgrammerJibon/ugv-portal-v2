@@ -133,7 +133,7 @@ const AddPaymentPage = ({ user }) => {
 
     return (
         <Section user={user}>
-            <div className="min-h-screen bg-slate-50 font-sans flex flex-col items-center py-10">
+            <div className="min-h-screen bg-slate-50  font-sans flex flex-col items-center py-10">
                 <div className="w-full container max-w-7xl px-4">
 
                     <div className="mb-8 border-b border-gray-200 pb-4">
@@ -166,8 +166,8 @@ const AddPaymentPage = ({ user }) => {
                             {student && (
                                 <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden animate-fade-in-up">
                                     <div className="bg-gradient-to-r from-slate-800 to-slate-900 p-6 text-white relative">
-                                        <h2 className="text-xl font-bold">{student.name}</h2>
-                                        <p className="text-sm text-slate-300 font-mono mt-1">{student.user_id}</p>
+                                        <h2 className="text-xl font-bold text-gray-800">{student.name}</h2>
+                                        <p className="text-sm text-slate-600 font-mono mt-1">{student.user_id}</p>
                                         <div className="flex gap-2 mt-3">
                                             <span className="text-[10px] bg-slate-700 px-2 py-1 rounded">Sem: {student.current_semester}</span>
                                             <span className="text-[10px] bg-slate-700 px-2 py-1 rounded">Sec: {student.section || 'A'}</span>
