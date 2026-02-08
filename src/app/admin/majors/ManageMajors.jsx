@@ -9,12 +9,12 @@ const ManageMajors = ({ user }) => {
     const [majors, setMajors] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Edit Modal State
+    
     const [isEditing, setIsEditing] = useState(false);
-    const [currentMajor, setCurrentMajor] = useState(null); // The major being edited
+    const [currentMajor, setCurrentMajor] = useState(null); 
     const [saveLoading, setSaveLoading] = useState(false);
 
-    // 1. Load Data
+    
     useEffect(() => {
         loadMajors();
     }, []);
@@ -27,13 +27,13 @@ const ManageMajors = ({ user }) => {
         setLoading(false);
     };
 
-    // 2. Open Edit Modal
+    
     const handleEditClick = (major) => {
-        setCurrentMajor({ ...major }); // Create a copy to avoid direct state mutation
+        setCurrentMajor({ ...major }); 
         setIsEditing(true);
     };
 
-    // 3. Handle Update Submit
+    
     const handleUpdate = async (e) => {
         e.preventDefault();
         setSaveLoading(true);
@@ -46,7 +46,7 @@ const ManageMajors = ({ user }) => {
         );
 
         if (res.status === 'success') {
-            // Update local list instantly
+            
             setMajors(majors.map(m => m.id === currentMajor.id ? currentMajor : m));
             setIsEditing(false);
             alert("Updated Successfully");
@@ -60,7 +60,7 @@ const ManageMajors = ({ user }) => {
         <Section user={user}>
             <div className="min-h-screen bg-slate-50 font-sans p-6">
 
-                {/* Page Header */}
+                {}
                 <div className="flex justify-between items-center mb-8">
                     <div>
                         <h1 className="text-2xl font-bold text-slate-800">Academic Programs</h1>
@@ -74,7 +74,7 @@ const ManageMajors = ({ user }) => {
                     </button>
                 </div>
 
-                {/* Majors List Table */}
+                {}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <table className="w-full text-left border-collapse">
                         <thead className="bg-slate-100 text-slate-600 text-xs uppercase font-bold tracking-wider">
@@ -132,12 +132,12 @@ const ManageMajors = ({ user }) => {
                     </table>
                 </div>
 
-                {/* --- EDIT MODAL --- */}
+                {}
                 {isEditing && currentMajor && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
                         <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in-up">
 
-                            {/* Modal Header */}
+                            {}
                             <div className="bg-slate-800 px-6 py-4 flex justify-between items-center text-white">
                                 <h3 className="font-bold flex items-center gap-2">
                                     <FaGraduationCap /> Edit Program
@@ -147,7 +147,7 @@ const ManageMajors = ({ user }) => {
                                 </button>
                             </div>
 
-                            {/* Modal Body */}
+                            {}
                             <form onSubmit={handleUpdate} className="p-6 space-y-4">
 
                                 <div>
@@ -185,7 +185,7 @@ const ManageMajors = ({ user }) => {
                                     />
                                 </div>
 
-                                {/* Modal Footer */}
+                                {}
                                 <div className="pt-4 flex justify-end gap-3">
                                     <button
                                         type="button"

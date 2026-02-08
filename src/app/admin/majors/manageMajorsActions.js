@@ -2,7 +2,7 @@
 
 import { connectDatabase } from "@/app/json/connectDatabase";
 
-// 1. Fetch All Majors
+
 export async function getMajorsAction() {
     const db = await connectDatabase();
     try {
@@ -16,7 +16,7 @@ export async function getMajorsAction() {
     }
 }
 
-// 2. Update a Major
+
 export async function updateMajorAction(id, degreeType, programName, programShortName) {
     const db = await connectDatabase();
 

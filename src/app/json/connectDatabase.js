@@ -1,13 +1,11 @@
 import mysql from "mysql2/promise";
 
-export const isServer = true;
-
 function createPool() {
     return mysql.createPool({
-        host: isServer ? "103.191.50.6" : "localhost",
-        user: isServer ? "jibonco1_ugv_portal_b2" : "root",
-        password: isServer ? "Wci=asrL?Fs4" : "",
-        database: "jibonco1_ugv_portal_b2",
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME,
         waitForConnections: true,
         connectionLimit: 3,
         queueLimit: 0,
@@ -28,9 +26,7 @@ export async function connectDatabase() {
         return pool;
     } catch (e) {
         try {
-            if (global._mysqlPool) {
-                await global._mysqlPool.end();
-            }
+            await global._mysqlPool.end();
         } catch (_) { }
         global._mysqlPool = createPool();
         return global._mysqlPool;
