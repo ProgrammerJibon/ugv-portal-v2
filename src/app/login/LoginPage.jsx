@@ -80,7 +80,7 @@ const LoginPage = () => {
             <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-50">
                 <button 
                     onClick={() => setShowVerify(true)}
-                    className="bg-green-700 text-white font-bold py-6 px-2 rounded-l-lg shadow-lg hover:bg-green-800 transition-all active:scale-95 flex items-center justify-center writing-mode-vertical"
+                    className="bg-green-700 text-white border border-green-800 rounded-sm font-bold py-6 px-2 rounded-l-lg shadow-lg hover:bg-green-800 transition-all active:scale-95 flex items-center justify-center writing-mode-vertical"
                     style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
                 >
                     <span className="rotate-180 tracking-widest uppercase text-xs mb-2 opacity-70">Check ID</span>
