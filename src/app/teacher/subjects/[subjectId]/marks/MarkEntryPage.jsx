@@ -3,7 +3,7 @@ import Section from '@/Components/Section';
 import React, { useState, useEffect, useRef } from 'react';
 import { getClassMarksData, saveStudentMark } from './markEntryActions'; // Adjust path
 import { useParams } from 'next/navigation';
-import { FaSpinner, FaSave } from 'react-icons/fa';
+import { FaSpinner, FaSave, FaLock, FaUnlock } from 'react-icons/fa';
 
 const MarkEntryPage = ({ user }) => {
     // Get Subject ID from URL
@@ -65,6 +65,8 @@ const MarkEntryPage = ({ user }) => {
     const debounceTimers = useRef({});
 
     const handleInputChange = (studentId, field, value) => {
+        if (courseInfo?.isMarkOpen === false) return;
+
         // 1. Validations (Ensure numbers and max limits)
         let numValue = value === '' ? 0 : parseFloat(value);
         if (numValue < 0) numValue = 0;
@@ -144,13 +146,27 @@ const MarkEntryPage = ({ user }) => {
 
                             {/* Save Status Indicator */}
                             <div className="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">
-                                {saveStatus === 'saving' && <><div className="animate-spin h-3 w-3 border-2 border-indigo-500 border-t-transparent rounded-full"></div><span className="text-xs text-indigo-600 font-bold">Saving...</span></>}
-                                {saveStatus === 'saved' && <><FaSave className="text-emerald-500" /><span className="text-xs text-emerald-600 font-bold">All Saved</span></>}
-                                {saveStatus === 'error' && <span className="text-xs text-red-600 font-bold">Save Failed! Check Connection</span>}
+                                {courseInfo.isMarkOpen === false ? (
+                                    <><FaLock className="text-amber-500" /><span className="text-xs text-amber-600 font-bold">Portal Closed (Read-Only)</span></>
+                                ) : saveStatus === 'saving' ? (
+                                    <><div className="animate-spin h-3 w-3 border-2 border-indigo-500 border-t-transparent rounded-full"></div><span className="text-xs text-indigo-600 font-bold">Saving...</span></>
+                                ) : saveStatus === 'saved' ? (
+                                    <><FaSave className="text-emerald-500" /><span className="text-xs text-emerald-600 font-bold">All Saved</span></>
+                                ) : (
+                                    <span className="text-xs text-red-600 font-bold">Save Failed! Check Connection</span>
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
+
+                {/* Locked Banner if portal is closed */}
+                {courseInfo.isMarkOpen === false && (
+                    <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 flex items-center justify-center gap-2 text-amber-800 text-sm font-medium">
+                        <FaLock className="text-amber-600" />
+                        <span><strong>Mark Submission Closed:</strong> The grading portal for this session is currently locked by the Exam Controller. Marks are displayed in read-only mode.</span>
+                    </div>
+                )}
 
                 {/* --- Table --- */}
                 <div className="container mx-auto p-6">
@@ -186,18 +202,18 @@ const MarkEntryPage = ({ user }) => {
                                                     <td key={field} className="px-2 py-2 text-center">
                                                         <input
                                                             type="number"
-                                                            title={student.registerred == 0 ? "This student is not registerred yet!" : ""}
-                                                            disabled={student.registerred == 0}
-                                                            value={student[field] === 0 ? '' : student[field]} // Show empty if 0 for better UX? Or keep 0.
+                                                            title={student.registerred == 0 ? "This student is not registered yet!" : courseInfo.isMarkOpen === false ? "Mark submission is closed" : ""}
+                                                            disabled={student.registerred == 0 || courseInfo.isMarkOpen === false}
+                                                            value={student[field] === 0 ? '' : student[field]}
                                                             placeholder="0"
                                                             onChange={(e) => handleInputChange(student.id, field, e.target.value)}
-                                                            className={`w-16 text-center border rounded py-1.5 font-bold ${student.registerred == 0 ? 'text-gray-400' :'text-gray-900'} focus:outline-none focus:ring-2 transition-all
+                                                            className={`w-16 text-center border rounded py-1.5 font-bold ${student.registerred == 0 || courseInfo.isMarkOpen === false ? 'text-gray-400 bg-slate-100 cursor-not-allowed' : 'text-gray-900 bg-white border-gray-300'} focus:outline-none focus:ring-2 transition-all
                                                                 ${field === 'att' ? 'focus:border-blue-500 focus:ring-blue-200' : ''}
                                                                 ${field === 'quiz' ? 'focus:border-teal-500 focus:ring-teal-200' : ''}
                                                                 ${field === 'assign' ? 'focus:border-orange-500 focus:ring-orange-200' : ''}
                                                                 ${field === 'mid' ? 'focus:border-purple-500 focus:ring-purple-200' : ''}
                                                                 ${field === 'final' ? 'focus:border-pink-500 focus:ring-pink-200' : ''}
-                                                                ${saveStatus === 'saving' ? 'bg-gray-50' : 'bg-white border-gray-300'}
+                                                                ${saveStatus === 'saving' ? 'bg-gray-50' : ''}
                                                             `}
                                                         />
                                                     </td>

@@ -1,17 +1,13 @@
 import { getUserFromAuthCookie } from "@/app/json/serverFunctions";
+import { redirect } from "next/navigation";
 
-export default async () => {
+export default async ({ params }) => {
+    const { subjectId } = await params;
     const res = await getUserFromAuthCookie();
     if (res && "user" in res) {
         if (res?.user?.user_type?.toLowerCase() === "exam") {
-            return <>
-                {/* <TeacherDashboard user={res?.user}/> */}
-            </>
+            redirect(`/exam/marks/${subjectId}/marks`);
         }
     }
-    return <div>
-        <h1>Redirecting to login page...</h1>
-        <script>window.location.href = "/";</script>
-        
-    </div>;
-}
+    redirect("/");
+};

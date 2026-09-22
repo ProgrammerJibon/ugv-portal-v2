@@ -97,7 +97,7 @@ const MarkEntryPage = ({ user }) => {
             const payload = {
                 studentUserId: studentId,
                 subjectId: subjectId,
-                teacherId: user.id,
+                teacherId: courseInfo.teacher_id || user.id,
                 sessionId: courseInfo.session_id,
                 programId: courseInfo.program_id,
                 semester: courseInfo.semester,
@@ -160,11 +160,11 @@ const MarkEntryPage = ({ user }) => {
                                     <tr>
                                         <th className="px-6 py-4 border-b border-slate-200">Student ID</th>
                                         <th className="px-6 py-4 border-b border-slate-200 w-1/4">Name</th>
-                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-blue-50/50">Att (10)</th>
-                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-teal-50/50">Quiz (15)</th>
-                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-orange-50/50">Assgn (20)</th>
-                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-purple-50/50">Mid (30)</th>
-                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-pink-50/50">Final (40)</th>
+                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-blue-50/50">Att ({courseInfo.mark_attendance || 10})</th>
+                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-teal-50/50">Quiz ({courseInfo.mark_quize || 15})</th>
+                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-orange-50/50">Assgn ({courseInfo.mark_assignment || 20})</th>
+                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-purple-50/50">Mid ({courseInfo.mark_mid || 30})</th>
+                                        <th className="px-2 py-4 border-b border-slate-200 text-center w-24 bg-pink-50/50">Final ({courseInfo.mark_final || 40})</th>
                                         <th className="px-4 py-4 border-b border-slate-200 text-center bg-gray-50 text-slate-800">Total</th>
                                         <th className="px-4 py-4 border-b border-slate-200 text-center bg-gray-50 text-slate-800">Grade</th>
                                     </tr>

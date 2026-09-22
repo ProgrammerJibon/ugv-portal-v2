@@ -3,7 +3,8 @@
 import Section from '@/Components/Section';
 import React, { useState, useEffect } from 'react';
 import { getTeacherDashboardData } from './teacherDashboardActions'; // Adjust path
-import { FaSpinner, FaUsers, FaClock, FaClipboardList, FaArrowRight } from 'react-icons/fa';
+import { FaSpinner, FaUsers, FaClock, FaClipboardList, FaArrowRight, FaCheckCircle } from 'react-icons/fa';
+import Link from 'next/link';
 
 const TeacherDashboard = ({ user }) => {
     const [loading, setLoading] = useState(true);
@@ -105,32 +106,32 @@ const TeacherDashboard = ({ user }) => {
                                                     {course.title}
                                                 </h3>
 
-                                                {/* Meta Info (Mocked for now as specific schedule table doesn't exist yet) */}
+                                                {/* Meta Info */}
                                                 <div className="space-y-3 mt-4 border-t border-slate-100 pt-4">
                                                     <div className="flex items-center text-sm text-slate-500">
                                                         <FaUsers className="mr-3 text-slate-400" />
-                                                        <span>Students Enrolled: <span className="font-semibold text-slate-700">TBA</span></span>
+                                                        <span>Students Enrolled: <span className="font-semibold text-slate-700">{course.enrolled_count ?? 0}</span></span>
                                                     </div>
                                                     <div className="flex items-center text-sm text-slate-500">
-                                                        <FaClock className="mr-3 text-slate-400" />
-                                                        <span>Schedule: <span className="italic text-slate-400">Not set</span></span>
+                                                        <FaCheckCircle className="mr-3 text-emerald-500" />
+                                                        <span>Marks Evaluated: <span className="font-semibold text-indigo-600">{course.graded_count ?? 0}</span> / {course.enrolled_count ?? 0}</span>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             {/* Action Buttons */}
                                             <div className="mt-6 pt-4 grid grid-cols-2 gap-3">
-                                                <button 
-                                                    onClick={() => window.location.href = `/teacher/subjects/${course.subject_id}/materials`} 
-                                                className="flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs font-bold py-2 px-3 rounded border border-slate-200 transition-colors">
+                                                <Link 
+                                                    href={`/teacher/subjects/${course.subject_id}/materials`} 
+                                                    className="flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs font-bold py-2 px-3 rounded border border-slate-200 transition-colors">
                                                     <FaClipboardList /> Materials
-                                                </button>
-                                                <button
+                                                </Link>
+                                                <Link
+                                                    href={`/teacher/subjects/${course.subject_id}/marks`}
                                                     className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 px-3 rounded shadow transition-colors"
-                                                    onClick={() => window.location.href = `/teacher/subjects/${course.subject_id}/marks`} // Future link
                                                 >
                                                     Enter Marks <FaArrowRight />
-                                                </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

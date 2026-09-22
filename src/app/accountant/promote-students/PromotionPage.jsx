@@ -85,14 +85,23 @@ const PromotionPage = ({ user }) => {
         }
     };
 
+    const getOrdinal = (n) => {
+        const num = parseInt(n);
+        if (num === 0) return "0 (Admitted / Freshmen)";
+        const s = ["th", "st", "nd", "rd"];
+        const v = num % 100;
+        return `${num}${s[(v - 20) % 10] || s[v] || s[0]} Semester`;
+    };
+
     const handlePromote = async () => {
         if (selectedIds.length === 0) return;
 
-        const confirmMsg = `Promote ${selectedIds.length} students to ${parseInt(filters.currentSemester) + 1}th Semester for ${filters.targetSession}?`;
+        const nextSemLabel = getOrdinal(parseInt(filters.currentSemester) + 1);
+        const confirmMsg = `Promote ${selectedIds.length} students to ${nextSemLabel} for ${filters.targetSession}?`;
 
         if (window.confirm(confirmMsg)) {
             setPromoting(true);
-            const res = await promoteStudentsAction(selectedIds, filters.targetSession);
+            const res = await promoteStudentsAction(selectedIds, filters.targetSession, user?.user_id || user?.id);
 
             if (res.status === 'success') {
                 alert(res.message);
@@ -164,7 +173,7 @@ const PromotionPage = ({ user }) => {
                                     onChange={(e) => setFilters({ ...filters, currentSemester: e.target.value })}
                                 >
                                     {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(sem => (
-                                        <option key={sem} value={sem}>{sem}th Semester</option>
+                                        <option key={sem} value={sem}>{getOrdinal(sem)}</option>
                                     ))}
                                 </select>
                             </div>
@@ -278,7 +287,7 @@ const PromotionPage = ({ user }) => {
                         <div className="bg-white border-t border-gray-200 p-4 sticky bottom-0 flex justify-between items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
                             <div>
                                 <p className="text-xs text-slate-500">
-                                    Promoting will move students to <strong className="text-slate-800">{parseInt(filters.currentSemester) + 1}th Semester</strong>.
+                                    Promoting will move students to <strong className="text-slate-800">{getOrdinal(parseInt(filters.currentSemester) + 1)}</strong>.
                                 </p>
                             </div>
                             <button

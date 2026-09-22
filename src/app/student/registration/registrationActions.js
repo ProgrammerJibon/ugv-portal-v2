@@ -5,8 +5,6 @@ import { connectDatabase } from "@/app/json/connectDatabase";
 export async function getStudentRegistrationAction(studentId) {
     const db = await connectDatabase();
     try {
-        console.log("fuk");
-        
         // 1. Get the Current Active Session from System
         // Assumes the latest added session is the current one
         const [sessionRows] = await db.execute(`
@@ -42,9 +40,9 @@ export async function getStudentRegistrationAction(studentId) {
             };
         }
 
-        // 4. If Registered, Fetch Subjects
+        // 4. If Registered, Fetch Subjects with ID
         const [subjects] = await db.execute(`
-            SELECT subject_code, subject_name, credit 
+            SELECT id, subject_code, subject_name, credit 
             FROM subjects 
             WHERE program_id = ? AND semester = ?
             ORDER BY subject_code ASC
@@ -60,5 +58,25 @@ export async function getStudentRegistrationAction(studentId) {
     } catch (error) {
         console.error("Registration Load Error:", error);
         return { status: "error", message: "Failed to load data" };
+    }
+}
+
+// 5. Fetch Course Materials for Enrolled Student
+export async function getStudentCourseMaterialsAction(subjectId) {
+    const db = await connectDatabase();
+    try {
+        const [materials] = await db.execute(`
+            SELECT cm.id, cm.title, cm.description, cm.file_path, cm.file_type, cm.file_size, cm.upload_date,
+                   u.name as teacher_name
+            FROM course_materials cm
+            LEFT JOIN users u ON cm.teacher_id = u.id
+            WHERE cm.subject_id = ?
+            ORDER BY cm.id DESC
+        `, [subjectId]);
+
+        return { status: "success", materials };
+    } catch (error) {
+        console.error("Fetch Student Materials Error:", error);
+        return { status: "error", message: "Failed to load course materials." };
     }
 }

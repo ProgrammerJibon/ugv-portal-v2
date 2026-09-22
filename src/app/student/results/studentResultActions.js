@@ -9,9 +9,9 @@ export async function getStudentResultsAction(studentUserId) {
     try {
         // 1. Fetch Basic Student Info
         const [studentRows] = await db.execute(`
-            SELECT u.name, u.user_id, u.program, u.batch, m.program_name 
+            SELECT u.name, u.user_id, u.program, u.batch, COALESCE(m.program_name, 'General') AS program_name 
             FROM users u
-            JOIN majors m ON u.program = m.id
+            LEFT JOIN majors m ON u.program = m.id
             WHERE u.user_id = ?
         `, [studentUserId]);
 
@@ -48,16 +48,16 @@ export async function getStudentResultsAction(studentUserId) {
                 };
             }
 
-            // Calculate Total Marks & Grade
+            // Calculate Total Marks & Grade (with null fallbacks)
             const totalMarks =
-                parseFloat(row.mark_attendance) +
-                parseFloat(row.mark_quiz) +
-                parseFloat(row.mark_assignment) +
-                parseFloat(row.mark_mid) +
-                parseFloat(row.mark_final);
+                parseFloat(row.mark_attendance || 0) +
+                parseFloat(row.mark_quiz || 0) +
+                parseFloat(row.mark_assignment || 0) +
+                parseFloat(row.mark_mid || 0) +
+                parseFloat(row.mark_final || 0);
 
             const { grade, point } = calculateGrade(totalMarks);
-            const credit = parseFloat(row.credit);
+            const credit = parseFloat(row.credit || 0);
 
             // Add to Semester Data
             resultsDB[sem].subjects.push({
@@ -94,8 +94,8 @@ export async function getStudentResultsAction(studentUserId) {
             student: {
                 name: studentInfo.name,
                 id: studentInfo.user_id,
-                program: studentInfo.program_name,
-                batch: studentInfo.batch
+                program: studentInfo.program_name || 'General',
+                batch: studentInfo.batch || 'N/A'
             },
             results: resultsDB
         };

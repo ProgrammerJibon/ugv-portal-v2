@@ -32,8 +32,8 @@ const ExamControllerPage = ({ user }) => {
     // Find the full object of the currently selected session
     const currentSessionObj = sessions.find(s => s.id == selectedSessionId);
 
-    // Check if mark entry is open (ensure we handle 1/0 from DB as boolean)
-    const isMarkEntryOpen = currentSessionObj ? Boolean(currentSessionObj.mark_open) : false;
+    // Check if mark entry is open (handle '1'/'0' string or number from MySQL)
+    const isMarkEntryOpen = currentSessionObj ? (currentSessionObj.mark_open == 1 || currentSessionObj.mark_open === '1') : false;
 
     // --- Handlers ---
     const handleToggle = async () => {

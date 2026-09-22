@@ -2,10 +2,11 @@
 
 import Section from '@/Components/Section';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { getStudentPaymentDataAction } from './studentPaymentActions';
 import {
     FaSpinner, FaHistory, FaFileInvoiceDollar, FaCheckCircle,
-    FaExclamationCircle, FaFilter, FaWallet, FaReceipt
+    FaExclamationCircle, FaFilter, FaWallet, FaReceipt, FaPrint, FaTimes, FaUniversity
 } from 'react-icons/fa';
 
 // --- Helper: Number Suffix (1st, 2nd, 3rd) ---
@@ -21,8 +22,11 @@ const formatCurrency = (amount) => {
 };
 
 const StudentPaymentPage = ({ user }) => {
+    const router = useRouter();
+
     // --- State ---
     const [loading, setLoading] = useState(true);
+    const [selectedReceipt, setSelectedReceipt] = useState(null);
 
     // Data Sources
     const [overallBalance, setOverallBalance] = useState(0);
@@ -96,7 +100,8 @@ const StudentPaymentPage = ({ user }) => {
 
     // --- Handlers ---
     const handlePayNow = () => {
-        alert("Online payment gateway integration coming soon! Please visit the accounts office.");
+        const dueAmount = displayStats.due > 0 ? displayStats.due : '';
+        router.push(`/student/online-payments?amount=${dueAmount}`);
     };
 
     if (loading) {
@@ -280,8 +285,12 @@ const StudentPaymentPage = ({ user }) => {
                                                 </td>
                                                 <td className="px-6 py-4 text-center">
                                                     {isPayment && (
-                                                        <button className="text-slate-300 hover:text-indigo-600 transition-colors" title="Download Receipt">
-                                                            <FaReceipt className="inline-block text-lg" />
+                                                        <button
+                                                            onClick={() => setSelectedReceipt(item)}
+                                                            className="text-indigo-600 hover:text-indigo-800 p-2 rounded-lg hover:bg-indigo-50 transition-colors inline-flex items-center gap-1.5 font-semibold text-xs border border-indigo-100 shadow-sm"
+                                                            title="View Official Receipt"
+                                                        >
+                                                            <FaReceipt className="text-sm" /> Receipt
                                                         </button>
                                                     )}
                                                 </td>
@@ -311,6 +320,110 @@ const StudentPaymentPage = ({ user }) => {
 
                 </div>
             </div>
+
+            {/* --- Official Money Receipt Modal --- */}
+            {selectedReceipt && (
+                <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+                    <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-200 animate-fade-in-up">
+                        {/* Receipt Header */}
+                        <div className="bg-slate-900 text-white p-6 text-center relative">
+                            <button
+                                onClick={() => setSelectedReceipt(null)}
+                                className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors p-1"
+                            >
+                                <FaTimes className="text-lg" />
+                            </button>
+                            <img
+                                src="https://ugv.edu.bd/assets/images/logos/UGV-Logo-02.png"
+                                alt="UGV Logo"
+                                className="h-12 w-auto mx-auto mb-2 bg-white/95 rounded p-1"
+                            />
+                            <h2 className="text-lg font-bold tracking-tight">UNIVERSITY OF GLOBAL VILLAGE</h2>
+                            <p className="text-xs text-indigo-300 font-medium">Office of Accounts & Finance</p>
+                            <div className="inline-block mt-3 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                                Official Payment Receipt
+                            </div>
+                        </div>
+
+                        {/* Receipt Body */}
+                        <div className="p-6 space-y-4">
+                            <div className="flex justify-between items-start border-b border-dashed border-slate-200 pb-3 text-xs">
+                                <div>
+                                    <span className="text-slate-400 font-bold uppercase">Receipt / Voucher:</span>
+                                    <p className="font-mono font-bold text-slate-800 mt-0.5">
+                                        {selectedReceipt.trx_id || `REC-${selectedReceipt.id}`}
+                                    </p>
+                                </div>
+                                <div className="text-right">
+                                    <span className="text-slate-400 font-bold uppercase">Payment Date:</span>
+                                    <p className="font-semibold text-slate-800 mt-0.5">{selectedReceipt.payment_date}</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2 text-sm">
+                                <div className="flex justify-between">
+                                    <span className="text-slate-500">Student Name:</span>
+                                    <span className="font-bold text-slate-800">{user?.name}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-slate-500">Student ID:</span>
+                                    <span className="font-mono font-bold text-slate-800">{user?.user_id}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-slate-500">Academic Period:</span>
+                                    <span className="font-semibold text-slate-700">{selectedReceipt.session} {selectedReceipt.semester ? `(${getOrdinal(selectedReceipt.semester)} Sem)` : ''}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-slate-500">Payment Purpose:</span>
+                                    <span className="font-semibold text-slate-800">{selectedReceipt.fee_type}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span className="text-slate-500">Payment Mode:</span>
+                                    <span className="font-semibold uppercase text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded text-xs">
+                                        {selectedReceipt.payment_method}
+                                    </span>
+                                </div>
+                                {selectedReceipt.remarks && (
+                                    <div className="flex justify-between text-xs text-slate-400 pt-1 border-t border-slate-200/50">
+                                        <span>Remarks:</span>
+                                        <span className="italic">{selectedReceipt.remarks}</span>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex justify-between items-center">
+                                <div>
+                                    <p className="text-xs font-bold text-emerald-800 uppercase tracking-wider">Total Amount Paid</p>
+                                    <p className="text-xs text-emerald-600">Verified and credited</p>
+                                </div>
+                                <span className="text-2xl font-extrabold text-emerald-700">
+                                    {formatCurrency(selectedReceipt.amount)}
+                                </span>
+                            </div>
+
+                            <div className="pt-2 text-[11px] text-center text-slate-400 italic">
+                                Computer-generated official money receipt. No manual signature required.
+                            </div>
+                        </div>
+
+                        {/* Modal Footer Actions */}
+                        <div className="bg-slate-50 px-6 py-4 border-t border-slate-100 flex justify-end gap-3">
+                            <button
+                                onClick={() => setSelectedReceipt(null)}
+                                className="px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-200 transition-colors"
+                            >
+                                Close
+                            </button>
+                            <button
+                                onClick={() => window.print()}
+                                className="px-5 py-2 rounded-lg text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors flex items-center gap-2 shadow"
+                            >
+                                <FaPrint /> Print Receipt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </Section>
     );
 };

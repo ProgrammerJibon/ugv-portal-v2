@@ -93,7 +93,7 @@ const AccountantStudentPage = ({ user }) => {
                             >
                                 <option value="All">All Status</option>
                                 <option value="ACTIVE">ACTIVE Only</option>
-                                <option value="INACTIVE">ACTIVE Only</option>
+                                <option value="INACTIVE">INACTIVE Only</option>
                             </select>
                         </div>
                     </div>
@@ -170,9 +170,13 @@ const AccountantStudentPage = ({ user }) => {
                                                 {}
                                                 <td className="px-6 py-4 text-right">
                                                     <div className="flex items-center justify-end gap-2">
-
-                                                        {}
-                                                        {}
+                                                        <Link
+                                                            href={`/accountant/add-payment?studentId=${std.id}`}
+                                                            className="bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 text-indigo-700 text-xs font-bold py-2 px-3 rounded transition-colors flex items-center gap-1"
+                                                            title="Collect Payment"
+                                                        >
+                                                            <FaMoneyBillWave /> Pay
+                                                        </Link>
 
                                                         {}
                                                         {std.registerred === '1' ? (

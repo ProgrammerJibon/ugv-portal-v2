@@ -19,7 +19,7 @@ export async function getUsersAction() {
 // Action 2: Toggle Account Status (ACTIVE/Deactive)
 export async function toggleUserStatusAction(dbId, currentStatus) {
     const db = await connectDatabase();
-    const newStatus = currentStatus === "ACTIVE" ? "ACTIVE" : "ACTIVE";
+    const newStatus = currentStatus?.toUpperCase() === "ACTIVE" ? "INACTIVE" : "ACTIVE";
 
     try {
         await db.execute("UPDATE users SET status = ? WHERE id = ?", [newStatus?.toUpperCase(), dbId]);

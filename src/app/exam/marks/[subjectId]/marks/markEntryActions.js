@@ -11,16 +11,19 @@ export async function getClassMarksData(subjectId, teacherId) {
         // We need this to know WHICH students to fetch
         const [assignment] = await db.execute(`
             SELECT 
-                at.session_id, at.program_id, at.semester,
+                at.session_id, at.program_id, at.semester, at.teacher_id,
                 s.subject_code, s.subject_name,
+                s.mark_attendance, s.mark_quize, s.mark_assignment, s.mark_mid, s.mark_final,
                 m.program_name,
                 sess.session_season, sess.session_year
             FROM assigned_teachers at
             JOIN subjects s ON at.subject_id = s.id
             JOIN majors m ON at.program_id = m.id
             JOIN sessions sess ON at.session_id = sess.id
+            WHERE at.subject_id = ?
+            ORDER BY at.id DESC
             LIMIT 1
-        `);
+        `, [subjectId]);
 
         if (assignment.length === 0) {
             return { status: "error", message: "Course assignment not found." };
@@ -82,6 +85,11 @@ export async function saveStudentMark(data) {
         sessionId, programId, semester,
         field, value
     } = data;
+
+    const allowedFields = ["mark_attendance", "mark_quiz", "mark_assignment", "mark_mid", "mark_final"];
+    if (!allowedFields.includes(field)) {
+        return { status: "error", message: "Invalid mark field" };
+    }
 
     try {
         // Check if row exists

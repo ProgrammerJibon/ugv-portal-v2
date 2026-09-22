@@ -2,23 +2,31 @@
 
 import { connectDatabase } from "@/app/json/connectDatabase";
 
-export async function getTeacherDashboardData(teacherId) {
+export async function getTeacherDashboardData(examUserId, selectedSessionId = null) {
     const db = await connectDatabase();
 
     try {
-        // 1. Get the Current ACTIVE Session
-        const [sessions] = await db.execute(
-            "SELECT id, session_year, session_season FROM sessions WHERE status = 'ACTIVE' LIMIT 1"
+        // 1. Fetch All Sessions for Filter
+        const [allSessions] = await db.execute(
+            "SELECT id, session_year, session_season, status, mark_open FROM sessions ORDER BY session_year DESC, id DESC"
         );
 
-        if (sessions.length === 0) {
-            return { status: "error", message: "No active session found.", data: null };
+        if (allSessions.length === 0) {
+            return { status: "error", message: "No academic sessions found in system.", data: null };
         }
 
-        const activeSession = sessions[0];
-        const sessionLabel = `${activeSession.session_season} ${activeSession.session_year}`;
+        // 2. Determine target session
+        let targetSession = null;
+        if (selectedSessionId) {
+            targetSession = allSessions.find(s => String(s.id) === String(selectedSessionId));
+        }
+        if (!targetSession) {
+            targetSession = allSessions.find(s => s.status === 'ACTIVE') || allSessions[0];
+        }
 
-        // 2. Get Assigned Courses for this Teacher in this Session
+        const sessionLabel = `${targetSession.session_season} ${targetSession.session_year}`;
+
+        // 3. Get Assigned Courses for this Session with Teacher and Submission Stats
         const query = `
             SELECT 
                 at.id,
@@ -26,23 +34,30 @@ export async function getTeacherDashboardData(teacherId) {
                 at.semester,
                 s.subject_code AS code,
                 s.id AS subject_id,
-                s.subject_name AS title
+                s.subject_name AS title,
+                COALESCE(u.name, 'Unassigned') AS teacher_name,
+                COALESCE(u.faculty_id, u.user_id, '') AS teacher_code,
+                (SELECT COUNT(DISTINCT sm.student_user_id) FROM student_marks sm WHERE sm.subject_id = s.id) AS marks_entered_count
             FROM assigned_teachers at
             JOIN subjects s ON at.subject_id = s.id
             JOIN majors m ON at.program_id = m.id
-            ORDER BY at.semester ASC
+            LEFT JOIN users u ON at.teacher_id = u.id
+            WHERE at.session_id = ?
+            ORDER BY m.program_short_name ASC, at.semester ASC
         `;
 
-        const [courses] = await db.execute(query, [teacherId, activeSession.id]);
+        const [courses] = await db.execute(query, [targetSession.id]);
 
         return {
             status: "success",
             sessionLabel,
+            selectedSessionId: targetSession.id,
+            sessions: allSessions,
             courses
         };
 
     } catch (error) {
-        console.error("Dashboard Error:", error);
-        return { status: "error", message: "Failed to load dashboard." };
+        console.error("Exam Dashboard Error:", error);
+        return { status: "error", message: "Failed to load exam marks dashboard." };
     }
 }

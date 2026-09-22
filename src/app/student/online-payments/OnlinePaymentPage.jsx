@@ -2,78 +2,102 @@
 
 import Section from '@/Components/Section';
 import React, { useState, useEffect } from 'react';
-import { FaCreditCard, FaMobileAlt, FaLock, FaCheckCircle, FaSpinner, FaArrowLeft } from 'react-icons/fa';
+import { FaCreditCard, FaMobileAlt, FaLock, FaCheckCircle, FaSpinner, FaArrowLeft, FaReceipt } from 'react-icons/fa';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { processOnlinePaymentAction } from './onlinePaymentActions';
 
 const OnlinePaymentPage = ({ user }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    // Get amount passed from previous page or default to 0
+    // Get amount passed from previous page or default to empty
     const initialAmount = searchParams.get('amount') || '';
 
     const [amount, setAmount] = useState(initialAmount);
     const [method, setMethod] = useState('bkash'); // Default
     const [processing, setProcessing] = useState(false);
     const [paymentSuccess, setPaymentSuccess] = useState(false);
+    const [receiptData, setReceiptData] = useState(null);
 
-    // --- Mock Payment Processing ---
-    const handlePay = (e) => {
+    // --- Real Payment Processing ---
+    const handlePay = async (e) => {
         e.preventDefault();
 
-        if (!amount || parseFloat(amount) <= 0) {
-            alert("Please enter a valid amount.");
+        const numericAmount = parseFloat(amount);
+        if (!numericAmount || numericAmount <= 0) {
+            alert("Please enter a valid payment amount.");
             return;
         }
 
         setProcessing(true);
 
-        // Simulate Network Delay (2 seconds)
-        setTimeout(() => {
-            setProcessing(false);
+        const res = await processOnlinePaymentAction({
+            studentId: user?.user_id,
+            amount: numericAmount,
+            paymentMethod: method.toUpperCase(),
+            session: user?.session || 'Current Session',
+            semester: user?.current_semester || '1'
+        });
+
+        if (res.status === 'success') {
+            setReceiptData(res);
             setPaymentSuccess(true);
-        }, 2000);
+        } else {
+            alert(res.message);
+        }
+
+        setProcessing(false);
     };
 
-    // --- Redirect after Success ---
-    useEffect(() => {
-        if (paymentSuccess) {
-            const timer = setTimeout(() => {
-                router.push('/student/payment'); // Go back to ledger
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [paymentSuccess, router]);
-
     // --- Success Screen ---
-    if (paymentSuccess) {
+    if (paymentSuccess && receiptData) {
         return (
-            <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-                <div className="bg-white rounded-2xl shadow-xl p-8 text-center max-w-md w-full animate-fade-in-up">
-                    <div className="w-20 h-20 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <FaCheckCircle className="text-5xl" />
-                    </div>
-                    <h2 className="text-2xl font-bold text-slate-800 mb-2">Payment Successful!</h2>
-                    <p className="text-slate-500 mb-6">
-                        Transaction <span className="font-mono font-bold text-slate-700">TRX-{Math.floor(Math.random() * 1000000)}</span> has been processed.
-                        Your ledger will update shortly.
-                    </p>
-                    <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 mb-6">
-                        <div className="flex justify-between text-sm mb-2">
-                            <span className="text-slate-500">Amount Paid</span>
-                            <span className="font-bold text-slate-700">৳ {parseFloat(amount).toLocaleString()}</span>
+            <Section user={user}>
+                <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-2xl shadow-xl p-8 text-center max-w-md w-full animate-fade-in-up border border-slate-100">
+                        <div className="w-20 h-20 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <FaCheckCircle className="text-5xl" />
                         </div>
-                        <div className="flex justify-between text-sm">
-                            <span className="text-slate-500">Method</span>
-                            <span className="font-bold text-slate-700 uppercase">{method}</span>
+                        <h2 className="text-2xl font-bold text-slate-800 mb-2">Payment Successful!</h2>
+                        <p className="text-slate-500 text-sm mb-6">
+                            Transaction <span className="font-mono font-bold text-indigo-600">{receiptData.trxId}</span> has been verified and posted to your ledger.
+                        </p>
+                        <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6 text-left space-y-2">
+                            <div className="flex justify-between text-sm">
+                                <span className="text-slate-500">Student ID</span>
+                                <span className="font-mono font-bold text-slate-700">{user?.user_id}</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                                <span className="text-slate-500">Amount Credited</span>
+                                <span className="font-bold text-emerald-600">৳ {receiptData.amount.toLocaleString()}</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                                <span className="text-slate-500">Payment Channel</span>
+                                <span className="font-bold text-slate-700 uppercase">{receiptData.method}</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                                <span className="text-slate-500">Date</span>
+                                <span className="font-medium text-slate-600">{receiptData.date}</span>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <button
+                                onClick={() => router.push('/student/payments')}
+                                className="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-lg transition-colors shadow"
+                            >
+                                Return to Financial Ledger
+                            </button>
+                            <button
+                                onClick={() => window.print()}
+                                className="w-full bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold py-2.5 rounded-lg transition-colors border border-indigo-200 flex items-center justify-center gap-2 text-sm"
+                            >
+                                <FaReceipt /> Print Payment Slip
+                            </button>
                         </div>
                     </div>
-                    <button onClick={() => router.push('/student/payment')} className="w-full bg-slate-800 text-white font-bold py-3 rounded-lg hover:bg-slate-700 transition-colors">
-                        Return to Dashboard
-                    </button>
                 </div>
-            </div>
+            </Section>
         );
     }
 
@@ -85,7 +109,7 @@ const OnlinePaymentPage = ({ user }) => {
 
                     {/* Left: Summary */}
                     <div className="md:col-span-1 space-y-6">
-                        <Link href="/student/payment" className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-slate-800 mb-4">
+                        <Link href="/student/payments" className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-slate-800 mb-4">
                             <FaArrowLeft /> Cancel & Return
                         </Link>
 

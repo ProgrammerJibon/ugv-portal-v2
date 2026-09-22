@@ -2,13 +2,21 @@
 
 import Section from '@/Components/Section';
 import React, { useState, useEffect } from 'react';
-import { FaSpinner, FaBook, FaExclamationTriangle, FaCheckCircle, FaArrowRight, FaRegSadTear } from 'react-icons/fa';
+import {
+    FaSpinner, FaBook, FaExclamationTriangle, FaCheckCircle, FaArrowRight,
+    FaDownload, FaFilePdf, FaFileWord, FaFileVideo, FaFileAlt, FaTimes
+} from 'react-icons/fa';
 import Link from 'next/link';
-import { getStudentRegistrationAction } from './registrationActions';
+import { getStudentRegistrationAction, getStudentCourseMaterialsAction } from './registrationActions';
 
 const StudentRegistrationPage = ({ user }) => {
     const [loading, setLoading] = useState(true);
     const [registrationData, setData] = useState(null);
+
+    // Course Materials Modal State
+    const [activeSubject, setActiveSubject] = useState(null);
+    const [materials, setMaterials] = useState([]);
+    const [loadingMaterials, setLoadingMaterials] = useState(false);
 
     useEffect(() => {
         if (!user?.user_id) return;
@@ -19,6 +27,26 @@ const StudentRegistrationPage = ({ user }) => {
         };
         load();
     }, [user]);
+
+    const handleOpenMaterials = async (sub) => {
+        setActiveSubject(sub);
+        setLoadingMaterials(true);
+        const res = await getStudentCourseMaterialsAction(sub.id);
+        if (res.status === 'success') {
+            setMaterials(res.materials || []);
+        } else {
+            setMaterials([]);
+        }
+        setLoadingMaterials(false);
+    };
+
+    const getFileIcon = (type) => {
+        const t = (type || '').toLowerCase();
+        if (t.includes('pdf')) return <FaFilePdf className="text-red-500 text-2xl" />;
+        if (t.includes('doc')) return <FaFileWord className="text-blue-500 text-2xl" />;
+        if (t.includes('mp4') || t.includes('video')) return <FaFileVideo className="text-purple-500 text-2xl" />;
+        return <FaFileAlt className="text-slate-400 text-2xl" />;
+    };
 
     if (loading) {
         return (
@@ -40,7 +68,7 @@ const StudentRegistrationPage = ({ user }) => {
     return (
         <Section user={user}>
             <div className="min-h-screen bg-slate-50 font-sans flex flex-col items-center py-12">
-                <div className="w-full container max-w-4xl px-4">
+                <div className="w-full container max-w-5xl px-4">
 
                     {/* --- STATE 1: NOT REGISTERED --- */}
                     {!registrationData?.isRegistered ? (
@@ -56,14 +84,11 @@ const StudentRegistrationPage = ({ user }) => {
                                 Please clear your dues or contact the administration office immediately to avoid late fees.
                             </p>
 
-                            {/* <div className="flex gap-4">
-                                <Link href="/student/payment" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform active:scale-95 flex items-center gap-2">
-                                    Go to Payment <FaArrowRight />
+                            <div className="flex gap-4">
+                                <Link href="/student/payments" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform active:scale-95 flex items-center gap-2">
+                                    Go to Financials / Clear Dues <FaArrowRight />
                                 </Link>
-                                <button className="bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 font-bold py-3 px-8 rounded-full shadow-sm transition-colors">
-                                    Contact Admin
-                                </button>
-                            </div> */}
+                            </div>
                         </div>
                     ) : (
 
@@ -98,6 +123,7 @@ const StudentRegistrationPage = ({ user }) => {
                                                 <th className="px-6 py-4">Course Title</th>
                                                 <th className="px-6 py-4 w-32 text-center">Type</th>
                                                 <th className="px-6 py-4 w-24 text-center">Credit</th>
+                                                <th className="px-6 py-4 w-36 text-center">Materials</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-slate-100">
@@ -121,11 +147,19 @@ const StudentRegistrationPage = ({ user }) => {
                                                         <td className="px-6 py-4 text-center font-bold text-slate-600">
                                                             {parseFloat(sub.credit).toFixed(1)}
                                                         </td>
+                                                        <td className="px-6 py-4 text-center">
+                                                            <button
+                                                                onClick={() => handleOpenMaterials(sub)}
+                                                                className="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold py-1.5 px-3 rounded-lg border border-indigo-200 transition-colors inline-flex items-center gap-1.5"
+                                                            >
+                                                                <FaDownload className="text-xs" /> Materials
+                                                            </button>
+                                                        </td>
                                                     </tr>
                                                 ))
                                             ) : (
                                                 <tr>
-                                                    <td colSpan="4" className="px-6 py-12 text-center text-slate-400">
+                                                    <td colSpan="5" className="px-6 py-12 text-center text-slate-400">
                                                         <FaBook className="text-4xl mx-auto mb-2 opacity-20" />
                                                         No subjects found for this semester.
                                                     </td>
@@ -138,10 +172,6 @@ const StudentRegistrationPage = ({ user }) => {
                                 {/* Footer */}
                                 <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 text-xs text-slate-400 flex justify-between items-center">
                                     <span>* Standard academic load. Contact advisor for changes.</span>
-                                    <button className="flex items-center gap-1 font-bold text-indigo-600 hover:underline">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                                        Download Registration Card
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -149,6 +179,84 @@ const StudentRegistrationPage = ({ user }) => {
 
                 </div>
             </div>
+
+            {/* --- Course Materials Modal --- */}
+            {activeSubject && (
+                <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+                    <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden border border-slate-200 animate-fade-in-up">
+                        <div className="bg-slate-900 text-white p-6 flex justify-between items-center">
+                            <div>
+                                <span className="text-xs font-mono font-bold text-indigo-300 uppercase tracking-wider">{activeSubject.subject_code}</span>
+                                <h3 className="text-lg font-bold text-white">{activeSubject.subject_name}</h3>
+                            </div>
+                            <button
+                                onClick={() => setActiveSubject(null)}
+                                className="text-slate-400 hover:text-white transition-colors p-2"
+                            >
+                                <FaTimes className="text-lg" />
+                            </button>
+                        </div>
+
+                        <div className="p-6 max-h-[60vh] overflow-y-auto space-y-4">
+                            {loadingMaterials ? (
+                                <div className="py-12 flex justify-center items-center text-slate-400 gap-2">
+                                    <FaSpinner className="animate-spin text-xl text-indigo-600" />
+                                    <span>Loading study materials...</span>
+                                </div>
+                            ) : materials.length > 0 ? (
+                                materials.map((m) => (
+                                    <div key={m.id} className="p-4 rounded-xl border border-slate-200 hover:border-indigo-300 bg-slate-50/50 hover:bg-indigo-50/30 transition-all flex items-center justify-between gap-4">
+                                        <div className="flex items-start gap-4">
+                                            <div className="p-3 bg-white rounded-lg shadow-sm border border-slate-200">
+                                                {getFileIcon(m.file_type)}
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-slate-800 text-sm">{m.title}</h4>
+                                                {m.description && <p className="text-xs text-slate-500 mt-0.5">{m.description}</p>}
+                                                <div className="flex items-center gap-3 mt-2 text-[11px] text-slate-400 font-medium">
+                                                    <span>Size: {m.file_size}</span>
+                                                    <span>•</span>
+                                                    <span>Uploaded: {m.upload_date}</span>
+                                                    {m.teacher_name && (
+                                                        <>
+                                                            <span>•</span>
+                                                            <span className="text-indigo-600 font-semibold">{m.teacher_name}</span>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a
+                                            href={m.file_path}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            download
+                                            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2 px-4 rounded-lg shadow transition-colors flex items-center gap-1.5 shrink-0"
+                                        >
+                                            <FaDownload /> Download
+                                        </a>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="py-12 text-center text-slate-400">
+                                    <FaBook className="text-4xl mx-auto mb-3 opacity-20" />
+                                    <p className="font-medium text-slate-600">No Course Materials Yet</p>
+                                    <p className="text-xs text-slate-400 mt-1">Your instructor has not uploaded lecture materials or slides for this subject yet.</p>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex justify-end">
+                            <button
+                                onClick={() => setActiveSubject(null)}
+                                className="bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold py-2.5 px-6 rounded-lg transition-colors"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </Section>
     );
 };

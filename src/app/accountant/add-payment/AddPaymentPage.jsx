@@ -2,6 +2,7 @@
 
 import Section from '@/Components/Section';
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { findStudentForPaymentAction, processPaymentAction, getPaymentHistoryAction, getSessionListAction } from './paymentActions';
 import {
     FaSpinner, FaSearch, FaCheckCircle, FaMoneyBillWave, FaUserGraduate,
@@ -9,8 +10,10 @@ import {
 } from 'react-icons/fa';
 
 const AddPaymentPage = ({ user }) => {
+    const searchParams = useSearchParams();
+    const urlStudentId = searchParams.get('studentId') || '';
     
-    const [searchId, setSearchId] = useState('');
+    const [searchId, setSearchId] = useState(urlStudentId);
     const [student, setStudent] = useState(null);
     const [history, setHistory] = useState([]);
     const [sessionsList, setSessionsList] = useState([]); 
@@ -51,24 +54,20 @@ const AddPaymentPage = ({ user }) => {
         if (res.status === 'success') setHistory(res.data);
     };
 
-    
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        if (!searchId) return;
+    const executeSearch = async (idToSearch) => {
+        if (!idToSearch) return;
 
         setLoadingSearch(true);
         setStudent(null);
         setHistory([]);
 
-        const res = await findStudentForPaymentAction(searchId);
+        const res = await findStudentForPaymentAction(idToSearch);
 
         if (res.status === 'success') {
             const std = res.data;
             setStudent(std);
             await fetchHistory(std.user_id);
 
-            
-            
             const defaultSession = std.globalSession || (sessionsList.length > 0 ? sessionsList[0].session_name : '');
 
             setFormData(prev => ({
@@ -81,6 +80,17 @@ const AddPaymentPage = ({ user }) => {
             alert(res.message);
         }
         setLoadingSearch(false);
+    };
+
+    useEffect(() => {
+        if (urlStudentId) {
+            executeSearch(urlStudentId);
+        }
+    }, [urlStudentId]);
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        await executeSearch(searchId);
     };
 
     const handleSubmit = async (e) => {

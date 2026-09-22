@@ -1,12 +1,12 @@
 import { getUserFromAuthCookie } from "@/app/json/serverFunctions";
-import CourseFeedback from "./CourseFeedback";
+import StudentReportPage from "./StudentReportPage";
 
 export default async () => {
     const res = await getUserFromAuthCookie();
     if (res && "user" in res) {
         if (res?.user?.user_type?.toLowerCase() === "student") {
             return <>
-                <CourseFeedback user={res?.user} />
+                <StudentReportPage user={res?.user} />
             </>
         }
     }

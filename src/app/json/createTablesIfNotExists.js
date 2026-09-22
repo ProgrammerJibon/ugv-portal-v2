@@ -4,7 +4,21 @@ async function tableExists(connection, table) {
 }
 
 async function createUser(connection) {
-    if (await tableExists(connection, "users")) return true;
+    if (await tableExists(connection, "users")) {
+        try {
+            const [statusCol] = await connection.execute("SHOW COLUMNS FROM users LIKE 'status'");
+            if (statusCol.length === 0) {
+                await connection.execute("ALTER TABLE users ADD COLUMN status VARCHAR(32) DEFAULT 'ACTIVE'");
+            }
+            const [batchCol] = await connection.execute("SHOW COLUMNS FROM users LIKE 'batch'");
+            if (batchCol.length === 0) {
+                await connection.execute("ALTER TABLE users ADD COLUMN batch VARCHAR(32) DEFAULT NULL");
+            }
+        } catch (e) {
+            console.error("Column check error for users:", e);
+        }
+        return true;
+    }
     const sql = `CREATE TABLE IF NOT EXISTS users (
         id int(11) NOT NULL AUTO_INCREMENT,
 
@@ -32,6 +46,8 @@ async function createUser(connection) {
         semester_fee varchar(8) NOT NULL DEFAULT '50000',
         section varchar(2) DEFAULT NULL,
         last_promoted_session varchar(64) DEFAULT NULL,
+        status varchar(32) DEFAULT 'ACTIVE',
+        batch varchar(32) DEFAULT NULL,
 
         program varchar(64) DEFAULT NULL,
         session varchar(32) DEFAULT NULL,
@@ -78,13 +94,22 @@ async function createMajorsTable(connection) {
 }
 
 async function createSessionsTable(connection) {
-    if (await tableExists(connection, "sessions")) return true;
+    if (await tableExists(connection, "sessions")) {
+        try {
+            const [cols] = await connection.execute("SHOW COLUMNS FROM sessions LIKE 'mark_open'");
+            if (cols.length === 0) {
+                await connection.execute("ALTER TABLE sessions ADD COLUMN mark_open VARCHAR(2) NOT NULL DEFAULT '0'");
+            }
+        } catch (_) {}
+        return true;
+    }
     const sql = `CREATE TABLE IF NOT EXISTS sessions (
         id INT(11) NOT NULL AUTO_INCREMENT,
         session_year VARCHAR(4) NOT NULL,
         session_season VARCHAR(32) NOT NULL,
         short_code VARCHAR(16) NOT NULL,
         status VARCHAR(16) DEFAULT 'ACTIVE',
+        mark_open VARCHAR(2) NOT NULL DEFAULT '0',
         PRIMARY KEY (id)
         ) ENGINE=InnoDB`;
     const [q] = await connection.execute(sql);
@@ -178,7 +203,14 @@ async function createSMSSentTable(connection) {
 }
 
 async function createAssignedSubjectsTeacherTable(connection) {
-    if (await tableExists(connection, "assigned_teachers")) return true;
+    if (await tableExists(connection, "assigned_teachers")) {
+        try {
+            await connection.execute("ALTER TABLE assigned_teachers MODIFY COLUMN mark_open VARCHAR(2) NOT NULL DEFAULT '0'");
+        } catch (e) {
+            console.error("Column check error for assigned_teachers:", e);
+        }
+        return true;
+    }
     const sql = `CREATE TABLE IF NOT EXISTS assigned_teachers (
         id INT(11) NOT NULL AUTO_INCREMENT,
         session_id INT(11) NOT NULL,
@@ -186,7 +218,7 @@ async function createAssignedSubjectsTeacherTable(connection) {
         semester VARCHAR(16) NOT NULL,
         subject_id INT(11) NOT NULL,
         teacher_id INT(11) NOT NULL,
-        mark_open VARCHAR(2) NOT NULL,
+        mark_open VARCHAR(2) NOT NULL DEFAULT '0',
         PRIMARY KEY (id)
         ) ENGINE=InnoDB`;
     const [q] = await connection.execute(sql);
@@ -233,7 +265,7 @@ async function createPaymentsTable(connection) {
 }
 
 async function createFinancialTable(connection) {
-    if (await tableExists(connection, "financials")) return true;
+    if (await tableExists(connection, "student_financials")) return true;
     const sql = `CREATE TABLE IF NOT EXISTS student_financials (
         id INT(11) NOT NULL AUTO_INCREMENT,
         student_user_id VARCHAR(64) NOT NULL,

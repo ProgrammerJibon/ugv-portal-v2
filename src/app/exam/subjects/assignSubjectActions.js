@@ -80,7 +80,7 @@ export async function assignTeacherAction(formData) {
 
     try {
         await db.execute(
-            "INSERT INTO assigned_teachers (session_id, program_id, semester, subject_id, teacher_id) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO assigned_teachers (session_id, program_id, semester, subject_id, teacher_id, mark_open) VALUES (?, ?, ?, ?, ?, '0')",
             [sessionId, programId, semester, subjectId, teacherId]
         );
         return { status: "success", message: "Faculty assigned successfully!" };

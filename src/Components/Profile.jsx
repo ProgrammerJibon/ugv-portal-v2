@@ -13,7 +13,7 @@ import {
 
 const Profile = ({ user }) => {
     // Helper to check user role
-    const isStudent = user?.user_type === 'STUDENT';
+    const isStudent = user?.user_type?.toUpperCase() === 'STUDENT';
 
     return (
         <div className="bg-slate-50 font-sans py-4 w-full">
@@ -97,7 +97,7 @@ const Profile = ({ user }) => {
                                     <DetailItem label="Session" value={user?.session} />
                                     <DetailItem label="Program Type" value={user?.program_type} />
                                     <DetailItem label="Section" value={user?.section} />
-                                    <DetailItem label="Semester" value={`${user?.current_semester}${getOrdinal(user?.current_semester)}`} />
+                                    <DetailItem label="Semester" value={user?.current_semester ? `${user.current_semester}${getOrdinal(user.current_semester)}` : "—"} />
                                     {user?.batch && <DetailItem label="Batch" value={user?.batch} />}
                                 </div>
                             </div>
@@ -171,8 +171,10 @@ const DetailItem = ({ label, value }) => (
 
 // Helper to add 'st', 'nd', 'rd', 'th' to semester numbers
 const getOrdinal = (n) => {
+    const num = parseInt(n);
+    if (!num) return "";
     const s = ["th", "st", "nd", "rd"];
-    const v = n % 100;
+    const v = num % 100;
     return s[(v - 20) % 10] || s[v] || s[0];
 };
 

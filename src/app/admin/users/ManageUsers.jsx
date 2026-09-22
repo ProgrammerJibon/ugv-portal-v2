@@ -28,11 +28,10 @@ const ManageUsers = ({ user }) => {
         setLoading(false);
     };
 
-    // 2. Handle Search Filter
     const filteredUsers = users.filter(user =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.user_id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email_address.toLowerCase().includes(searchTerm.toLowerCase())
+        (user.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (user.user_id || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (user.email_address || '').toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // 3. Action Handlers

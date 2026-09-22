@@ -2,33 +2,43 @@
 
 import Section from '@/Components/Section';
 import React, { useState, useEffect } from 'react';
-import { getTeacherDashboardData } from './teacherDashboardActions'; // Adjust path
-import { FaSpinner, FaUsers, FaClock, FaClipboardList, FaArrowRight } from 'react-icons/fa';
+import { getTeacherDashboardData } from './teacherDashboardActions';
+import { FaSpinner, FaUsers, FaClipboardList, FaArrowRight, FaCalendarAlt, FaChalkboardTeacher } from 'react-icons/fa';
+import Link from 'next/link';
 
-const TeacherDashboard = ({ user }) => {
+const ExamMarksDashboard = ({ user }) => {
     const [loading, setLoading] = useState(true);
-    const [currentSession, setCurrentSession] = useState("Loading...");
+    const [sessions, setSessions] = useState([]);
+    const [selectedSessionId, setSelectedSessionId] = useState("");
+    const [currentSessionLabel, setCurrentSessionLabel] = useState("");
     const [assignedCourses, setAssignedCourses] = useState([]);
 
-    // --- Load Data ---
+    const fetchData = async (sessionId = null) => {
+        setLoading(true);
+        const res = await getTeacherDashboardData(user?.id, sessionId);
+        if (res.status === 'success') {
+            setSessions(res.sessions || []);
+            setSelectedSessionId(res.selectedSessionId);
+            setCurrentSessionLabel(res.sessionLabel);
+            setAssignedCourses(res.courses || []);
+        } else {
+            setCurrentSessionLabel("No Active Session");
+            setAssignedCourses([]);
+        }
+        setLoading(false);
+    };
+
     useEffect(() => {
         if (!user || !user.id) return;
-
-        const fetchData = async () => {
-            const res = await getTeacherDashboardData(user.id);
-            if (res.status === 'success') {
-                setCurrentSession(res.sessionLabel);
-                setAssignedCourses(res.courses);
-            } else {
-                setCurrentSession("No ACTIVE Session");
-            }
-            setLoading(false);
-        };
-
         fetchData();
     }, [user]);
 
-    // --- Helper: Visual Coding for Dept ---
+    const handleSessionChange = (e) => {
+        const newSessionId = e.target.value;
+        setSelectedSessionId(newSessionId);
+        fetchData(newSessionId);
+    };
+
     const getDeptColor = (dept) => {
         const colors = {
             'CSE': 'bg-blue-600',
@@ -37,35 +47,42 @@ const TeacherDashboard = ({ user }) => {
             'ENG': 'bg-emerald-600',
             'LLB': 'bg-red-600'
         };
-        return colors[dept] || 'bg-slate-600'; // Default color
+        return colors[dept] || 'bg-slate-600';
     };
 
     return (
         <Section user={user}>
             <div className="min-h-screen bg-slate-50 font-sans">
-
-                {/* --- Main Content Area --- */}
                 <div className="container mx-auto p-6">
 
                     {/* Header Section */}
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                         <div>
-                            <h1 className="text-2xl font-bold text-slate-800">My Assigned Courses</h1>
+                            <h1 className="text-2xl font-bold text-slate-800">Exam Controller - Course Marks Overview</h1>
                             <p className="text-slate-500 mt-1">
-                                Welcome back, <span className="font-semibold text-slate-700">{user?.name}</span>
+                                Review and verify student grading submitted by course instructors.
                             </p>
                         </div>
 
-                        {/* Session Badge */}
-                        <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-200">
-                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">ACTIVE Session</span>
-                            <span className="text-sm font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">
-                                {currentSession}
-                            </span>
+                        {/* Session Selector */}
+                        <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200">
+                            <FaCalendarAlt className="text-indigo-600" />
+                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Session:</span>
+                            <select
+                                value={selectedSessionId}
+                                onChange={handleSessionChange}
+                                className="text-sm font-semibold text-slate-700 bg-transparent border-none focus:outline-none cursor-pointer"
+                            >
+                                {sessions.map((s) => (
+                                    <option key={s.id} value={s.id}>
+                                        {s.session_season} {s.session_year} {s.status === 'ACTIVE' ? '(Current)' : ''}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
 
-                    {/* --- Content Grid --- */}
+                    {/* Content Grid */}
                     {loading ? (
                         <div className="flex justify-center items-center h-64">
                             <FaSpinner className="animate-spin text-4xl text-indigo-500" />
@@ -77,9 +94,8 @@ const TeacherDashboard = ({ user }) => {
                                 assignedCourses.map((course) => (
                                     <div key={course.id} className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-slate-100 flex flex-col h-full group">
 
-                                        {/* Card Top: Color Banner & Dept Info */}
+                                        {/* Card Top */}
                                         <div className={`${getDeptColor(course.dept)} px-6 py-4 text-white relative overflow-hidden`}>
-                                            {/* Decorative Background Text */}
                                             <h3 className="text-5xl font-bold opacity-10 absolute -bottom-4 -right-2 select-none group-hover:scale-110 transition-transform duration-500">
                                                 {course.dept}
                                             </h3>
@@ -98,56 +114,46 @@ const TeacherDashboard = ({ user }) => {
                                             </div>
                                         </div>
 
-                                        {/* Card Body: Course Details */}
+                                        {/* Card Body */}
                                         <div className="p-6 flex-grow flex flex-col justify-between">
                                             <div>
                                                 <h3 className="text-lg font-bold text-slate-800 mb-2 line-clamp-2" title={course.title}>
                                                     {course.title}
                                                 </h3>
 
-                                                {/* Meta Info (Mocked for now as specific schedule table doesn't exist yet) */}
                                                 <div className="space-y-3 mt-4 border-t border-slate-100 pt-4">
-                                                    <div className="flex items-center text-sm text-slate-500">
-                                                        <FaUsers className="mr-3 text-slate-400" />
-                                                        <span>Students Enrolled: <span className="font-semibold text-slate-700">TBA</span></span>
+                                                    <div className="flex items-center text-sm text-slate-600">
+                                                        <FaChalkboardTeacher className="mr-3 text-indigo-500 flex-shrink-0" />
+                                                        <span className="truncate">
+                                                            Teacher: <span className="font-semibold text-slate-800">{course.teacher_name}</span>
+                                                        </span>
                                                     </div>
                                                     <div className="flex items-center text-sm text-slate-500">
-                                                        <FaClock className="mr-3 text-slate-400" />
-                                                        <span>Schedule: <span className="italic text-slate-400">Not set</span></span>
+                                                        <FaUsers className="mr-3 text-slate-400 flex-shrink-0" />
+                                                        <span>Students with Marks: <span className="font-semibold text-emerald-600">{course.marks_entered_count || 0}</span></span>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            {/* Action Buttons */}
-                                            <div className="mt-6 pt-4 grid grid-cols-2 gap-3">
-                                                {/* <button 
-                                                    onClick={() => window.location.href = `/teacher/subjects/${course.subject_id}/materials`} 
-                                                className="flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs font-bold py-2 px-3 rounded border border-slate-200 transition-colors">
-                                                    <FaClipboardList /> Materials
-                                                </button> */}
-                                                <button
-                                                    className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 px-3 rounded shadow transition-colors"
-                                                    onClick={() => window.location.href = `/exam/marks/${course.subject_id}/marks`} // Future link
+                                            {/* Action Button */}
+                                            <div className="mt-6 pt-4">
+                                                <Link
+                                                    href={`/exam/marks/${course.subject_id}/marks`}
+                                                    className="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2.5 px-4 rounded-lg shadow transition-colors"
                                                 >
-                                                    Review Marks <FaArrowRight />
-                                                </button>
+                                                    Review & Edit Marks <FaArrowRight />
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
                                 ))
                             ) : (
-                                <div className="col-span-full py-12 flex flex-col items-center justify-center text-slate-400 bg-white rounded-xl border border-dashed border-slate-300">
-                                    <FaClipboardList className="text-4xl mb-3 opacity-50" />
-                                    <p className="text-lg font-semibold">No Courses Assigned</p>
-                                    <p className="text-sm">You have not been assigned any courses for the {currentSession} session yet.</p>
+                                <div className="col-span-full py-16 flex flex-col items-center justify-center text-slate-400 bg-white rounded-xl border border-dashed border-slate-300">
+                                    <FaClipboardList className="text-5xl mb-3 text-slate-300" />
+                                    <p className="text-lg font-bold text-slate-600">No Courses Assigned in This Session</p>
+                                    <p className="text-sm text-slate-400 mt-1">There are no faculty subject allocations for {currentSessionLabel}.</p>
                                 </div>
                             )}
-
-                            {/* Contact Card */}
-                            <div className="bg-slate-100 rounded-xl border-2 border-dashed border-slate-300 flex flex-col items-center justify-center p-6 text-slate-400 min-h-[200px] hover:bg-slate-200 transition-colors cursor-pointer">
-                                <p className="text-sm font-medium text-center">Missing a course?</p>
-                                <p className="text-xs mt-1 text-center max-w-[200px]">Contact the Exam Controller assigned to your department to rectify allocation issues.</p>
-                            </div>
 
                         </div>
                     )}
@@ -157,4 +163,4 @@ const TeacherDashboard = ({ user }) => {
     );
 };
 
-export default TeacherDashboard;
+export default ExamMarksDashboard;

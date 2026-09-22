@@ -11,7 +11,7 @@ export async function findStudentAction(studentId) {
                 id, user_id, name, program, batch, session, status, 
                 current_semester, program_type 
              FROM users 
-             WHERE user_id = ? AND user_type = 'STUDENT'`,
+             WHERE user_id = ? AND UPPER(user_type) = 'STUDENT'`,
             [studentId]
         );
 
@@ -21,10 +21,13 @@ export async function findStudentAction(studentId) {
 
         const student = rows[0];
 
-        
-        
-        const [progRows] = await db.execute("SELECT program_name FROM majors WHERE id = ?", [student.program]);
-        const programName = progRows.length > 0 ? progRows[0].program_name : "Unknown Program";
+        let programName = "General / Unknown";
+        if (student.program) {
+            const [progRows] = await db.execute("SELECT program_name FROM majors WHERE id = ?", [student.program]);
+            if (progRows.length > 0) {
+                programName = progRows[0].program_name;
+            }
+        }
 
         return {
             status: "success",

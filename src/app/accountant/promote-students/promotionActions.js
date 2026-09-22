@@ -48,15 +48,14 @@ export async function getPromotableStudentsAction(filters) {
             FROM users u
             LEFT JOIN student_financials sf ON u.user_id = sf.student_user_id
             WHERE 
-                u.user_type = 'Student'
+                LOWER(u.user_type) = 'student'
                 AND u.program = ? 
-                AND u.current_semester = ?
+                AND (u.current_semester = ? OR (? = '0' AND (u.current_semester IS NULL OR u.current_semester = '0' OR u.current_semester = '')))
                 AND (u.last_promoted_session IS NULL OR u.last_promoted_session != ?)
             ORDER BY u.user_id ASC
         `;
 
-        
-        const [rows] = await db.execute(query, [department, currentSemester, targetSession]);
+        const [rows] = await db.execute(query, [department, currentSemester, currentSemester, targetSession]);
         return { status: "success", data: rows };
 
     } catch (error) {
@@ -106,11 +105,12 @@ export async function promoteStudentsAction(studentIds, targetSession, adminId) 
                 if (fee.amount > 0) {
                     await connection.execute(
                         `INSERT INTO payments 
-                        (student_user_id, session, fee_type, amount, payment_method, remarks, payment_date, created_by)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, 
+                        (student_user_id, session, semester, fee_type, amount, payment_method, remarks, payment_date, created_by)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
                         [
                             userId,
                             targetSession,
+                            nextSem.toString(),
                             fee.name,
                             fee.amount,
                             'System',
